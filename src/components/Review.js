@@ -73,7 +73,7 @@ const Review = () => {
             
             const headers = { 'Content-Type': 'application/json' }
             
-            const response = axios({method: 'post', url:'/newReview', data:
+            const response = axios({method: 'put', url:'/newReview', data:
                 JSON.stringify({
                     "email_user": username, 'rating': rating, 'description': descripcion
                 }),
@@ -127,12 +127,10 @@ const Review = () => {
             
               <ReactStars
                count={5}
-               onChange={() => {setRating(parseInt(rating))}}
+               value={rating}
+               onChange={(rating) => {setRating(parseInt(rating))}}
                size={35}
                isHalf={false}
-               emptyIcon={<i className="far fa-star"></i>}
-               halfIcon={<i className="fa fa-star-half-alt"></i>}
-               fullIcon={<i className="fa fa-star"></i>}
                color='black'
               activeColor="#ffd700"
              />
