@@ -47,6 +47,7 @@ const ViewPublication = (() => {
     const [precio, setPrecio] = useState(parse_publication.price);
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const [rating, setRating] = useState(parse_publication.rating);
     //const [reservado, setReservado] = useState(false);
     
     const [direccion, setDireccion] = useState(parse_properties.direction);
@@ -56,6 +57,7 @@ const ViewPublication = (() => {
     const [habitaciones, setHabitaciones] = useState(parse_properties.rooms);
     const [banios, setBanios] = useState(parse_properties.toilets);
     const [personas, setPersonas] = useState(parse_properties.people);
+    
 
     
     const [images, setImages] = useState([]);
@@ -160,6 +162,10 @@ const ViewPublication = (() => {
                        
                      <Typography variant="body2">
                        {descripcion}
+                     </Typography>
+                     
+                     <Typography variant="body2">
+                       Puntaje promedio: {rating}
                      </Typography>
                      
                      <Button variant="contained" onClick={()=>{makeReservation(props)}} 

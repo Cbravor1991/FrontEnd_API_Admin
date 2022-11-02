@@ -71,16 +71,14 @@ const Review = () => {
         
             const params = new URLSearchParams([['publication_id', id_publication]]);
             
-            const response = axios.post('/newReview',
+            const headers = { 'Content-Type': 'application/json' }
+            
+            const response = axios({method: 'post', url:'/newReview', data:
                 JSON.stringify({
                     "email_user": username, 'rating': rating, 'description': descripcion
                 }),
-                {
-                    headers: { 'Content-Type': 'application/json'
-                     }
-                }
-
-            ,{ params: params });
+                
+                    headers: headers, params: params });
               
              
 
@@ -129,9 +127,9 @@ const Review = () => {
             
               <ReactStars
                count={5}
-               onChange={() => {setRating(rating)}}
+               onChange={() => {setRating(parseInt(rating))}}
                size={35}
-               isHalf={true}
+               isHalf={false}
                emptyIcon={<i className="far fa-star"></i>}
                halfIcon={<i className="fa fa-star-half-alt"></i>}
                fullIcon={<i className="fa fa-star"></i>}
