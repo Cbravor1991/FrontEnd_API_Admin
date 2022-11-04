@@ -8,11 +8,11 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import {Button, Divider, Paper, Typography} from '@mui/material';
+import {Button, CircularProgress, Divider, Paper, Typography} from '@mui/material';
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useParams } from 'react-router-dom'
-import { DateRange, PrecisionManufacturing } from "@mui/icons-material";
+import { Circle, DateRange, PrecisionManufacturing } from "@mui/icons-material";
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
@@ -33,59 +33,56 @@ const MakeReservation = () => {
 
 
     let props = window.localStorage.getItem("view_publication")
-    let parse_publication = (JSON.parse(props)).Publication
-    
-    //console.log(props)
+    let parsed_publication = (JSON.parse(props)).Publication
 
-    const userRef = useRef();
-    const errRef = useRef();
-    
-    /*Este es el parametro id que recupero de props/*/
+    const navigate = useNavigate();
 
-
-    /*Recomporner Json*/
-
-
-
-    /*Datos publicacion*/
-    
-    const [id_publication, setPublicationID] = useState(parse_publication.id);
-    const [email_user, setEmail] = useState('');
     const [fechaInicio, setFechaInicio] = useState(new Date());
     const [fechaFin, setFechaFin] = useState(new Date());
     //const [fechaInicio, setFechaInicio] = useState("");
     //const [fechaFin, setFechaFin] = useState("");
     
-    
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);    
-    const [selected, setSelected] = useState('');
-    const [selected1, setSelected1] = useState('');
-    const navigate = useNavigate();
+    let username;
+    if (!window.localStorage.getItem("username")) {
+        console.log("no autorizado")
+        navigate("/login");
+    } else {
+        username = window.localStorage.getItem("username")
+    }
+
+
+    const [fechasOcupadas, setFechasOcupadas] = useState(null);
+
+    if (!fechasOcupadas){
+        axios.post('/getReservedDaysByDateRange',
+        JSON.stringify({
+            "start_date": "2022-11-01","end_date": "2023-11-01",
+            "email_user": username, 'publication_id': parsed_publication.id
+        }),
+        {
+            headers: { 'Content-Type': 'application/json'
+             }
+        }
+
+    ).then((response) => {
+        console.log(response)
+        setFechasOcupadas(response.data.map((x) => new Date(new Date(x).setDate(new Date(x).getDate() + 1)) ));//new Date(x))); // corregir?
+    }).catch((err) => {
+        console.log(err);
+        swal.fire({title: "Error", text:`Hubo un error inesperado`, icon: "error"}).then(() => navigate("/"))
+
+    });
+    }
     
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack floors
-
-        let username;
-        if (!window.localStorage.getItem("username")) {
-            console.log("no autorizado")
-            //navigate("/login");
-            window.location.href = "/login";
-            return;
-        } else {
-            username = window.localStorage.getItem("username")
-        }
-
-            setEmail(username)
-        
-        
             
             axios.post('/reserve',
                 JSON.stringify({
                     "start_date": format(fechaInicio, "yyyy-MM-dd"),"end_date": format(fechaFin, "yyyy-MM-dd"),
-                    "email_user": username, 'publication_id': id_publication
+                    "email_user": username, 'publication_id': parsed_publication.id
                 }),
                 {
                     headers: { 'Content-Type': 'application/json'
@@ -109,62 +106,19 @@ const MakeReservation = () => {
       parse_publication = (JSON.parse(props)).Publication
       parse_properties = JSON.parse(props).Property
     })*/
-
-    let footer = <p>Seleccione una fecha</p>
-            if (selected) {
-                footer = <p>Se seleccionó {format(selected, 'yyyy-MM-dd')}.</p>;
-             }
-             if (selected1) {
-                footer = <p>Se seleccionó {format(selected1, 'yyyy-MM-dd')}.</p>;
-             }
   
 
     return ( 
 
 
 <Paper component="form" onSubmit={handleSubmit} sx={{minWidth: 350, maxWidth: 600, padding: "20px", minHeight: 300, backgroundColor: 'white'}}> 
+            {(fechasOcupadas ?<>
                     <Typography variant="h6"> Ingrese los datos de la reserva </Typography>
 
                     <Divider></Divider>
                     <br></br>
                     
-                    {/* <label htmlFor="titulo">
-                        Fecha de ingreso:
-                    </label>
-                    
-                    <br/>
-                    
-                    <DatePicker
-                        dateFormat="yyyy-MM-dd"
-                        format="yyyy-MM-dd"
-                        value={fechaInicio}
-                        //mode="single"
-                        //minDate={subDays(new Date(), 0)}
-                        selected={fechaInicio}
-                        onChange={(date: Date) => {setFechaInicio(date)}}
-                        footer={footer}
-                    />
-
-                    <br/>
-                    
-                    <label htmlFor="descrPubl">
-                        Fecha de egreso:
-                    </label>
-                    
-                    <br/>
-                    
-                    <DatePicker
-                        dateFormat="yyyy-MM-dd"
-                        format="yyyy-MM-dd"
-                        value={fechaFin}
-                        //mode="single"
-                        selected={fechaFin}
-                        onChange={(date: Date) => {setFechaFin(date)}}
-                        footer={footer}
-                    /> */}
-
-                    
-                        <label for="fechaInicio"><Typography variant="subtitle2" gutterBottom><DateRange></DateRange> Fecha inicio:  </Typography></label>
+                        <label htmlFor="fechaInicio"><Typography variant="subtitle2" gutterBottom><DateRange></DateRange> Fecha inicio:  </Typography></label>
                         <DatePicker
                         selected={fechaInicio}
                         onChange={(date) => setFechaInicio(date)}
@@ -173,9 +127,10 @@ const MakeReservation = () => {
                         endDate={fechaFin}
                         name="fechaInicio"
                         id="fechaInicio"
+                        excludeDates={fechasOcupadas}
                         />
                     
-                    <label for="fechaFin"><DateRange></DateRange> Fecha fin: </label>
+                    <label htmlFor="fechaFin"><DateRange></DateRange> Fecha fin: </label>
                     <DatePicker
                     selected={fechaFin}
                     onChange={(date) => setFechaFin(date)}
@@ -185,6 +140,7 @@ const MakeReservation = () => {
                     minDate={fechaInicio}
                     name="fechaFin"
                         id="fechaFin"
+                    excludeDates={fechasOcupadas}
                     />
 
                     <br></br>
@@ -193,7 +149,9 @@ const MakeReservation = () => {
                     <Button variant="outlined" onClick={() => {navigate(-1)
                         }}> Volver </Button>
 
-                    <Button variant="contained" type="submit"> Reservar</Button>
+                    <Button disabled={(fechaInicio > fechaFin)} variant="contained" type="submit"> Reservar</Button></>
+                    : <CircularProgress></CircularProgress>)
+                    }
                     
                    
             </Paper>
