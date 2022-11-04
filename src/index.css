@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-* {
+#root {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,13 +8,17 @@
 
 html {
     font-family: 'Nunito', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
+}
+
+.custom html {
     color:white;
 }
 
 body {
     min-height: 100vh;
     background-color: white;
+    margin:0;
 }
 
 .App {
@@ -22,8 +26,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 90vh; 
   padding: 1rem 0.5rem;
+  padding: 0;
 }
 
 section {

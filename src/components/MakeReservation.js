@@ -8,15 +8,23 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import {Button, Divider, Paper, Typography} from '@mui/material';
+
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useParams } from 'react-router-dom'
-import { PrecisionManufacturing } from "@mui/icons-material";
+import { DateRange, PrecisionManufacturing } from "@mui/icons-material";
 import { format } from 'date-fns';
-import DatePicker from 'react-date-picker';
-import Time from 'react-time';
-import 'react-day-picker/dist/style.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
+
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+
+//import 'react-day-picker/dist/style.css';
+
 //import subDays from "date-fsn/subDays";
 import Moment from "moment";
+
+import swal from "sweetalert2";
 
 const PROPERTYHANDLER_URL = '/updateProperty/';
 
@@ -70,16 +78,11 @@ const MakeReservation = () => {
             username = window.localStorage.getItem("username")
         }
 
-        try {
             setEmail(username)
-            console.log(username)
+        
         
             
-            console.log("Fechas")
-            console.log(fechaInicio)
-            console.log(fechaFin)
-            
-            const response = axios.post('/reserve',
+            axios.post('/reserve',
                 JSON.stringify({
                     "start_date": format(fechaInicio, "yyyy-MM-dd"),"end_date": format(fechaFin, "yyyy-MM-dd"),
                     "email_user": username, 'publication_id': id_publication
@@ -89,25 +92,14 @@ const MakeReservation = () => {
                      }
                 }
 
-            );
+            ).then(() => {
+                swal.fire({title: "Exito", text:"Reserva realizada exitosamente", icon: "success"}).then(() => {navigate("/showsAllPublications")})
+            }).catch((err) => {
+                console.log(err);
+                swal.fire({title: "Error", text:`Error realizando reserva: "${(err.response ? err.response.data.detail : err)}"`, icon: "error"})
+
+            });
               
-             
-
-            setSuccess(true);
-
-
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No hay respuesta del servidor');
-            } else if (err.response?.status === 400) {
-                setErrMsg('error del tipo 400');
-            } else {
-                setErrMsg('el registro fallo')
-            }
-            errRef.current.focus();
-
-            setErrMsg(null)
-        }
     }
     
   /*  useEffect((props) => {
@@ -129,73 +121,82 @@ const MakeReservation = () => {
 
     return ( 
 
-           
-        <>
-            {success ? (
-                <section style={{ backgroundColor: 'grey' }}>
-                    <h1>Reserva realizada con exito!</h1>
-                    <p>
-                        <a href="/">Ir a la pagina principal</a>
-                        <br />
-                        <a href="/showPublication">Ir a la pagina de publicaciones</a>
-                    </p>
-                </section>
-            ) : (
 
-                <section style={{ backgroundColor: 'grey' }}>
-                    <Logo />
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h2>Ingrese los datos de la reserva</h2>
-                    <form className="custom" onSubmit={handleSubmit}>
+<Paper component="form" onSubmit={handleSubmit} sx={{minWidth: 350, maxWidth: 600, padding: "20px", minHeight: 300, backgroundColor: 'white'}}> 
+                    <Typography variant="h6"> Ingrese los datos de la reserva </Typography>
 
-                       < br/>
-                       < br/>
-                       
-                        <label htmlFor="titulo">
-                            Fecha de ingreso:
-                        </label>
-                        
-                        <br/>
-                        
+                    <Divider></Divider>
+                    <br></br>
+                    
+                    {/* <label htmlFor="titulo">
+                        Fecha de ingreso:
+                    </label>
+                    
+                    <br/>
+                    
+                    <DatePicker
+                        dateFormat="yyyy-MM-dd"
+                        format="yyyy-MM-dd"
+                        value={fechaInicio}
+                        //mode="single"
+                        //minDate={subDays(new Date(), 0)}
+                        selected={fechaInicio}
+                        onChange={(date: Date) => {setFechaInicio(date)}}
+                        footer={footer}
+                    />
+
+                    <br/>
+                    
+                    <label htmlFor="descrPubl">
+                        Fecha de egreso:
+                    </label>
+                    
+                    <br/>
+                    
+                    <DatePicker
+                        dateFormat="yyyy-MM-dd"
+                        format="yyyy-MM-dd"
+                        value={fechaFin}
+                        //mode="single"
+                        selected={fechaFin}
+                        onChange={(date: Date) => {setFechaFin(date)}}
+                        footer={footer}
+                    /> */}
+
+                    
+                        <label for="fechaInicio"><Typography variant="subtitle2" gutterBottom><DateRange></DateRange> Fecha inicio:  </Typography></label>
                         <DatePicker
-                          dateFormat="yyyy-MM-dd"
-                          format="yyyy-MM-dd"
-                          value={fechaInicio}
-                          //mode="single"
-                          //minDate={subDays(new Date(), 0)}
-                          selected={fechaInicio}
-                          onChange={(date: Date) => {setFechaInicio(date)}}
-                          footer={footer}
+                        selected={fechaInicio}
+                        onChange={(date) => setFechaInicio(date)}
+                        selectsStart
+                        startDate={fechaInicio}
+                        endDate={fechaFin}
+                        name="fechaInicio"
+                        id="fechaInicio"
                         />
+                    
+                    <label for="fechaFin"><DateRange></DateRange> Fecha fin: </label>
+                    <DatePicker
+                    selected={fechaFin}
+                    onChange={(date) => setFechaFin(date)}
+                    selectsEnd
+                    startDate={fechaInicio}
+                    endDate={fechaFin}
+                    minDate={fechaInicio}
+                    name="fechaFin"
+                        id="fechaFin"
+                    />
 
-                        <br/>
-                        
-                        <label htmlFor="descrPubl">
-                            Fecha de egreso:
-                        </label>
-                        
-                        <br/>
-                        
-                        <DatePicker
-                          dateFormat="yyyy-MM-dd"
-                          format="yyyy-MM-dd"
-                          value={fechaFin}
-                          //mode="single"
-                          selected={fechaFin}
-                          onChange={(date: Date) => {setFechaFin(date)}}
-                          footer={footer}
-                        />
+                    <br></br>
+                    <br></br>
 
-                        <br/>
+                    <Button variant="outlined" onClick={() => {navigate(-1)
+                        }}> Volver </Button>
 
-                        <button >Reservar</button>
-                        
-                        <button onClick={() => {navigate(-1)
-                          }}> Volver </button>
-                    </form>
-                </section>
-            )}
-        </>
+                    <Button variant="contained" type="submit"> Reservar</Button>
+                    
+                   
+            </Paper>
     )
 }
 
