@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from '../api/axios';
 import CardPublication from "../components/CardPublication";
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { Add } from '@mui/icons-material';
 
 const ShowsAllPublications = () => {
 
   const navigate = useNavigate();
 
-  const [publications, setPublications] = useState([]);
+  const [publications, setPublications] = useState(null);
 
   let username = window.localStorage.getItem("username")
     
@@ -37,7 +37,8 @@ const ShowsAllPublications = () => {
 
   return (
     <>
-    { (publications && publications.length > 0) ? 
+    { publications ? (
+      publications.length > 0 ? 
       <Box sx={{display:'flex',flexWrap: 'wrap' }}>
         {
         publications.map(item => {
@@ -53,6 +54,8 @@ const ShowsAllPublications = () => {
       <Typography style={{color: "black"}} variant="body2" gutterBottom>
             Podes realizar tu publicacion en <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
       </Typography></>)
+    )
+    : <CircularProgress></CircularProgress>
     }
        
     </>

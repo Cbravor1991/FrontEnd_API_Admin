@@ -23,7 +23,6 @@ import MakePublication from './components/MakePublication';
 import ShowsMyPublications from './routes/ShowsMyPublications';
 import UpdatePublications from './components/UpdatePublcations';
 import ViewPublication from './components/ViewPublcation';
-import ViewPublication2 from './components/ViewPublcation2';
 import MakeReservation from './components/MakeReservation';
 import ShowsAllPublications from './routes/ShowsAllPublications';
 import ShowsMyReservations from './routes/ShowsMyReservations';
@@ -65,10 +64,8 @@ function App() {
       <Route path="showsMyPublications"  element={<ShowsMyPublications />}/>
       <Route path="showsAllPublications"  element={<ShowsAllPublications />}/>
       <Route path="showsMyReservations"  element={<ShowsMyReservations />}/>
-      <Route path="showsMyReservations"  element={<ShowsMyReservations />}/>
       <Route path="updatePublications/" element={<UpdatePublications/>} />
-      <Route path="viewPublication/" element={<ViewPublication/>} />
-      <Route path="viewPublication2/" element={<ViewPublication2/>} />
+      <Route path="viewPublication/:id" element={<ViewPublication/>} />
       <Route path="makeReservation/" element={<MakeReservation/>} />
       <Route path="profile/edit" element={<EditProfile />} />
       <Route path="review" element={<Review />} />

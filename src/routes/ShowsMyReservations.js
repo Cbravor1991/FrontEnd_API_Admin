@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from '../api/axios';
-import { Box, Button, Typography , Card, CardContent, CardActions} from '@mui/material';
+import { Box, Button, Typography , Card, CardContent, CardActions, CircularProgress} from '@mui/material';
 import { Add } from '@mui/icons-material';
 import swal from 'sweetalert2';
 
@@ -10,16 +10,10 @@ const ShowsMyReservations = () => {
   const navigate = useNavigate();
 
   const [reservations, setReservations] = useState(null);
-  const [publications, setPublications] = useState(null);
 
   let username = window.localStorage.getItem("username")
   
   window.localStorage.setItem("reservado", true)
-  
-  const viewPublication = async (props) => {
-    window.localStorage.setItem("view_publication", JSON.stringify (props))
-    window.location.href="/viewPublication2/"
-  }
   
   
   const cancelReservation = (reservation_id) => {
@@ -56,21 +50,14 @@ const ShowsMyReservations = () => {
     .catch((error) => {
       console.log(error);
     });
-    
-    axios.post('fetchAllUserPublications/', {},{ params })
-    .then((response) => {
-      setPublications(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
   }
   
 
 
   return (
     <>
-    { (reservations && reservations.length > 0) ? 
+    { reservations ? (
+      reservations.length > 0 ? 
       <Box sx={{display:'flex',flexWrap: 'wrap' }}>
         {
         reservations.map(item => {
@@ -89,7 +76,7 @@ const ShowsMyReservations = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={() => {viewPublication(publications.find(element => element.Publication.id === item.id))}}>Ver publicación</Button>
+                <Button size="small" onClick={() => {navigate(`/viewPublication/${item.publication_id}`)}}>Ver publicación</Button>
                 </CardActions>
                 <CardActions>
 
@@ -103,7 +90,8 @@ const ShowsMyReservations = () => {
       </Box>
       : <Typography style={{color: "black"}} variant="h6" gutterBottom>
           No tenés reservas realizadas.
-      </Typography>
+      </Typography>)
+    : <CircularProgress></CircularProgress>
     }
        
     </>

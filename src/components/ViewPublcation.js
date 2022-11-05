@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback, memo, useMemo } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from '../components/Logo';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -14,57 +14,43 @@ import { PrecisionManufacturing } from "@mui/icons-material";
 //import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { CircularProgress } from "@mui/material";
 
 
 
 const ViewPublication = (() => {
 
+  const routeParams = useParams();
 
-    let props = window.localStorage.getItem("view_publication")
-    let parse_publication = (JSON.parse(props)).Publication
-    let parse_properties = (JSON.parse(props)).Property
+  const navigate = useNavigate();
+
+  const [publicationData, setPublicationData] = useState(null);
+
+  let username = window.localStorage.getItem("username")
     
-    //console.log(props)
+  
+  const loadPublicationData = () => {
+    if (!username){
+      window.location.href = "/login";
+      return;
+    } 
+    const params = JSON.stringify({'email_user': username});
     
+    axios.post('/publications/', {},{ params })
+    .then((response) => {
+      console.log(response.data)
+      setPublicationData(response.data.filter((x) => (x.Publication.id == routeParams.id))[0]);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  if (!publicationData){
+    loadPublicationData();
+  }
     
-    //const navigate = useNavigate();    
-
-    //const userRef = useRef();
-    //const errRef = useRef();
-    /*Este es el parametro id que recupero de props/*/
-
-
-    /*Recomporner Json*/
-
-
-
-    /*Datos publicacion*/
-    const [id_property, setPropertyID] = useState(parse_properties.id);
-    const [id_publication, setPublicationID] = useState(parse_publication.id);
-    const [titulo, setTitle] = useState(parse_publication.title);
-    const [descripcion, setDescripcion] = useState(parse_publication.description);
-    const [email_user, setEmail] = useState(parse_publication.email_user);
-    const [precio, setPrecio] = useState(parse_publication.price);
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-    const [rating, setRating] = useState(parse_publication.rating);
-    //const [reservado, setReservado] = useState(false);
-    
-    const [direccion, setDireccion] = useState(parse_properties.direction);
-    const [localidad, setLocalidad] = useState(parse_properties.location);
-    const [provincia, setProvincia] = useState(parse_properties.province);
-    const [pais, setPais] = useState(parse_properties.country);
-    const [habitaciones, setHabitaciones] = useState(parse_properties.rooms);
-    const [banios, setBanios] = useState(parse_properties.toilets);
-    const [personas, setPersonas] = useState(parse_properties.people);
-    
-
-    
-    const [images, setImages] = useState([]);
-
-    let username = window.localStorage.getItem("username")
-
-    //setReservado(window.localStorage.getItem("reservado"))
+    const [images, setImages] = useState(null);
 
     const loadImages = () => {
       if (!username){
@@ -73,7 +59,8 @@ const ViewPublication = (() => {
         window.location.href = "/login";
         return;
       } 
-      const params = new URLSearchParams([['property_id', id_property]]);
+      console.log(publicationData);
+      const params = new URLSearchParams([['property_id', publicationData.Publication.property_id]]);
     
       axios.post('/fetchAllPropertyImages/', {},{ params })
       .then((response) => {
@@ -84,6 +71,9 @@ const ViewPublication = (() => {
       });
     }
 
+    if (publicationData && !images){
+      loadImages();
+    }
 
    const makeReservation = async (props) => {
      window.localStorage.setItem("make_reservation", JSON.stringify (props))
@@ -94,28 +84,17 @@ const ViewPublication = (() => {
      window.localStorage.setItem("calificar", JSON.stringify (props))
      window.location.href="/review/"
     }
-    
-   /*const isReserved = memo(() => {
-      if(reservado) 
-        return true;
-      else
-        return false;
-      })  */
 
 
-  useEffect(() => {
-    loadImages();
-    }, []);
 
 
     return (
                 <section style={{ backgroundColor: 'grey' }}>
-                    <Logo />
-
+                  {(publicationData && images) ? <>
                     <h2>Datos de la publicación</h2>
 
                     <Typography sx={{ fontSize: 34 }} color="text.secondary" gutterBottom>
-                        {titulo}
+                        {publicationData.Publication.title}
                     </Typography>
 
                     <div className="form-group multi-preview">
@@ -125,58 +104,60 @@ const ViewPublication = (() => {
                     </div>
 
                     <Typography variant="h6" component="div">
-                        {descripcion}
-                    </Typography>
-            
-                    <Typography variant="body2">
-                       $ {precio}
+                        {publicationData.Property.description}
                     </Typography>
 
                     <Typography variant="body2">
-                      {direccion}
+                      $ {publicationData.Publication.price}
                     </Typography>
 
                     <Typography variant="body2">
-                       {provincia}
+                      {publicationData.Property.direction}
                     </Typography>
-                       
+
                     <Typography variant="body2">
-                       {localidad}
+                      {publicationData.Property.province}
                     </Typography>
-                       
+                      
                     <Typography variant="body2">
-                       {pais}
-                     </Typography>
-                       
-                     <Typography variant="body2">
-                       {banios} baños
-                     </Typography>
-                       
-                     <Typography variant="body2">
-                       {habitaciones} habitaciones
-                     </Typography>
-                       
-                     <Typography variant="body2">
-                       para {personas} personas
-                     </Typography>
-                       
-                     <Typography variant="body2">
-                       {descripcion}
-                     </Typography>
-                     
-                     <Typography variant="body2">
-                       Puntaje promedio: {rating}
-                     </Typography>
-                     
-                     <Button variant="contained" onClick={()=>{makeReservation(props)}} 
-                     disabled={false} color="success">Realizar reserva</Button>
-                     
-                     <Button variant="contained" onClick={()=>{calificar(props)}} 
-                     disabled={true} color="success">Calificar</Button>
-                     
-                       
-                     <Button variant="filled" color="primary" 
-                     onClick={() => {window.history.go(-1);return false;}}>Volver</Button>
+                      {publicationData.Property.location}
+                    </Typography>
+                      
+                    <Typography variant="body2">
+                      {publicationData.Property.country}
+                    </Typography>
+                      
+                    <Typography variant="body2">
+                      {publicationData.Property.toilets} baños
+                    </Typography>
+                      
+                    <Typography variant="body2">
+                      {publicationData.Property.rooms} habitaciones
+                    </Typography>
+                      
+                    <Typography variant="body2">
+                      para {publicationData.Property.people} personas
+                    </Typography>
+                      
+                    <Typography variant="body2">
+                      {publicationData.Publication.description}
+                    </Typography>
+                    
+                    <Typography variant="body2">
+                      Puntaje promedio: {publicationData.Publication.rating}
+                    </Typography>
+                    
+                    <Button variant="contained" onClick={()=>{makeReservation(publicationData)}}//props)}} 
+                    disabled={false} color="success">Realizar reserva</Button>
+                    
+                    <Button variant="contained" onClick={()=>{calificar(publicationData)}}//props)}} 
+                    disabled={true} color="success">Calificar</Button>
+                    
+                      
+                    <Button variant="filled" color="primary" 
+                    onClick={() => {navigate(-1);return false;}}>Volver</Button>
+                  </> :
+                  <CircularProgress/>}
 
                 </section>
     )

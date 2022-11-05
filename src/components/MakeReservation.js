@@ -32,7 +32,7 @@ const PROPERTYHANDLER_URL = '/updateProperty/';
 const MakeReservation = () => {
 
 
-    let props = window.localStorage.getItem("view_publication")
+    let props = window.localStorage.getItem("make_reservation")
     let parsed_publication = (JSON.parse(props)).Publication
 
     const navigate = useNavigate();

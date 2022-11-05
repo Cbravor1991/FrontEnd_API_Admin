@@ -10,19 +10,16 @@ import axios from '../api/axios';
 import swal from 'sweetalert2';
 import {Image} from "@mui/icons-material";
 import { useRef, useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 const DELETE_PUBLICATION_URL = '/deletePublication/';
 const DELETE_PROPERTY_URL = '/deleteProperty/';
 
-const viewPublication = async (props) => {
-  window.localStorage.setItem("view_publication", JSON.stringify (props))
-  window.location.href="/viewPublication/"
-}
-
-
 export default function CardPublication(props) {
     let username = props.username
+
+    const navigate = useNavigate();
 
 //Solución provisoria
     
@@ -56,6 +53,12 @@ export default function CardPublication(props) {
   useEffect(() => {
     loadImages();
     }, []);
+
+    const viewPublication = async (id) => {
+      //window.localStorage.setItem("view_publication", JSON.stringify (props))
+      navigate(`/viewPublication/${id}`)
+    }
+    
   
     return (
     
@@ -79,7 +82,7 @@ export default function CardPublication(props) {
             </Typography>
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
-            <Button variant="contained" onClick={()=>{viewPublication(props)}} color="success">Consultar</Button>
+            <Button variant="contained" onClick={()=>{viewPublication(props.Publication.id)}} color="success">Consultar</Button>
           </CardActions>
         </React.Fragment>
       </Card>

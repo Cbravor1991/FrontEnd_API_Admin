@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from '../api/axios';
 import CardMyPublication from "../components/CardMyPublication";
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import { Add } from '@mui/icons-material';
 
 const ShowsMyPublications = () => {
 
   const navigate = useNavigate();
 
-  const [publications, setPublications] = useState([]);
+  const [publications, setPublications] = useState(null);
 
   let username = window.localStorage.getItem("username")
   
@@ -43,7 +43,9 @@ const ShowsMyPublications = () => {
 
   return (
     <>
-    { (publications && publications.length > 0) ? 
+    { (publications) ? 
+    (
+      (publications.length > 0) ?
       <Box sx={{display:'flex',flexWrap: 'wrap' }}>
         {publications.map(item => {
           return (
@@ -54,7 +56,7 @@ const ShowsMyPublications = () => {
       : <Typography style={{color: "black"}} variant="h6" gutterBottom>
         No tenés publicaciones realizadas
       </Typography>
-
+    ) : <CircularProgress></CircularProgress>
       
     }
 
