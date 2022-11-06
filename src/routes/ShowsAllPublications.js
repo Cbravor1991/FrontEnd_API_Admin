@@ -17,9 +17,13 @@ const ShowsAllPublications = () => {
       window.location.href = "/login";
       return;
     } 
-    const params = JSON.stringify({'email_user': username});
-    
-    axios.post('/publications/', {},{ params })
+    const params = new URLSearchParams([['offset', 1], ['limit', 100]]);
+    const json = {"email_user": username}
+    const headers = {headers:{
+                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }}
+    axios({method:'post', url:'/publications/', data:json, params:params, headers:headers })
     .then((response) => {
       setPublications(response.data);
     })
