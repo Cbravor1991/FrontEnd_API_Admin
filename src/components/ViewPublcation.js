@@ -1,17 +1,7 @@
-import { useRef, useState, useEffect, useCallback, memo, useMemo } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import axios from '../api/axios';
-import { Link, useNavigate } from "react-router-dom";
-import Logo from '../components/Logo';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
-import { PrecisionManufacturing } from "@mui/icons-material";
-//import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { CircularProgress } from "@mui/material";

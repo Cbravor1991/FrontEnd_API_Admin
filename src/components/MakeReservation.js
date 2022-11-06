@@ -1,32 +1,16 @@
-import { useRef, useState, useEffect } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import axios from '../api/axios';
-import { Link, useNavigate } from "react-router-dom";
-import Logo from '../components/Logo';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import { useNavigate } from "react-router-dom";
 import {Button, CircularProgress, Divider, Paper, Typography} from '@mui/material';
-
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useParams } from 'react-router-dom'
-import { Circle, DateRange, PrecisionManufacturing } from "@mui/icons-material";
+import { DateRange } from "@mui/icons-material";
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
-
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-
-//import 'react-day-picker/dist/style.css';
-
-//import subDays from "date-fsn/subDays";
-import Moment from "moment";
-
 import swal from "sweetalert2";
 
-const PROPERTYHANDLER_URL = '/updateProperty/';
+
+//const PROPERTYHANDLER_URL = '/updateProperty/';
 
 
 const MakeReservation = () => {

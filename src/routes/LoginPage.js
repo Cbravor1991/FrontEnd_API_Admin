@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import Logo from '../components/Logo';
 

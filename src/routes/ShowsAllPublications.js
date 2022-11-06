@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from '../api/axios';
 import CardPublication from "../components/CardPublication";
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import { Add } from '@mui/icons-material';
+import { Box, CircularProgress, Typography } from '@mui/material';
+
 
 const ShowsAllPublications = () => {
-
-  const navigate = useNavigate();
 
   const [publications, setPublications] = useState(null);
 

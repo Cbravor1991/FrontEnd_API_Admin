@@ -1,4 +1,6 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {

@@ -6,7 +6,6 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import axios from '../api/axios';
-
 import { Logout } from '@mui/icons-material';
 import { Avatar, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate } from "react-router-dom";

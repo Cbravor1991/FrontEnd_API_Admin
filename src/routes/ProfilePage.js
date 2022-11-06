@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from '../api/axios';
-import Card from "../components/Card";
-import { Avatar, Box, Button, CircularProgress, Divider, Paper, Rating, Typography } from '@mui/material';
-import { Add, ContactMail, ContactMailOutlined, Description, DescriptionOutlined, Edit, LocationCity, LocationOn, LocationOnOutlined, PersonOutline, VerifiedOutlined, VerifiedUserOutlined, Work, WorkOutline, WorkOutlineOutlined } from '@mui/icons-material';
+import { Avatar, Button, CircularProgress, Divider, Paper, Typography } from '@mui/material';
+import { Edit, LocationOnOutlined, DescriptionOutlined, PersonOutline, VerifiedUserOutlined, WorkOutline } from '@mui/icons-material';
 
 
 const Profile = () => {

@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
-import { useRef, useState, useEffect } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from '../api/axios';
-import { Link, Route, useNavigate, BrowserRouter, BrowserRouter as Router, Redirect, Switch} from "react-router-dom";
 import Logo from '../components/Logo';
 import GoBack from '../components/GoBack';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import ImageUploading from "react-images-uploading";
 
 
 export class FileLoaderGallery2 extends Component {

@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from '../api/axios';
-import Card from "../components/Card";
-import { Avatar, Box, Button, CircularProgress, Divider, Paper, Rating, TextField, Typography } from '@mui/material';
-import { Add, ContactMail, ContactMailOutlined, Description, DescriptionOutlined, Edit, LocationCity, LocationOn, LocationOnOutlined, PersonOutline, VerifiedOutlined, VerifiedUserOutlined, Work, WorkOutline, WorkOutlineOutlined } from '@mui/icons-material';
-
-
+import { Avatar, Button, CircularProgress, Paper, TextField } from '@mui/material';
 import swal from 'sweetalert2';
+
 
 const EditProfile = () => {
   const CLOUD_NAME = 'dwx9rqfjh';

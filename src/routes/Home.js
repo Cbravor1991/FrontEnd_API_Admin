@@ -1,9 +1,7 @@
-import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 import Logo from '../components/Logo';
-import { Alert, Paper } from '@mui/material';
-
+import { Paper } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {

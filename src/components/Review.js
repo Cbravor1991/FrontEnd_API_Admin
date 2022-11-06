@@ -1,23 +1,8 @@
-import { useRef, useState, useEffect, Component } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef, useState} from "react"
 import axios from '../api/axios';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from '../components/Logo';
-import { Box, TextField } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useParams } from 'react-router-dom'
-import { PrecisionManufacturing } from "@mui/icons-material";
-//import { Rating } from 'react-simple-star-rating'
-//import StarIcon from "@mui/icons-material/Star";
-//import StarBorderIcon from "@mui/icons-material/StarBorder";
-//import Rating from 'react-simple-rating';
-//import { FaStar } from "react-icons/fa";
-//import { Container } from 'react-bootstrap';
-//import { Radio } from "@nextui-org/react";
+import { TextField } from '@mui/material';
 import ReactStars from "react-rating-stars-component";
 
 
@@ -72,10 +57,11 @@ const Review = () => {
             
             const headers = { 'Content-Type': 'application/json' }
             
-            const response = axios({method: 'put', url:'/newReview', data:
-                JSON.stringify({
+            const json = JSON.stringify({
                     "email_user": username, 'rating': rating, 'description': descripcion
-                }),
+                })
+            
+            const response = axios({method: 'put', url:'/newReview', data: json,
                 
                     headers: headers, params: params });
               

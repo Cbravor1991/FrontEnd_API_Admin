@@ -5,11 +5,9 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import UpdateData from './UpdateData';
 import axios from '../api/axios';
 import swal from 'sweetalert2';
-import {Image} from "@mui/icons-material";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 
 const DELETE_PUBLICATION_URL = '/deletePublication/';

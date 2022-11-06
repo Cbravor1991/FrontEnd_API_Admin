@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from '../api/axios';
 import Card from "../components/Card";
 import { Box, Button, Typography } from '@mui/material';

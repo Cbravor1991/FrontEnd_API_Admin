@@ -1,20 +1,16 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import UpdateData from './UpdateData';
 import axios from '../api/axios';
-import swal from 'sweetalert2';
-import {Image} from "@mui/icons-material";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 
-const DELETE_PUBLICATION_URL = '/deletePublication/';
-const DELETE_PROPERTY_URL = '/deleteProperty/';
+//const DELETE_PUBLICATION_URL = '/deletePublication/';
+//const DELETE_PROPERTY_URL = '/deleteProperty/';
 
 export default function CardPublication(props) {
     let username = props.username

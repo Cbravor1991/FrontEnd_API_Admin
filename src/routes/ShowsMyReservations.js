@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from '../api/axios';
 import { Box, Button, Typography , Card, CardContent, CardActions, CircularProgress} from '@mui/material';
-import { Add } from '@mui/icons-material';
 import swal from 'sweetalert2';
 
 const ShowsMyReservations = () => {
