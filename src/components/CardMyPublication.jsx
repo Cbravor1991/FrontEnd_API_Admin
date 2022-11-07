@@ -8,10 +8,12 @@ import Typography from '@mui/material/Typography';
 import axios from '../api/axios';
 import swal from 'sweetalert2';
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 const DELETE_PUBLICATION_URL = '/deletePublication/';
 const DELETE_PROPERTY_URL = '/deleteProperty/';
+
 
 const bull = (
   <Box
@@ -22,11 +24,6 @@ const bull = (
   </Box>
 );
 
-
-const viewPublication = async (props) => {
-  window.localStorage.setItem("view_publication", JSON.stringify (props))
-  window.location.href="/viewPublication/"
-}
 
 
 const update = async (props) => {
@@ -84,9 +81,23 @@ const deletePublication = async (props, username, updateFunction) => {
 }
 
 
+ const viewPublication = async (props, navigate) => {
+     window.localStorage.setItem("view_publication", JSON.stringify (props))
+     const id = props.Publication.id;
+     console.log(id);
+     navigate(`/viewPublication/${id}`)
+   }
+
+
 
 export default function CardMyPublication(props) {
-    let username = props.username
+    let username = props.username;
+    
+    const navigate = useNavigate();
+    
+    
+  //console.log(props.Publication.id)
+  //console.log(props.Property.id)
 
 //Solución provisoria
     
@@ -116,7 +127,10 @@ export default function CardMyPublication(props) {
     images.map(item => {
                   list.push(item.link)
                 })
-  
+
+
+
+
   useEffect(() => {
     loadImages();
     }, []);
@@ -143,7 +157,7 @@ export default function CardMyPublication(props) {
             </Typography>
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
-            { <Button variant="contained" onClick={()=>{viewPublication(props)}} color="success">Consultar</Button> }
+            { <Button variant="contained" onClick={()=>{viewPublication(props, navigate)}} color="success">Consultar</Button> }
             <Button variant="contained" onClick={()=>{update(props)}} color="success">Modificar</Button>
             <Button variant="contained" onClick={()=>{deletePublication(props, username, props.updateLodgings)}} color="success">Eliminar</Button>
             

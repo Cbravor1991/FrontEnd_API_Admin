@@ -51,7 +51,8 @@ export default function CardPublication(props) {
     }, []);
 
     const viewPublication = async (id) => {
-      //window.localStorage.setItem("view_publication", JSON.stringify (props))
+      window.localStorage.setItem("view_publication", JSON.stringify (props))
+      //console.log(id)
       navigate(`/viewPublication/${id}`)
     }
     
