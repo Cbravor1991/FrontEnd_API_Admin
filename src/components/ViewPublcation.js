@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from '../api/axios';
 import { useNavigate } from "react-router-dom";
-import { useParams } from 'react-router-dom'
+//import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { CircularProgress } from "@mui/material";
@@ -23,8 +23,15 @@ const ViewPublication = (() => {
   const [publicationData, setPublicationData] = useState([]);
 
   let username = window.localStorage.getItem("username")
-    
   
+  const [isReserved, setReserved] =  useState(false);
+  
+  
+  const validate = () => {
+    return window.localStorage.getItem("reservado");
+  };
+
+    
   const loadPublicationData = () => {
     if (!username){
       window.location.href = "/login";
@@ -37,7 +44,7 @@ const ViewPublication = (() => {
                     'Access-Control-Allow-Origin': '*'
                 }}
                 
-    const routeParams = new URLSearchParams(window.location.search);
+    //const routeParams = new URLSearchParams(window.location.search);
     //const id = routeParams.get('id'); 
     const id = parse_publication.id;
     console.log(id) 
@@ -100,6 +107,11 @@ const ViewPublication = (() => {
      window.location.href="/review/"
     }
 
+
+    useEffect(() => {
+    const result = validate();
+    setReserved(result);
+  }, []);
 
 
     return (
@@ -164,10 +176,10 @@ const ViewPublication = (() => {
                     </Typography>
                     
                     <Button variant="contained" onClick={()=>{makeReservation(props)}}
-                    disabled={false} color="success">Realizar reserva</Button>
+                    disabled={isReserved} color="success">Realizar reserva</Button>
                     
                     <Button variant="contained" onClick={()=>{calificar(props)}} 
-                    disabled={true} color="success">Calificar</Button>
+                    disabled={!isReserved} color="success">Calificar</Button>
                       
                     <Button variant="filled" color="primary" 
                     onClick={() => {navigate(-1);return false;}}>Volver</Button>
