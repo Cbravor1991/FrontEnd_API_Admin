@@ -91,7 +91,7 @@ const ViewPublication = (() => {
     //}
 
    const makeReservation = async (props) => {
-     window.localStorage.setItem("make_reservation", JSON.stringify (props))
+     window.localStorage.setItem("make_reservation", props)
      window.location.href="/makeReservation/"
     }
     
@@ -163,10 +163,10 @@ const ViewPublication = (() => {
                       Puntaje promedio: {parse_publication.rating}
                     </Typography>
                     
-                    <Button variant="contained" onClick={()=>{makeReservation(publicationData)}}
+                    <Button variant="contained" onClick={()=>{makeReservation(props)}}
                     disabled={false} color="success">Realizar reserva</Button>
                     
-                    <Button variant="contained" onClick={()=>{calificar(publicationData)}} 
+                    <Button variant="contained" onClick={()=>{calificar(props)}} 
                     disabled={true} color="success">Calificar</Button>
                       
                     <Button variant="filled" color="primary" 

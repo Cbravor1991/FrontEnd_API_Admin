@@ -17,7 +17,7 @@ const ShowsAllPublications = () => {
       window.location.href = "/login";
       return;
     } 
-    const params = new URLSearchParams([['offset', 1], ['limit', 100]]);
+    const params = new URLSearchParams([['offset', 0], ['limit', 100]]);
     const json = {"email_user": username}
     const headers = {headers:{
                      'Content-Type': 'application/json',

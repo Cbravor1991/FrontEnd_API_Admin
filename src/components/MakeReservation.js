@@ -18,6 +18,9 @@ const MakeReservation = () => {
 
     let props = window.localStorage.getItem("make_reservation")
     let parsed_publication = (JSON.parse(props)).Publication
+    
+    console.log(props);
+    console.log(parsed_publication);
 
     const navigate = useNavigate();
 
