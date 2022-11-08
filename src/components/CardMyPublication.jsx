@@ -85,7 +85,7 @@ const deletePublication = async (props, username, updateFunction) => {
      window.localStorage.setItem("view_publication", JSON.stringify (props))
      const id = props.Publication.id;
      console.log(id);
-     navigate(`/viewPublication/${id}`)
+     navigate(`/viewPublication/${id}?is_mine=true`)
    }
 
 

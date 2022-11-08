@@ -24,6 +24,7 @@ const ViewPublication = (() => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   let isReserved = searchParams.get("is_reserved");
+  let isMine = searchParams.get("is_mine");
 
   const navigate = useNavigate();
 
@@ -153,14 +154,20 @@ const ViewPublication = (() => {
                       Puntaje promedio: {publicationData.Publication.rating}
                     </Typography>
                     
-                    <Button variant="contained" onClick={()=>{makeReservation(publicationData)}}//props)}} 
-                    disabled={isReserved} color="success">Realizar reserva</Button>
-                    
-                    <Button variant="contained" onClick={()=>{calificar(publicationData)}}//props)}} 
-                    disabled={!isReserved} color="success">Calificar</Button>
+                    {
+                      (!isMine && !isReserved) ? 
+                      <Button variant="contained" onClick={()=>{makeReservation(publicationData)}} color="success">Realizar reserva</Button>
+                      : ""
+                    }
+
+                    {
+                      (isReserved) ? 
+                      <Button variant="contained" onClick={()=>{calificar(publicationData)}} color="success">Calificar</Button>
+                      : ""
+                    }
                     
                       
-                    <Button variant="filled" color="primary" 
+                    <Button variant="contained" color="primary" 
                     onClick={() => {navigate(-1);return false;}}>Volver</Button>
                   </> :
                   <CircularProgress/>}
