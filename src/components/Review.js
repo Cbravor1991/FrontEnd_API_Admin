@@ -61,13 +61,16 @@ const Review = () => {
                     "email_user": username, 'rating': rating, 'description': descripcion
                 })
                 
+            //const endpoint = '/newReview/' 
+            const endpoint = (`/newReview/${id_publication}`)
+                
             console.log(id_publication)
             console.log(rating)
             console.log(descripcion)    
             
-            const response = axios({method: 'put', url:'/newReview', data: json,
+            const response = axios({method: 'put', url: endpoint, data: json,
                 
-                    headers: headers, params: params });
+                    headers: headers });
               
              
 
@@ -125,16 +128,21 @@ const Review = () => {
              />
   
       
-      <TextField
-              name="Descripcion"
-              label="Comentarios"
-              defaultValue={descripcion}
-              sx={{margin: "10px 0 10px 0", width: "350px"}}
+               <label htmlFor="comentarios">
+                            Comentarios:
 
-            />
+                        </label>
+                        <input
+                            type="text"
+                            id="comentarios"
+                            onChange={(e) => setDescripcion(e.target.value)}
+                            value={descripcion}
+                            required
 
-                       
-                        <button onClick={() => {navigate(-1)}}> Aceptar </button>
+                        />
+
+
+                        <button > Aceptar </button>                       
                     </form>
                 </section>
             )}

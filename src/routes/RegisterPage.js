@@ -86,7 +86,7 @@ const RegisterPage = () => {
         <>
             {success ? (
                 <section style={{backgroundColor: 'grey'}}>
-                    <h1>Registrado con Exito!</h1>
+                    <h2>Registrado con Exito!</h2>
                     <p>
                         <a href="/login">Ingresar</a>
                     </p>
@@ -95,7 +95,7 @@ const RegisterPage = () => {
                 <section style={{backgroundColor: 'grey'}}>
                     <Logo />
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Registrarse</h1>
+                    <h2>Registrarse</h2>
                     <form className="custom" onSubmit={handleSubmit}>
                         <label htmlFor="username">
                             Nombre de usuario:
