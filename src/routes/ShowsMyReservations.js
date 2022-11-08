@@ -75,7 +75,7 @@ const ShowsMyReservations = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={() => {navigate(`/viewPublication/${item.publication_id}`)}}>Ver publicación</Button>
+                <Button size="small" onClick={() => {navigate(`/viewPublication/${item.publication_id}?is_reserved=true`)}}>Ver publicación</Button>
                 </CardActions>
                 <CardActions>
 

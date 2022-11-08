@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback, memo, useMemo } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Logo from '../components/Logo';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -22,11 +22,15 @@ const ViewPublication = (() => {
 
   const routeParams = useParams();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  let isReserved = searchParams.get("is_reserved");
+
   const navigate = useNavigate();
 
   const [publicationData, setPublicationData] = useState(null);
 
-  let isReserved = window.localStorage.getItem("reservado");
+  //let isReserved = window.localStorage.getItem("reservado");
+  console.log(isReserved)
 
   let username = window.localStorage.getItem("username")
     
@@ -150,10 +154,10 @@ const ViewPublication = (() => {
                     </Typography>
                     
                     <Button variant="contained" onClick={()=>{makeReservation(publicationData)}}//props)}} 
-                    disabled={!isReserved} color="success">Realizar reserva</Button>
+                    disabled={isReserved} color="success">Realizar reserva</Button>
                     
                     <Button variant="contained" onClick={()=>{calificar(publicationData)}}//props)}} 
-                    disabled={isReserved} color="success">Calificar</Button>
+                    disabled={!isReserved} color="success">Calificar</Button>
                     
                       
                     <Button variant="filled" color="primary" 
