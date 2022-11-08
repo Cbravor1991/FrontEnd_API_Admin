@@ -1,7 +1,17 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback, memo, useMemo } from "react";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
-import { useNavigate } from "react-router-dom";
-//import { useParams } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import Logo from '../components/Logo';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useParams } from 'react-router-dom'
+import { PrecisionManufacturing } from "@mui/icons-material";
+//import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { CircularProgress } from "@mui/material";
@@ -10,68 +20,41 @@ import { CircularProgress } from "@mui/material";
 
 const ViewPublication = (() => {
 
-  //const { routeParams } = useParams();
-  let props = window.localStorage.getItem("view_publication")
-  let parse_publication = (JSON.parse(props)).Publication
-  let parse_properties = JSON.parse(props).Property
-  
-  console.log(parse_publication);
-  console.log(parse_properties);
+  const routeParams = useParams();
 
   const navigate = useNavigate();
 
-  const [publicationData, setPublicationData] = useState([]);
+  const [publicationData, setPublicationData] = useState(null);
+
+  let isReserved = window.localStorage.getItem("reservado");
 
   let username = window.localStorage.getItem("username")
-  
-  const [isReserved, setReserved] =  useState(false);
-  
-  
-  const validate = () => {
-    return window.localStorage.getItem("reservado");
-  };
-
     
+  
   const loadPublicationData = () => {
     if (!username){
       window.location.href = "/login";
       return;
     } 
-    const params = new URLSearchParams([['offset', 0], ['limit', 100]]);
-    const json = {"email_user": username}
-    const headers = {headers:{
-                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                }}
-                
-    //const routeParams = new URLSearchParams(window.location.search);
-    //const id = routeParams.get('id'); 
-    const id = parse_publication.id;
-    console.log(id) 
-              
+    const params = new URLSearchParams([['email_user', username], ['publication_id', routeParams.id]]);
     
-    axios.post('/publications/', json, params, headers)
+    axios.post('/getPublicationById/', {},{ params })
     .then((response) => {
       console.log(response.data)
-      let item = response.data.filter(x => x.Publication.id === id)[0];
-      console.log(item);
-      setPublicationData(publicationData.push(item));
-      console.log(publicationData)
-      //console.log(id)
+      setPublicationData(response.data);
     })
     .catch((error) => {
       console.log(error);
     });
   }
-  
-   if (!parse_publication){
-  //if (!publicationData){
+
+  if (!publicationData){
     loadPublicationData();
   }
     
-  const [images, setImages] = useState(null);
+    const [images, setImages] = useState(null);
 
-  const loadImages = (publicationData) => {
+    const loadImages = () => {
       if (!username){
         console.log("no autorizado")
         //navigate("/login");
@@ -79,9 +62,7 @@ const ViewPublication = (() => {
         return;
       } 
       console.log(publicationData);
-      //let parse = JSON.parse(publicationData).Property;
-      //console.log(parse);
-      const params = new URLSearchParams([['property_id', parse_properties.id]]);
+      const params = new URLSearchParams([['property_id', publicationData.Publication.property_id]]);
     
       axios.post('/fetchAllPropertyImages/', {},{ params })
       .then((response) => {
@@ -90,15 +71,14 @@ const ViewPublication = (() => {
       .catch((error) => {
         console.log(error);
       });
-   }
+    }
 
-     if (parse_publication && !images){
-    //if (publicationData && !images){
-      loadImages(publicationData);
+    if (publicationData && !images){
+      loadImages();
     }
 
    const makeReservation = async (props) => {
-     window.localStorage.setItem("make_reservation", props)
+     window.localStorage.setItem("make_reservation", JSON.stringify (props))
      window.location.href="/makeReservation/"
     }
     
@@ -108,21 +88,15 @@ const ViewPublication = (() => {
     }
 
 
-    useEffect(() => {
-    const result = validate();
-    setReserved(result);
-  }, []);
 
 
     return (
                 <section style={{ backgroundColor: 'grey' }}>
-                
                   {(publicationData && images) ? <>
-                  
                     <h2>Datos de la publicación</h2>
 
                     <Typography sx={{ fontSize: 34 }} color="text.secondary" gutterBottom>
-                        {parse_publication.title}
+                        {publicationData.Publication.title}
                     </Typography>
 
                     <div className="form-group multi-preview">
@@ -132,60 +106,60 @@ const ViewPublication = (() => {
                     </div>
 
                     <Typography variant="h6" component="div">
-                        {parse_properties.description}
+                        {publicationData.Property.description}
                     </Typography>
 
                     <Typography variant="body2">
-                      $ {parse_publication.price}
+                      $ {publicationData.Publication.price}
                     </Typography>
 
                     <Typography variant="body2">
-                      {parse_properties.direction}
+                      {publicationData.Property.direction}
                     </Typography>
 
                     <Typography variant="body2">
-                      {parse_properties.province}
+                      {publicationData.Property.province}
                     </Typography>
                       
                     <Typography variant="body2">
-                      {parse_properties.location}
+                      {publicationData.Property.location}
                     </Typography>
                       
                     <Typography variant="body2">
-                      {parse_properties.country}
+                      {publicationData.Property.country}
                     </Typography>
                       
                     <Typography variant="body2">
-                      {parse_properties.toilets} baños
+                      {publicationData.Property.toilets} baños
                     </Typography>
                       
                     <Typography variant="body2">
-                      {parse_properties.rooms} habitaciones
+                      {publicationData.Property.rooms} habitaciones
                     </Typography>
                       
                     <Typography variant="body2">
-                      para {parse_properties.people} personas
+                      para {publicationData.Property.people} personas
                     </Typography>
                       
                     <Typography variant="body2">
-                      {parse_publication.description}
+                      {publicationData.Publication.description}
                     </Typography>
                     
                     <Typography variant="body2">
-                      Puntaje promedio: {parse_publication.rating}
+                      Puntaje promedio: {publicationData.Publication.rating}
                     </Typography>
                     
-                    <Button variant="contained" onClick={()=>{makeReservation(props)}}
+                    <Button variant="contained" onClick={()=>{makeReservation(publicationData)}}//props)}} 
                     disabled={!isReserved} color="success">Realizar reserva</Button>
                     
-                    <Button variant="contained" onClick={()=>{calificar(props)}} 
+                    <Button variant="contained" onClick={()=>{calificar(publicationData)}}//props)}} 
                     disabled={isReserved} color="success">Calificar</Button>
+                    
                       
                     <Button variant="filled" color="primary" 
                     onClick={() => {navigate(-1);return false;}}>Volver</Button>
-                    
                   </> :
-                  <CircularProgress></CircularProgress>}
+                  <CircularProgress/>}
 
                 </section>
     )
