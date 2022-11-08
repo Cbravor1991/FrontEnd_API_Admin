@@ -60,6 +60,10 @@ const Review = () => {
             const json = JSON.stringify({
                     "email_user": username, 'rating': rating, 'description': descripcion
                 })
+                
+            console.log(id_publication)
+            console.log(rating)
+            console.log(descripcion)    
             
             const response = axios({method: 'put', url:'/newReview', data: json,
                 

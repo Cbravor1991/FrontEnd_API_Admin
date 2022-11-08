@@ -64,10 +64,10 @@ const ViewPublication = (() => {
     });
   }
   
-
+   if (!parse_publication){
   //if (!publicationData){
     loadPublicationData();
-  //}
+  }
     
   const [images, setImages] = useState(null);
 
@@ -92,10 +92,10 @@ const ViewPublication = (() => {
       });
    }
 
-
+     if (parse_publication && !images){
     //if (publicationData && !images){
       loadImages(publicationData);
-    //}
+    }
 
    const makeReservation = async (props) => {
      window.localStorage.setItem("make_reservation", props)
