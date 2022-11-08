@@ -176,10 +176,10 @@ const ViewPublication = (() => {
                     </Typography>
                     
                     <Button variant="contained" onClick={()=>{makeReservation(props)}}
-                    disabled={isReserved} color="success">Realizar reserva</Button>
+                    disabled={!isReserved} color="success">Realizar reserva</Button>
                     
                     <Button variant="contained" onClick={()=>{calificar(props)}} 
-                    disabled={!isReserved} color="success">Calificar</Button>
+                    disabled={isReserved} color="success">Calificar</Button>
                       
                     <Button variant="filled" color="primary" 
                     onClick={() => {navigate(-1);return false;}}>Volver</Button>

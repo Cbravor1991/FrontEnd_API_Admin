@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Button, Paper } from "@mui/material";
 
 
 //const PROPERTYHANDLER_URL = '/updateProperty/';
@@ -143,24 +144,21 @@ const MakePublication = () => {
     return (
         <>
             {success ? (
-                <section style={{ backgroundColor: 'grey' }}>
-                    <h1>Propiedad actualizada con exito!</h1>
+                <section style={{ backgroundColor: 'white' }}>
+                    <h1>Publicacion creada con exito!</h1>
                     <p>
-                        <a href="/">Ir a la pagina principal</a>
-                        <br />
-                        <a href="/showsMyPublications">Ir a la pagina de publicaciones</a>
+                        <a href="/showsMyPublications">Ir a mis publicaciones</a>
                     </p>
                 </section>
             ) : (
 
-                <section style={{ backgroundColor: 'grey' }}>
-                    <Logo />
+                <Paper style={{ padding: '15px' }}>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h2>Ingrese los datos de la publicación</h2>
                     <form className="custom" onSubmit={handleSubmit}>
+                    <h3>Ingrese los datos de la publicación</h3>
 
                         <br />
-                        <Link to="/fileLoaderGallery2">Cargar Fotos</Link>
+                        <Link to="/fileLoaderGallery2" style={{color: "blue"}}>Cargar Fotos</Link>
 
                         <br />
                         
@@ -210,7 +208,7 @@ const MakePublication = () => {
 
                         <br />
 
-                        <h2>Ingrese los datos de la propiedad</h2>
+                        <h3>Ingrese los datos de la propiedad</h3>
 
                         <label htmlFor="direccion">
                             Direccion:
@@ -353,9 +351,9 @@ const MakePublication = () => {
                         <br/>
 
 
-                        <button >Crear publicación</button>
+                        <Button variant="contained" type="submit" color="primary">Crear publicación</Button>
                     </form>
-                </section>
+                </Paper>
             )}
         </>
     )
