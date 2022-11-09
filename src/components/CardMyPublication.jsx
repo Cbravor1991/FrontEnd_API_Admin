@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 const DELETE_PUBLICATION_URL = '/deletePublication/';
 const DELETE_PROPERTY_URL = '/deleteProperty/';
+const RESERVATION_STATUS = '/reservationStatus/';
 
 
 const bull = (
@@ -87,6 +88,30 @@ const deletePublication = async (props, username, updateFunction) => {
      console.log(id);
      navigate(`/viewPublication/${id}?is_mine=true`)
    }
+  
+  
+   async function statusPublication(props) {
+    window.localStorage.setItem("information_reservation", JSON.stringify (props.Publication.id))
+  
+    let params = new URLSearchParams([['email_user', props.username], ['publication_id', props.Publication.id]]);
+  
+    const response = axios.post(RESERVATION_STATUS, {}, { params })
+      .then((response) => {
+        console.log(response.data)
+        if((response.data) == true){
+          window.location.href = "/dateReservation"
+          
+        }else{
+          swal.fire({title: "ESTA PROPIEDAD NO TIENE RESERVAS",  icon: "error"})
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+     
+    
+  } 
 
 
 
@@ -155,6 +180,10 @@ export default function CardMyPublication(props) {
             <Typography variant="body2">
               {props.Publication.price}
             </Typography>
+
+            <Typography variant="body2">
+            <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver información reserva</Button>
+          </Typography>
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
             { <Button variant="contained" onClick={()=>{viewPublication(props, navigate)}} color="success">Consultar</Button> }

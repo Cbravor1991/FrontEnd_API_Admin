@@ -27,6 +27,9 @@ import MakeReservation from './components/MakeReservation';
 import ShowsAllPublications from './routes/ShowsAllPublications';
 import ShowsMyReservations from './routes/ShowsMyReservations';
 import Review from './components/Review';
+import DateReservation from './routes/DateReservation'
+
+
 
 
 
@@ -69,6 +72,8 @@ function App() {
       <Route path="makeReservation/" element={<MakeReservation/>} />
       <Route path="profile/edit" element={<EditProfile />} />
       <Route path="review" element={<Review />} />
+      <Route path="dateReservation" element={<DateReservation/>} />
+      
       
       {/*
       <Route element={<RequireAuth allowedRoles={[ROLES.Inquilino]} />}>
