@@ -18,13 +18,13 @@ const ShowsAllPublications = () => {
   
   
     //const [email_user, setEmail] = useState('');
-    const [precioMin, setPrecioMin] = useState(0);
-    const [precioMax, setPrecioMax] = useState(100000);
-    const [localidad, setLocalidad] = useState('');
-    const [provincia, setProvincia] = useState('');
-    const [pais, setPais] = useState('');
-    const [rating, setRating] = useState(0);
-    const [personas, setPersonas] = useState(0);
+    const [precioMin, setPrecioMin] = useState(null);
+    const [precioMax, setPrecioMax] = useState(null);
+    const [localidad, setLocalidad] = useState("");
+    const [provincia, setProvincia] = useState("");
+    const [pais, setPais] = useState("");
+    const [rating, setRating] = useState(null);
+    const [personas, setPersonas] = useState(null);
   
   
   const loadPublications = () => {
@@ -83,7 +83,6 @@ const ShowsAllPublications = () => {
                             id="precioMin"
                             onChange={(e) => setPrecioMin(e.target.value)}
                             value={precioMin}
-                            required
                         />
 
                         
@@ -96,7 +95,6 @@ const ShowsAllPublications = () => {
                             id="precioMax"
                             onChange={(e) => setPrecioMax(e.target.value)}
                             value={precioMax}
-                            required
                         />
 
                                                 
@@ -109,7 +107,6 @@ const ShowsAllPublications = () => {
                             id="provincia"
                             onChange={(e) => setProvincia(e.target.value)}
                             value={provincia}
-                            required
                         />
                         
 
@@ -122,7 +119,6 @@ const ShowsAllPublications = () => {
                             id="localidad"
                             onChange={(e) => setLocalidad(e.target.value)}
                             value={localidad}
-                            required
                         />
                         
 
@@ -135,7 +131,6 @@ const ShowsAllPublications = () => {
                             id="pais"
                             onChange={(e) => setPais(e.target.value)}
                             value={pais}
-                            required
                         />
                         
 
@@ -149,6 +144,7 @@ const ShowsAllPublications = () => {
                                     label="Rating"
                                     onChange={(e) => setRating(e.target.value)}
                                 >
+                                    <MenuItem value={null}></MenuItem>
                                     <MenuItem value={0}>0</MenuItem>
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -170,6 +166,7 @@ const ShowsAllPublications = () => {
                                     label="Personas"
                                     onChange={(e) => setPersonas(e.target.value)}
                                 >
+                                    <MenuItem value={null}></MenuItem>
                                     <MenuItem value={0}>0</MenuItem>
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
