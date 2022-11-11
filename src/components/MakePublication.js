@@ -194,7 +194,7 @@ const MakePublication = () => {
 
                        
                         <label htmlFor="precio">
-                            Precio:
+                            Precio por noche:
 
                         </label>
                         <input

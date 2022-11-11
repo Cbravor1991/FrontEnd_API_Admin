@@ -14,7 +14,7 @@ import { PrecisionManufacturing } from "@mui/icons-material";
 //import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Divider, Paper, Rating } from "@mui/material";
 
 
 
@@ -96,11 +96,10 @@ const ViewPublication = (() => {
 
 
     return (
-                <section style={{ backgroundColor: 'grey' }}>
+    <Paper component="form" sx={{minWidth: 350, maxWidth: 800, padding: "20px", minHeight: 300, backgroundColor: 'white', textAlign: "left"}}> 
                   {(publicationData && images) ? <>
-                    <h2>Datos de la publicación</h2>
 
-                    <Typography sx={{ fontSize: 34 }} color="text.secondary" gutterBottom>
+                    <Typography variant="h5" gutterBottom>
                         {publicationData.Publication.title}
                     </Typography>
 
@@ -110,69 +109,62 @@ const ViewPublication = (() => {
                       ))}
                     </div>
 
-                    <Typography variant="h6" component="div">
+                    <Typography variant="subtitle2">
+                    {publicationData.Property.people} personas - {publicationData.Property.rooms} habitaciones - {publicationData.Property.toilets} baños
+                    </Typography>
+
+                    <Typography variant="h6">
+                      $ {publicationData.Publication.price} noche
+                    </Typography>
+
+                    <Divider></Divider>
+                    <Typography variant="body1" component="div">
                         {publicationData.Property.description}
                     </Typography>
 
+                    <Typography variant="body1">
+                      {publicationData.Publication.description}
+                    </Typography>
+
+                    <Divider></Divider>
+
                     <Typography variant="body2">
-                      $ {publicationData.Publication.price}
+                    {publicationData.Property.country} {publicationData.Property.province}  {publicationData.Property.location}
                     </Typography>
 
                     <Typography variant="body2">
                       {publicationData.Property.direction}
                     </Typography>
-
-                    <Typography variant="body2">
-                      {publicationData.Property.province}
-                    </Typography>
                       
-                    <Typography variant="body2">
-                      {publicationData.Property.location}
-                    </Typography>
-                      
-                    <Typography variant="body2">
-                      {publicationData.Property.country}
-                    </Typography>
-                      
-                    <Typography variant="body2">
-                      {publicationData.Property.toilets} baños
-                    </Typography>
-                      
-                    <Typography variant="body2">
-                      {publicationData.Property.rooms} habitaciones
-                    </Typography>
-                      
-                    <Typography variant="body2">
-                      para {publicationData.Property.people} personas
-                    </Typography>
-                      
-                    <Typography variant="body2">
-                      {publicationData.Publication.description}
-                    </Typography>
                     
-                    <Typography variant="body2">
-                      Puntaje promedio: {publicationData.Publication.rating}
-                    </Typography>
+                    <Divider></Divider>
+
+                      {publicationData.Publication.rating ? 
+                       <div><Typography component="legend">Calificación promedio</Typography>
+                       <Rating name="read-only" value={publicationData.Publication.rating} readOnly /></div>
+                        : 
+                        <Typography variant="body2">Aún no cuenta con calificaciones</Typography>}
+                    
                     
                     {
                       (!isMine && !isReserved) ? 
-                      <Button variant="contained" onClick={()=>{makeReservation(publicationData)}} color="success">Realizar reserva</Button>
+                      <Button variant="contained" onClick={()=>{makeReservation(publicationData)}} color="success" fullWidth>Reservar</Button>
                       : ""
                     }
 
                     {
                       (isReserved) ? 
-                      <Button variant="contained" onClick={()=>{calificar(publicationData)}} color="success">Calificar</Button>
+                      <Button variant="contained" onClick={()=>{calificar(publicationData)}} color="success" fullWidth>Calificar</Button>
                       : ""
                     }
                     
                       
                     <Button variant="contained" color="primary" 
-                    onClick={() => {navigate(-1);return false;}}>Volver</Button>
+                    onClick={() => {navigate(-1);return false;}} fullWidth>Volver</Button>
                   </> :
                   <CircularProgress/>}
 
-                </section>
+                </Paper>
     )
 })
 

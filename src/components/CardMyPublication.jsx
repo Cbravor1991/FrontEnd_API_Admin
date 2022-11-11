@@ -182,7 +182,7 @@ export default function CardMyPublication(props) {
             </Typography>
 
             <Typography variant="body2">
-            <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver información reserva</Button>
+            <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver reservas</Button>
           </Typography>
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
