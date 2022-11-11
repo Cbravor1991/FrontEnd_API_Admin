@@ -28,6 +28,7 @@ import ShowsAllPublications from './routes/ShowsAllPublications';
 import ShowsMyReservations from './routes/ShowsMyReservations';
 import Review from './components/Review';
 import DateReservation from './routes/DateReservation'
+import ViewPublicationReviews from './components/ViewPublicationRatings';
 
 
 
@@ -69,6 +70,7 @@ function App() {
       <Route path="showsMyReservations"  element={<ShowsMyReservations />}/>
       <Route path="updatePublications/" element={<UpdatePublications/>} />
       <Route path="viewPublication/:id" element={<ViewPublication/>} />
+      <Route path="viewPublication/:id/reviews" element={<ViewPublicationReviews/>} />
       <Route path="makeReservation/" element={<MakeReservation/>} />
       <Route path="profile/edit" element={<EditProfile />} />
       <Route path="review" element={<Review />} />

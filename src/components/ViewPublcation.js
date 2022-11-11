@@ -137,7 +137,7 @@ const ViewPublication = (() => {
 
                     {publicationData.Publication.rating ? 
                        <div style={{textAlign: "center"}}><Typography variant="subtitle2">Calificación promedio</Typography>
-                       <Rating name="read-only" value={publicationData.Publication.rating} readOnly /></div>
+                       <Rating name="read-only"  precision={0.5} value={publicationData.Publication.rating} readOnly /></div>
                         : 
                         <Typography variant="body2">Aún no cuenta con calificaciones</Typography>}
 

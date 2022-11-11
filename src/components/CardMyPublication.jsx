@@ -9,6 +9,7 @@ import axios from '../api/axios';
 import swal from 'sweetalert2';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { StarRate } from '@mui/icons-material';
 
 
 const DELETE_PUBLICATION_URL = '/deletePublication/';
@@ -182,8 +183,13 @@ export default function CardMyPublication(props) {
             </Typography>
 
             <Typography variant="body2">
-            <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver reservas</Button>
-          </Typography>
+              <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver reservas</Button>
+            </Typography>
+
+            {props.Publication.rating ? 
+                <div><Button onClick={()=> {navigate(`/viewPublication/${props.Publication.id}/reviews`)}}><StarRate fontSize="small" style={{color: "#faaf00", transform: "translate(0px, -3px)"}}/> <span style={{color: "black", marginRight: "6px"}}>{props.Publication.rating}</span> Ver calificaciones</Button> </div>
+            : "Sin calificaciones"}
+
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
             { <Button variant="contained" onClick={()=>{viewPublication(props, navigate)}} color="success">Consultar</Button> }

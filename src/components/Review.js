@@ -102,7 +102,7 @@ const Review = () => {
                     <p>
                         <a href="/">Ir a la pagina principal</a>
                         <br />
-                        <a href="/showsPublications">Ir a la pagina de publicaciones</a>
+                        <a href="/showsAllPublications">Ir a la pagina de publicaciones</a>
                     </p>
                 </section>
             ) : (
