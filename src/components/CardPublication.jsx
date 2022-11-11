@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import axios from '../api/axios';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { StarRate } from '@mui/icons-material';
 
 
 //const DELETE_PUBLICATION_URL = '/deletePublication/';
@@ -75,8 +76,11 @@ export default function CardPublication(props) {
             </Typography>
             
             <Typography variant="body2">
-              {props.Publication.price}
+              $ {props.Publication.price} noche
             </Typography>
+            {props.Publication.rating ? <Typography variant="subtitle2"><StarRate fontSize="small" style={{color: "#faaf00", transform: "translate(0px, 4px)"}}/> {props.Publication.rating} </Typography> : ""}
+
+
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
             <Button variant="contained" onClick={()=>{viewPublication(props.Publication.id)}} color="success">Consultar</Button>
