@@ -27,8 +27,6 @@ const MakeReservation = () => {
 
     const [fechaInicio, setFechaInicio] = useState(new Date());
     const [fechaFin, setFechaFin] = useState(new Date());
-    //const [fechaInicio, setFechaInicio] = useState("");
-    //const [fechaFin, setFechaFin] = useState("");
     
     let username;
     if (!window.localStorage.getItem("username")) {
@@ -94,6 +92,7 @@ const MakeReservation = () => {
       parse_publication = (JSON.parse(props)).Publication
       parse_properties = JSON.parse(props).Property
     })*/
+
   
 
     return ( 
@@ -133,6 +132,10 @@ const MakeReservation = () => {
 
                     <br></br>
                     <br></br>
+
+                    <Typography variant="h6">
+                      Total: $ {Math.round(price * ((fechaFin - fechaInicio)/ (1000 * 3600 * 24) ))} 
+                    </Typography>
 
                     <Button variant="outlined" onClick={() => {navigate(-1)
                         }}> Volver </Button>

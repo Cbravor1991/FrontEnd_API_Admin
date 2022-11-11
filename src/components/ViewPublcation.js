@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useParams } from 'react-router-dom'
-import { PrecisionManufacturing } from "@mui/icons-material";
+import { LocationOn, LocationOnOutlined, PrecisionManufacturing } from "@mui/icons-material";
 //import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -99,8 +99,12 @@ const ViewPublication = (() => {
     <Paper component="form" sx={{minWidth: 350, maxWidth: 800, padding: "20px", minHeight: 300, backgroundColor: 'white', textAlign: "left"}}> 
                   {(publicationData && images) ? <>
 
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5">
                         {publicationData.Publication.title}
+                    </Typography>
+
+                    <Typography variant="body2">
+                      <LocationOnOutlined style={{transform: "translate(0px, 7px)"}}/> {publicationData.Property.country}, {publicationData.Property.province},  {publicationData.Property.location} - {publicationData.Property.direction}
                     </Typography>
 
                     <div className="form-group multi-preview">
@@ -113,37 +117,32 @@ const ViewPublication = (() => {
                     {publicationData.Property.people} personas - {publicationData.Property.rooms} habitaciones - {publicationData.Property.toilets} baños
                     </Typography>
 
-                    <Typography variant="h6">
+                    <Typography variant="h6" style={{textAlign:"right"}}>
                       $ {publicationData.Publication.price} noche
                     </Typography>
 
                     <Divider></Divider>
-                    <Typography variant="body1" component="div">
+
+                    <br></br>
+
+                    <Typography variant="body1" component="div" style={{textAlign:"center"}}>
                         {publicationData.Property.description}
                     </Typography>
 
-                    <Typography variant="body1">
+                    <Typography variant="body1" style={{textAlign:"center"}}>
                       {publicationData.Publication.description}
                     </Typography>
+                    <br></br>
 
-                    <Divider></Divider>
 
-                    <Typography variant="body2">
-                    {publicationData.Property.country} {publicationData.Property.province}  {publicationData.Property.location}
-                    </Typography>
-
-                    <Typography variant="body2">
-                      {publicationData.Property.direction}
-                    </Typography>
-                      
-                    
-                    <Divider></Divider>
-
-                      {publicationData.Publication.rating ? 
-                       <div><Typography component="legend">Calificación promedio</Typography>
+                    {publicationData.Publication.rating ? 
+                       <div style={{textAlign: "center"}}><Typography variant="subtitle2">Calificación promedio</Typography>
                        <Rating name="read-only" value={publicationData.Publication.rating} readOnly /></div>
                         : 
                         <Typography variant="body2">Aún no cuenta con calificaciones</Typography>}
+
+                    
+                    <Divider></Divider>
                     
                     
                     {
