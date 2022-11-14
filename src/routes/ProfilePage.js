@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import axios from '../api/axios';
-import { Avatar, Button, CircularProgress, Divider, Paper, Typography } from '@mui/material';
-import { Edit, LocationOnOutlined, DescriptionOutlined, PersonOutline, VerifiedUserOutlined, WorkOutline } from '@mui/icons-material';
+import Card from "../components/Card";
+import { Avatar, Box, Button, CircularProgress, Divider, Paper, Rating, Typography } from '@mui/material';
+import { Add, ContactMail, ContactMailOutlined, Description, DescriptionOutlined, Edit, LocationCity, LocationOn, LocationOnOutlined, PersonOutline, VerifiedOutlined, VerifiedUserOutlined, Work, WorkOutline, WorkOutlineOutlined } from '@mui/icons-material';
 
 
 const Profile = () => {
@@ -38,7 +39,7 @@ const Profile = () => {
 
 
   return (
-    <Paper sx={{minWidth: 350, padding:"20px", maxWidth: 600, minHeight: 600, display: 'flex', flexDirection:'column', alignItems:'center', textAlign: 'left'}}>
+    <Paper sx={{width: 700, height: 600, display: 'flex', flexDirection:'column', alignItems:'center', textAlign: 'left', mt: 10}}>
       {profileData ? <>
       <Avatar
         alt={username.toLocaleUpperCase()}

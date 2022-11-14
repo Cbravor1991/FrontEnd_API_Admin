@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
 
-import RegisterPage from './routes/RegisterPage';
 import LoginPage from './routes/LoginPage';
 import Home from './routes/Home';
 import Layout from './components/Layout';
@@ -48,12 +47,11 @@ function App() {
 
   return (
     <>
-    <NavBar/>
+      <NavBar/>
     <Routes>
     <Route path="/" element={<Layout />}>
       {/* public routes */}
       <Route path="login" element={<LoginPage />} />
-      <Route path="register" element={<RegisterPage />} />
       <Route path="/" element={<Home />} />
       <Route path="linkpage" element={<LinkPage />} />
       <Route path="casero" element={<Casero />} />

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from '../api/axios';
 import CardMyPublication from "../components/CardMyPublication";
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
@@ -9,7 +9,7 @@ const ShowsMyPublications = () => {
 
   const navigate = useNavigate();
 
-  const [publications, setPublications] = useState(null);
+  const [publications, setPublications] = useState([]);
 
   let username = window.localStorage.getItem("username")
   
@@ -43,10 +43,8 @@ const ShowsMyPublications = () => {
 
   return (
     <>
-    { (publications) ? 
-    (
-      (publications.length > 0) ?
-      <Box sx={{display:'flex',flexWrap: 'wrap' }}>
+    { (publications && publications.length > 0) ? 
+      <Box sx={{display:'flex',flexWrap: 'wrap', mt:10 }}>
         {publications.map(item => {
           return (
               <CardMyPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
@@ -55,7 +53,7 @@ const ShowsMyPublications = () => {
       </Box>
       : <Typography style={{color: "black"}} variant="h6" gutterBottom>
         No tenés publicaciones realizadas
-      </Typography>
+      </Typography>}
     ) : <CircularProgress></CircularProgress>
       
     }
