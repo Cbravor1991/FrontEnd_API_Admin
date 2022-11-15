@@ -34,10 +34,10 @@ const Home = () => {
 
     const navigate = useNavigate();
     const [email_user, setEmailUser] = useState("");
-    const [precioMin, setPrecioMin] = useState([0, 10000]);
-    const [precioMax, setPrecioMax] = useState([0, 10000]);
-    const [personas, setPersonas] = useState([0, 100]);
-    const [rating, setRating] = useState([0, 5]);
+    const [precioMin, setPrecioMin] = useState(null);
+    const [precioMax, setPrecioMax] = useState(null);
+    const [personas, setPersonas] = useState(null);
+    const [rating, setRating] = useState(null);
     const [pais, setPais] = useState("");
     const [provincia, setProvincia] = useState("");
     const [localidad, setLocalidad] = useState("");
@@ -64,7 +64,7 @@ const Home = () => {
     
     window.localStorage.setItem("reservado", false)
     
-    window.localStorage.setItem("filters", 0);
+    window.localStorage.setItem("filters", JSON.stringify({}));
 
     const handlePrecio = (event, newValue) => {
         setPrecioMin(newValue);
@@ -90,10 +90,10 @@ const Home = () => {
         return `rating ${value}`;
     }
     
-    const setFilters = async (event) => {
+    const setFilters = (event) => {
        //event.preventDefault();
        setEmailUser(username);
-       const json = { "email_user": email_user,
+       const json = JSON.stringify({ "email_user": email_user,
                     "price_max": precioMax,
                     "price_min": precioMin,
                        "rating": rating,
@@ -101,8 +101,13 @@ const Home = () => {
                       "country": pais,
                      "province": provincia,
                      "location": localidad
-                   };
+                   });
+                   
        window.localStorage.setItem("filters", json);
+       
+       let filters = window.localStorage.getItem("filters");
+       console.log(filters);
+       
     }
     
    
@@ -117,15 +122,19 @@ const Home = () => {
                     <DropDownMenuCountry setPais={setPais}/>
                     <DropDownMenuProvince setProvincia={setProvincia}/>
                     <DropDownMenuLocation setLocalidad={setLocalidad}/>
+                    
                     <Typography color="black">
                         Precio por día
                     </Typography>
                     <Slider
                         getAriaLabel={() => 'Precio'}
-                        value={precioMax}
+                        defaultValue={5000}
                         onChange={handlePrecio}
                         valueLabelDisplay="auto"
                         getAriaValueText={preciotext}
+                        step={1000}
+                        min={0}
+                        max={10000}
                         disableSwap
                     />
                     <Typography color="black">
@@ -133,10 +142,9 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => "Personas"}
-                        defaultValue={3}
+                        defaultValue={6}
                         getAriaValueText={personastext}
                         valueLabelDisplay="auto"
-                        value={personas}
                         onChange={handlePersonasChange}
                         step={1}
                         marks
@@ -149,21 +157,20 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => "Rating"}
-                        defaultValue={3}
+                        defaultValue={null}
                         getAriaValueText={ratingtext}
                         valueLabelDisplay="auto"
-                        value={rating}
                         onChange={handleRatingChange}
                         step={1}
                         marks
-                        min={1}
-                        max={10}
+                        min={0}
+                        max={5}
                         disableSwap
                     />
                     
                    <br />
                         
-                   <Button variant="contained" color="primary" onClick={() => {setFilters()}}>Filtrar</Button>
+                   <Button variant="contained" color="primary" onClick={(e) => {setFilters(e)}}>Filtrar</Button>
                     
                 </Stack>
                 

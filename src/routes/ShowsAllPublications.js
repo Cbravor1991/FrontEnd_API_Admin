@@ -95,17 +95,13 @@ const ShowsAllPublications = () => {
       : <Typography style={{color: "black"}} variant="h6" gutterBottom>
         No tenés publicaciones realizadas
       </Typography>}
-    ) : <CircularProgress></CircularProgress>
-      
-    }
-
+     
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
         Podes realizar tu publicacion en <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
-      </Button>
-     
+      </Button> }
     
-    </>
-  )
+    </>)
+  
 }
 
 export default ShowsAllPublications
