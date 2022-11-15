@@ -7,6 +7,7 @@ function DropDownMenuCountry(props) {
   const selectionChangeHandler = (event) => {
     setSelected(event.target.value);
     props.setPais(event.target.value);
+    props.passFilters(event);
   };
 
   return (

@@ -28,11 +28,12 @@ const theme = createTheme({
 const Home = () => {
 
     useEffect(() => {
-      setFilters();
+      passFilters();
     }, []);
 
 
     const navigate = useNavigate();
+    const [filters, setFilters] = useState({})
     const [email_user, setEmailUser] = useState("");
     const [precioMin, setPrecioMin] = useState(null);
     const [precioMax, setPrecioMax] = useState(null);
@@ -43,6 +44,7 @@ const Home = () => {
     const [localidad, setLocalidad] = useState("");
 
     let username;
+    
     if (!window.localStorage.getItem("username")) {
         window.location.href = "/login";
         return;
@@ -64,7 +66,7 @@ const Home = () => {
     
     window.localStorage.setItem("reservado", false)
     
-    window.localStorage.setItem("filters", JSON.stringify({}));
+    //window.localStorage.setItem("filters", JSON.stringify({}));
 
     const handlePrecio = (event, newValue) => {
         setPrecioMin(newValue);
@@ -90,7 +92,7 @@ const Home = () => {
         return `rating ${value}`;
     }
     
-    const setFilters = (event) => {
+    const passFilters = (event) => {
        //event.preventDefault();
        setEmailUser(username);
        const json = JSON.stringify({ "email_user": email_user,
@@ -105,10 +107,15 @@ const Home = () => {
                    
        window.localStorage.setItem("filters", json);
        
-       let filters = window.localStorage.getItem("filters");
+       //filters = window.localStorage.getItem("filters");
+       setFilters(json);
        console.log(filters);
        
     }
+    
+    const getFilters = () => {
+       return filters;
+       }
     
    
 
@@ -119,9 +126,9 @@ const Home = () => {
             <Stack direction="row" spacing={10} sx={{mt:10}}> 
                 <Stack direction="column" spacing={3} sx={{flex:1 , ml: '3%', heigth: '100%', textAlign: 'left', justifyContent: 'space-between'}}>
                     
-                    <DropDownMenuCountry setPais={setPais}/>
-                    <DropDownMenuProvince setProvincia={setProvincia}/>
-                    <DropDownMenuLocation setLocalidad={setLocalidad}/>
+                    <DropDownMenuCountry setPais={setPais} passFilters={passFilters}/>
+                    <DropDownMenuProvince setProvincia={setProvincia} passFilters={passFilters}/>
+                    <DropDownMenuLocation setLocalidad={setLocalidad} passFilters={passFilters}/>
                     
                     <Typography color="black">
                         Precio por día
@@ -170,14 +177,13 @@ const Home = () => {
                     
                    <br />
                         
-                   <Button variant="contained" color="primary" onClick={(e) => {setFilters(e)}}>Filtrar</Button>
                     
                 </Stack>
                 
                 <Divider orientation="vertical" flexItem />
                 
                 <Stack direction="column" sx={{width: '75vw'}}>
-                    <ShowsAllPublications/>
+                    <ShowsAllPublications getFilters={getFilters}/>
 
                 </Stack>
             </Stack>
