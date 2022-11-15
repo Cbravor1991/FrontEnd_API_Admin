@@ -1,4 +1,6 @@
 import { useRef, useState, useEffect } from "react";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Link } from "react-router-dom";
 import Logo from '../components/Logo';
@@ -10,17 +12,14 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { Paper } from "@mui/material";
-import { SelectChangeEvent } from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useParams } from 'react-router-dom'
 import { PrecisionManufacturing } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import AddImagesModal from "../components/AddImagesModal";
 import DropDownMenuMakePublication from "./DropDownMakePublication";
 
-
-//const PROPERTYHANDLER_URL = '/updateProperty/';
+const PROPERTYHANDLER_URL = '/updateProperty/';
 
 const selectionNumbers = [0,1,2,3,4,5,6,7]
 
@@ -32,9 +31,9 @@ const theme = createTheme({
         },
         secondary:{
             main: '#e9bc65',
-        }
+        } 
       },
-});
+}); 
 
 const MakePublication = () => {
     const handleOpen = () => setOpen(true);
@@ -65,7 +64,7 @@ const MakePublication = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
     const [titleError, setTitleError] = useState(false);
-
+    
     const [precioError, setPrecioError] = useState(false);
 
     const [listingInfo, setListingInfo] = useState(true);
@@ -83,13 +82,13 @@ const MakePublication = () => {
     //const [links, setLinks] = useState([]);
     
     const handleNextClick = () => {
-
+        
         titulo === '' ? setTitleError(true) : setTitleError(false);
         precio === '' ? setPrecioError(true) : setPrecioError(false);
         if(titulo !== '' && precio !== ''){
             setListingInfo(false);
         }
-
+        
     }
     const handleBackClick = () => {
         setListingInfo(true);
@@ -132,7 +131,7 @@ const MakePublication = () => {
               
             console.log("Respuesta")
             console.log(links)
-            console.log("Respuesta",
+            console.log("Respuesta", 
             {
                 "direction": direccion,"province": provincia,  "location": localidad,
                 "country": pais, "toilets": banios, "rooms": habitaciones, "people": personas, "description": descrProp, 'images': links, "email_user": username
@@ -160,7 +159,7 @@ const MakePublication = () => {
                         "Access-Control-Allow-Origin": "*"
                          }
                 },
-
+    
               ).then((response) => {
                 console.log(response.data)
                 }).catch((error) => {
@@ -169,10 +168,10 @@ const MakePublication = () => {
             }).catch((error) => {
                 console.log(error)
             })
-
-
-
-
+            
+            
+             
+            
 
             //const params = new URLSearchParams();
             //params.append('property_id', id_property)
@@ -218,7 +217,7 @@ const MakePublication = () => {
                                         variant="outlined"
                                         onChange={(e) => setDescrPubl(e.target.value)}
                                         value={descrPubl}
-
+                                        
                                     />
                                     <TextField
                                         id="outlined-basic"
@@ -250,7 +249,7 @@ const MakePublication = () => {
                                             onChange={(e) => setDireccion(e.target.value)}
                                             value={direccion}
                                             required
-
+                                            
                                         />
                                         <TextField
                                             id="outlined-basic"
@@ -275,7 +274,7 @@ const MakePublication = () => {
                                         <DropDownMenuMakePublication values={[0,1,2,3,4,5,6,7]} name={'Baños'} setFunction={setBanios}/>
                                         <DropDownMenuMakePublication values={[0,1,2,3,4,5,6,7]} name={'Habitaciones'} setFunction={setHabitaciones}/>
                                         <DropDownMenuMakePublication values={[0,1,2,3,4,5,6,7]} name={'Personas'} setFunction={setPersonas}/>
-                                        <TextField
+                                        <TextField 
                                             variant="outlined"
                                             onChange={(e)=>setDescrProp(e.target.value)}
                                             label="Descripcion"
@@ -286,13 +285,13 @@ const MakePublication = () => {
                                         </Button>
                                         <Button variant="contained" sx={{position: 'absolute', left:20, bottom: 20}} onClick={handleBackClick}>
                                             Datos de publicación
-                                        </Button>
+                                        </Button>                                    
                                     </Stack>
                                 </Stack>
                                         <AddImagesModal setOpen={setOpen} handleOpen={handleOpen} open={open}/>
                     </Stack>
 
-                )}
+                )}               
 
         </ThemeProvider>
     )

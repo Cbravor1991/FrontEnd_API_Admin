@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate  } from "react-router-dom";
 import axios from '../api/axios';
 import CardPublication from "../components/CardPublication";
 import { Box, CircularProgress, Typography } from '@mui/material';
@@ -8,9 +9,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Button } from "@mui/material";
+import { Add } from '@mui/icons-material';
 
 
 const ShowsAllPublications = () => {
+
+  const navigate = useNavigate();
+  
+  let filters = window.localStorage.getItem("filters");
+  console.log(filters);
+  let parsed_filters = JSON.parse(filters);
 
   const [publications, setPublications] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -18,14 +26,14 @@ const ShowsAllPublications = () => {
   let username = window.localStorage.getItem("username")
   
   
-    const [email_user, setEmailUser] = useState("");
-    const [precioMin, setPrecioMin] = useState(null);
-    const [precioMax, setPrecioMax] = useState(null);
-    const [localidad, setLocalidad] = useState("");
-    const [provincia, setProvincia] = useState("");
-    const [pais, setPais] = useState("");
-    const [rating, setRating] = useState(null);
-    const [personas, setPersonas] = useState(null);
+    //const [email_user, setEmailUser] = useState("");
+    //const [precioMin, setPrecioMin] = useState(null);
+    //const [precioMax, setPrecioMax] = useState(null);
+    //const [localidad, setLocalidad] = useState("");
+    //const [provincia, setProvincia] = useState("");
+    //const [pais, setPais] = useState("");
+    //const [rating, setRating] = useState(null);
+    //const [personas, setPersonas] = useState(null);
   
   
   const loadPublications = () => {
@@ -34,14 +42,14 @@ const ShowsAllPublications = () => {
       return;
     } 
     const params = new URLSearchParams([['offset', 0], ['limit', 100]]);
-    const json = { "email_user": email_user,
-                    "price_max": precioMax,
-                    "price_min": precioMin,
-                       "rating": rating,
-                       "people": personas,
-                      "country": pais,
-                     "province": provincia,
-                     "location": localidad
+    const json = { "email_user": parsed_filters.email_user,
+                    "price_max": parsed_filters.precioMax,
+                    "price_min": parsed_filters.precioMin,
+                       "rating": parsed_filters.rating,
+                       "people": parsed_filters.personas,
+                      "country": parsed_filters.pais,
+                     "province": parsed_filters.provincia,
+                     "location": parsed_filters.localidad
                    }
     
     
@@ -50,8 +58,7 @@ const ShowsAllPublications = () => {
                      'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 }}
-                
-    console.log(provincia)            
+                          
     axios({method:'post', url:'/publications/', data:json, params:params, headers:headers })
     .then((response) => {
       setPublications(response.data);
@@ -67,34 +74,37 @@ const ShowsAllPublications = () => {
     window.location.reload(false);
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     loadPublications();
-    }, []);*/
+    }, []);
 
 
 
 
   return (                             
-                 <>
+         <>
+         
     { (publications && publications.length > 0) ? 
-      <Box sx={{display:'flex',flexWrap: 'wrap' }}>
-        {
-        publications.map(item => {
+      <Box sx={{display:'flex',flexWrap: 'wrap', mt:10 }}>
+        {publications.map(item => {
           return (
               <CardPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
           )}
         )}   
       </Box>
-      : (<><Typography style={{color: "black"}} variant="h6" gutterBottom>
-          No hay publicaciones realizadas.
-      </Typography>
-
-      <Typography style={{color: "black"}} variant="body2" gutterBottom>
-            Podes realizar tu publicacion en <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
-      </Typography></>)
+      : <Typography style={{color: "black"}} variant="h6" gutterBottom>
+        No tenés publicaciones realizadas
+      </Typography>}
+    ) : <CircularProgress></CircularProgress>
+      
     }
-       
-    </>  
+
+      <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
+        Podes realizar tu publicacion en <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
+      </Button>
+     
+    
+    </>
   )
 }
 

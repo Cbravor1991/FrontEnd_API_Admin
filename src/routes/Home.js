@@ -1,18 +1,17 @@
-import { useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
-import { useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {  Typography } from '@mui/material';
-
+import { Button } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, Paper } from '@mui/material';
 import Divider from "@mui/material/Divider";
 import Slider from '@mui/material/Slider';
 import DropDownMenuCountry from '../components/DropDownMenuCountry';
 import DropDownMenuProvince from '../components/DropDownMenuProvince';
 import DropDownMenuLocation from '../components/DropDownMenuLocation';
 import ShowsAllPublications from "./ShowsAllPublications";
+
 
 const theme = createTheme({
     palette: {
@@ -26,11 +25,17 @@ const theme = createTheme({
 });
 
 
-
 const Home = () => {
 
+    useEffect(() => {
+      setFilters();
+    }, []);
+
+
     const navigate = useNavigate();
-    const [precio, setPrecio] = useState([0, 10000]);
+    const [email_user, setEmailUser] = useState("");
+    const [precioMin, setPrecioMin] = useState([0, 10000]);
+    const [precioMax, setPrecioMax] = useState([0, 10000]);
     const [personas, setPersonas] = useState([0, 100]);
     const [rating, setRating] = useState([0, 5]);
     const [pais, setPais] = useState("");
@@ -47,6 +52,7 @@ const Home = () => {
 
     //const { setAuth } = useContext(AuthContext);
 
+    
     const logout = async () => {
         // if used in more components, this should be in context 
         // axios to /logout endpoint 
@@ -57,9 +63,12 @@ const Home = () => {
     }
     
     window.localStorage.setItem("reservado", false)
+    
+    window.localStorage.setItem("filters", 0);
 
     const handlePrecio = (event, newValue) => {
-        setPrecio(newValue);
+        setPrecioMin(newValue);
+        setPrecioMax(newValue);
     };
     const handlePersonasChange = (event, newValue) => {
         setPersonas(newValue);
@@ -70,14 +79,33 @@ const Home = () => {
     };
 
     function preciotext(value) {
-        return `${value}$`;
+        return `$ ${value}`;
     }
+    
     function personastext(value) {
-        return `${value}m²`;
+        return `${value} personas`;
     }
+    
     function ratingtext(value) {
-        return `${value} baños`;
+        return `rating ${value}`;
     }
+    
+    const setFilters = async (event) => {
+       //event.preventDefault();
+       setEmailUser(username);
+       const json = { "email_user": email_user,
+                    "price_max": precioMax,
+                    "price_min": precioMin,
+                       "rating": rating,
+                       "people": personas,
+                      "country": pais,
+                     "province": provincia,
+                     "location": localidad
+                   };
+       window.localStorage.setItem("filters", json);
+    }
+    
+   
 
     return (
 
@@ -85,6 +113,7 @@ const Home = () => {
         <ThemeProvider theme={theme}>
             <Stack direction="row" spacing={10} sx={{mt:10}}> 
                 <Stack direction="column" spacing={3} sx={{flex:1 , ml: '3%', heigth: '100%', textAlign: 'left', justifyContent: 'space-between'}}>
+                    
                     <DropDownMenuCountry setPais={setPais}/>
                     <DropDownMenuProvince setProvincia={setProvincia}/>
                     <DropDownMenuLocation setLocalidad={setLocalidad}/>
@@ -93,7 +122,7 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => 'Precio'}
-                        value={precio}
+                        value={precioMax}
                         onChange={handlePrecio}
                         valueLabelDisplay="auto"
                         getAriaValueText={preciotext}
@@ -131,8 +160,15 @@ const Home = () => {
                         max={10}
                         disableSwap
                     />
+                    
+                   <br />
+                        
+                   <Button variant="contained" color="primary" onClick={() => {setFilters()}}>Filtrar</Button>
+                    
                 </Stack>
+                
                 <Divider orientation="vertical" flexItem />
+                
                 <Stack direction="column" sx={{width: '75vw'}}>
                     <ShowsAllPublications/>
 
@@ -146,11 +182,4 @@ const Home = () => {
 
 
 export default Home
-
-
-
-
-{/* 
-<Link to="/showsMyReservations">Mis reservas</Link>
-*/}
 
