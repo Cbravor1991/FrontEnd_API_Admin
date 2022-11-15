@@ -14,8 +14,6 @@ export class FileLoaderGallery2 extends Component {
     
     email_user = window.localStorage.getItem("username");
     
-    //browserHistory = ReactRouter.browserHistory;
-    
     constructor(props) {
         super(props)
             
@@ -61,8 +59,10 @@ export class FileLoaderGallery2 extends Component {
     }
     
     uploadMultipleFiles(e) {
+        
         this.fileObj.push(e.target.files)
         for (let i = 0; i < this.fileObj[0].length; i++) {
+
             this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
         }
         this.setState({ file: this.fileArray })

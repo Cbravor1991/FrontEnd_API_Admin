@@ -13,7 +13,7 @@ export default function ButtonAppBar() {
   let username = window.localStorage.getItem("username")    
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, mb: -10 }}>
       <AppBar position="static" sx={{background:'#e67e22'}}>
         <Toolbar>
 
