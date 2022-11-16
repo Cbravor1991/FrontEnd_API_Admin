@@ -15,6 +15,7 @@ import { StarRate } from '@mui/icons-material';
 const DELETE_PUBLICATION_URL = '/deletePublication/';
 const DELETE_PROPERTY_URL = '/deleteProperty/';
 const RESERVATION_STATUS = '/reservationStatus/';
+const PAYMENT_STATUS = '/paymentStatus/';
 
 
 const bull = (
@@ -93,7 +94,7 @@ const deletePublication = async (props, username, updateFunction) => {
    }
   
   
-   async function statusPublication(props) {
+ async function statusPublication(props) {
     window.localStorage.setItem("information_reservation", JSON.stringify (props.Publication.id))
   
     let params = new URLSearchParams([['email_user', props.username], ['publication_id', props.Publication.id]]);
@@ -111,10 +112,30 @@ const deletePublication = async (props, username, updateFunction) => {
       .catch((error) => {
         console.log(error);
       });
+   } 
+
+
+ async function statusPayments(props) {
+    window.localStorage.setItem("information_payments", JSON.stringify (props.Publication.id))
   
-     
-    
-  } 
+    let params = new URLSearchParams([['email_user', props.username], ['publication_id', props.Publication.id]]);
+  
+    window.location.href = "/datePayment";
+  
+   /* const response = axios.post(PAYMENT_STATUS, {}, { params })
+      .then((response) => {
+        console.log(response.data)
+        if((response.data) == true){
+          window.location.href = "/datePayment"
+          
+        }else{
+          swal.fire({title: "ESTA PROPIEDAD NO TIENE PAGOS",  icon: "error"})
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      }); */
+   } 
 
 
 
@@ -186,6 +207,10 @@ export default function CardMyPublication(props) {
 
             <Typography variant="body2">
               <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver reservas</Button>
+            </Typography>
+            
+            <Typography variant="body2">
+              <Button variant="contained" onClick={() => { statusPayments(props) }} color="success">Ver pagos</Button>
             </Typography>
 
             {props.Publication.rating ? 

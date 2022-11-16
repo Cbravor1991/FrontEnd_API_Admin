@@ -27,6 +27,7 @@ import ShowsAllPublications from './routes/ShowsAllPublications';
 import ShowsMyReservations from './routes/ShowsMyReservations';
 import Review from './components/Review';
 import DateReservation from './routes/DateReservation'
+import DatePayment from './routes/DatePayment'
 import ViewPublicationReviews from './components/ViewPublicationRatings';
 
 
@@ -73,7 +74,7 @@ function App() {
       <Route path="profile/edit" element={<EditProfile />} />
       <Route path="review" element={<Review />} />
       <Route path="dateReservation" element={<DateReservation/>} />
-      
+      <Route path="datePayment" element={<DatePayment/>} />
       
       {/*
       <Route element={<RequireAuth allowedRoles={[ROLES.Inquilino]} />}>

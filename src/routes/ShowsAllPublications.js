@@ -94,7 +94,7 @@ const ShowsAllPublications = (props) => {
       </Typography>}
      
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
-        Podes realizar tu publicacion en <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
+        Podes realizar tu publicacion en  <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
       </Button> }
     
     </>)
