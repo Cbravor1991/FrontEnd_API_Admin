@@ -40,10 +40,11 @@ const MakeReservation = () => {
     const [fechasOcupadas, setFechasOcupadas] = useState(null);
 
     if (!fechasOcupadas){
+        const paid=false;
         axios.post('/getReservedDaysByDateRange',
         JSON.stringify({
             "start_date": "2022-11-01","end_date": "2023-11-01",
-            "email_user": username, 'publication_id': parsed_publication.id
+            "email_user": username, 'publication_id': parsed_publication.id, "paid": paid
         }),
         {
             headers: { 'Content-Type': 'application/json'
@@ -64,11 +65,12 @@ const MakeReservation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack floors
+            const paid=false
             
             axios.post('/reserve',
                 JSON.stringify({
                     "start_date": format(fechaInicio, "yyyy-MM-dd"),"end_date": format(fechaFin, "yyyy-MM-dd"),
-                    "email_user": username, 'publication_id': parsed_publication.id
+                    "email_user": username, 'publication_id': parsed_publication.id, "paid": paid
                 }),
                 {
                     headers: { 'Content-Type': 'application/json'

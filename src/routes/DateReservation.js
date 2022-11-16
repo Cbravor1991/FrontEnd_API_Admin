@@ -44,11 +44,12 @@ const DateReservation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack floors
+           const paid = false
             
            const response = axios.post('/getReservedDaysByDateRange',
                 JSON.stringify({
                     "start_date": format(fechaInicio, "yyyy-MM-dd"),"end_date": format(fechaFin, "yyyy-MM-dd"),
-                    "email_user": username, 'publication_id': public_id
+                    "email_user": username, 'publication_id': public_id, "paid": paid
                 }),
                 {
                     headers: { 'Content-Type': 'application/json'

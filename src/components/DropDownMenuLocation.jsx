@@ -6,7 +6,7 @@ function DropDownMenuLocation(props) {
 
   const selectionChangeHandler = (event) => {
     setSelected(event.target.value);
-    props.setProvincia(event.target.value);
+    props.setLocalidad(event.target.value);
     props.passFilters();
   };
 
@@ -14,6 +14,7 @@ function DropDownMenuLocation(props) {
     <FormControl sx={{width: '100%'}}>
       <InputLabel>Localidad</InputLabel>
       <Select value={selected} onChange={selectionChangeHandler}>
+        <MenuItem value={""}></MenuItem>
         <MenuItem value={"Buenos Aires"}>Buenos Aires</MenuItem>
         <MenuItem value={"Córdoba"}>Córdoba</MenuItem>
         <MenuItem value={"Rosario"}>Rosario</MenuItem>

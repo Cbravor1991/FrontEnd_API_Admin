@@ -1,7 +1,7 @@
 //import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {  Typography } from '@mui/material';
-//import { Button } from "@mui/material";
+import { Button } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
@@ -58,17 +58,17 @@ const Home = () => {
     
 
 
-    const handlePrecio = (event, newValue) => {
-        setPrecioMin(newValue);
-        setPrecioMax(newValue);
-    }
-    const handlePersonasChange = (event, newValue) => {
-        setPersonas(newValue);
-    }
+    const handlePrecio = (event) => {
+        setPrecioMin(event.target.value);
+        setPrecioMax(event.target.value);
+    };
+    const handlePersonasChange = (event) => {
+        setPersonas(event.target.value);
+    };
 
-    const handleRatingChange = (event, newValue) => {
-        setRating(newValue);
-    }
+    const handleRatingChange = (event) => {
+        setRating(event.target.value);
+    };
 
     
     
@@ -97,6 +97,16 @@ const Home = () => {
        
     }
     
+    
+    const resetFilters = () => {
+      setPrecioMin(null);
+      setPrecioMax(null);
+      setPersonas(null);
+      setRating(null);
+      setPais("");
+      setProvincia("");
+      setLocalidad("");
+    }
     
     
     function preciotext(value) {
@@ -138,9 +148,10 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => 'Precio'}
-                        defaultValue={5000}
-                        onChange={handlePrecio}
+                        defaultValue={null}
+                        onChange={(event) => {handlePrecio(event)}}
                         valueLabelDisplay="auto"
+                        value={precioMax}
                         getAriaValueText={preciotext}
                         step={1000}
                         min={0}
@@ -152,10 +163,11 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => "Personas"}
-                        defaultValue={6}
+                        defaultValue={null}
                         getAriaValueText={personastext}
                         valueLabelDisplay="auto"
-                        onChange={handlePersonasChange}
+                        value={personas}
+                        onChange={(event) => {handlePersonasChange(event)}}
                         step={1}
                         marks
                         min={1}
@@ -170,7 +182,8 @@ const Home = () => {
                         defaultValue={null}
                         getAriaValueText={ratingtext}
                         valueLabelDisplay="auto"
-                        onChange={handleRatingChange}
+                        value={rating}
+                        onChange={(event) => {handleRatingChange(event)}}
                         step={1}
                         marks
                         min={0}
@@ -179,6 +192,10 @@ const Home = () => {
                     />
                     
                    <br />
+                   
+                   <Button variant="contained" onClick={(event) => {resetFilters()}} >
+                     Resetear filtros
+                   </Button>
                         
                     
                 </Stack>

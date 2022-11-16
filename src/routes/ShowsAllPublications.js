@@ -85,7 +85,7 @@ const ShowsAllPublications = (props) => {
    useEffect(() => {
      setTimeout(() => {
          loadPublications();
-      },3000);
+      },10000);
      //return()=>clearInterval(interval)
     }, [loadPublications]);
 
@@ -103,11 +103,11 @@ const ShowsAllPublications = (props) => {
       </Box>
       : <Typography style={{color: "black"}} variant="h6" gutterBottom>
         No tenés publicaciones realizadas
-      </Typography>}
+      </Typography> }
      
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
         Podes realizar tu publicacion en  <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
-      </Button> }
+      </Button> 
     
     </>)
   
