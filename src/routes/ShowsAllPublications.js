@@ -16,12 +16,14 @@ const ShowsAllPublications = (props) => {
 
   const navigate = useNavigate();
   
-  //let filters = window.localStorage.getItem("filters");
   console.log(props);
   
-  //let parsed_filters = (JSON.parse(props)).filters;
+  let parsed_filters={}
   
-  const parsed_filters = props.getFilters();
+  if (props.getFilters){
+    parsed_filters = props.getFilters();
+  }
+  
   console.log(parsed_filters);
   
 
