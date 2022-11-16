@@ -33,14 +33,16 @@ const Home = () => {
 
 
     const navigate = useNavigate();
-    const [email_user, setEmailUser] = useState("");
     const [precioMin, setPrecioMin] = useState(null);
     const [precioMax, setPrecioMax] = useState(null);
     const [personas, setPersonas] = useState(null);
     const [rating, setRating] = useState(null);
     const [pais, setPais] = useState("");
-    const [provincia, setProvincia] = useState("");
-    const [localidad, setLocalidad] = useState("");
+    const [provincia, setProvincia] = useState(null);
+    const [localidad, setLocalidad] = useState(null);
+
+    const [filters, setFilters] = useState(null);
+
 
     let username;
     if (!window.localStorage.getItem("username")) {
@@ -49,22 +51,7 @@ const Home = () => {
     } else {
         username = window.localStorage.getItem("username")
     }
-
-    //const { setAuth } = useContext(AuthContext);
-
-    
-    const logout = async () => {
-        // if used in more components, this should be in context 
-        // axios to /logout endpoint 
-        //setAuth({});
-        window.localStorage.removeItem("username")
-
-        navigate('/linkpage');
-    }
-    
-    window.localStorage.setItem("reservado", false)
-    
-    window.localStorage.setItem("filters", JSON.stringify({}));
+        
 
     const handlePrecio = (event, newValue) => {
         setPrecioMin(newValue);
@@ -90,10 +77,9 @@ const Home = () => {
         return `rating ${value}`;
     }
     
-    const setFilters = (event) => {
-       //event.preventDefault();
-       setEmailUser(username);
-       const json = JSON.stringify({ "email_user": email_user,
+    const onFiltrarClick = (event) => {
+        event.preventDefault();
+       const json = JSON.stringify({
                     "price_max": precioMax,
                     "price_min": precioMin,
                        "rating": rating,
@@ -103,11 +89,11 @@ const Home = () => {
                      "location": localidad
                    });
                    
-       window.localStorage.setItem("filters", json);
-       
-       let filters = window.localStorage.getItem("filters");
+       setFilters(json);
        console.log(filters);
        
+       //let filters = window.localStorage.getItem("filters");
+       //console.log(filters);
     }
     
    
@@ -148,7 +134,7 @@ const Home = () => {
                         onChange={handlePersonasChange}
                         step={1}
                         marks
-                        min={1}
+                        min={0}
                         max={10}
                         disableSwap
                     />
@@ -170,15 +156,14 @@ const Home = () => {
                     
                    <br />
                         
-                   <Button variant="contained" color="primary" onClick={(e) => {setFilters(e)}}>Filtrar</Button>
+                   <Button variant="contained" color="primary" onClick={(e) => {onFiltrarClick(e)}}>Filtrar</Button>
                     
                 </Stack>
                 
                 <Divider orientation="vertical" flexItem />
                 
                 <Stack direction="column" sx={{width: '75vw'}}>
-                    <ShowsAllPublications/>
-
+                    <ShowsAllPublications filters={filters}/>
                 </Stack>
             </Stack>
         </ThemeProvider>

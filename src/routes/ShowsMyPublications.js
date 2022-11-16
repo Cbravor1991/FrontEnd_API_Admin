@@ -12,9 +12,7 @@ const ShowsMyPublications = () => {
   const [publications, setPublications] = useState([]);
 
   let username = window.localStorage.getItem("username")
-  
-  window.localStorage.setItem("reservado", false)
-    
+      
   
   const loadPublications = () => {
     if (!username){
@@ -43,7 +41,8 @@ const ShowsMyPublications = () => {
 
   return (
     <>
-    { (publications && publications.length > 0) ? 
+    { (publications) ? (
+      (publications.length > 0) ? 
       <Box sx={{display:'flex',flexWrap: 'wrap', mt:10 }}>
         {publications.map(item => {
           return (
@@ -53,10 +52,8 @@ const ShowsMyPublications = () => {
       </Box>
       : <Typography style={{color: "black"}} variant="h6" gutterBottom>
         No tenés publicaciones realizadas
-      </Typography>}
-    ) : <CircularProgress></CircularProgress>
-      
-    }
+      </Typography>) 
+      : <CircularProgress></CircularProgress>}
 
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
         Realizar una publicación

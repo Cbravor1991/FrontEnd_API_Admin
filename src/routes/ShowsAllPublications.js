@@ -12,28 +12,15 @@ import { Button } from "@mui/material";
 import { Add } from '@mui/icons-material';
 
 
-const ShowsAllPublications = () => {
+const ShowsAllPublications = ({filters}) => {
 
   const navigate = useNavigate();
   
-  let filters = window.localStorage.getItem("filters");
-  console.log(filters);
-  let parsed_filters = JSON.parse(filters);
+  const [appliedFilters, setAppliedFilters] = useState(null);
 
   const [publications, setPublications] = useState(null);
-  const [success, setSuccess] = useState(false);
 
   let username = window.localStorage.getItem("username")
-  
-  
-    //const [email_user, setEmailUser] = useState("");
-    //const [precioMin, setPrecioMin] = useState(null);
-    //const [precioMax, setPrecioMax] = useState(null);
-    //const [localidad, setLocalidad] = useState("");
-    //const [provincia, setProvincia] = useState("");
-    //const [pais, setPais] = useState("");
-    //const [rating, setRating] = useState(null);
-    //const [personas, setPersonas] = useState(null);
   
   
   const loadPublications = () => {
@@ -42,18 +29,20 @@ const ShowsAllPublications = () => {
       return;
     } 
     const params = new URLSearchParams([['offset', 0], ['limit', 100]]);
-    const json = { "email_user": parsed_filters.email_user,
-                    "price_max": parsed_filters.precioMax,
-                    "price_min": parsed_filters.precioMin,
-                       "rating": parsed_filters.rating,
-                       "people": parsed_filters.personas,
-                      "country": parsed_filters.pais,
-                     "province": parsed_filters.provincia,
-                     "location": parsed_filters.localidad
+    let json = {};
+    if (filters){
+      let parsed_filters = JSON.parse(filters);
+      json = { "email_user": null,
+                "price_max": (parsed_filters.price_max == 0 ? null : parsed_filters.price_max),
+                "price_min": (parsed_filters.price_min == 0 ? null : parsed_filters.price_min),
+                    "rating": (parsed_filters.rating == 0 ? null : parsed_filters.rating),
+                    "people": (parsed_filters.people == 0 ? null : parsed_filters.people),
+                  "country": parsed_filters.country,
+                  "province": parsed_filters.province,
+                  "location": parsed_filters.location
                    }
+    }    
     
-    
-       
     const headers = {headers:{
                      'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
@@ -61,22 +50,21 @@ const ShowsAllPublications = () => {
                           
     axios({method:'post', url:'/publications/', data:json, params:params, headers:headers })
     .then((response) => {
+      setAppliedFilters(filters);
       setPublications(response.data);
     })
-    .then(setSuccess(true))
     .catch((error) => {
       console.log(error);
     });
   }
-  
-  const volver = () => {
-    setSuccess(false);
-    window.location.reload(false);
+
+  if (appliedFilters != filters){
+    loadPublications();
   }
 
-  useEffect(() => {
+  if (!publications){
     loadPublications();
-    }, []);
+    };
 
 
 
@@ -97,8 +85,8 @@ const ShowsAllPublications = () => {
       </Typography>}
      
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
-        Podes realizar tu publicacion en <Link to="/ShowsMyPublications"> Mis publicaciones </Link>
-      </Button> }
+        Podes realizar tu publicacion en <Link style={{marginLeft: "5px"}} to="/ShowsMyPublications"> Mis publicaciones </Link>
+      </Button>
     
     </>)
   
