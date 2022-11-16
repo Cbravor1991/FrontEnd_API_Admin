@@ -83,6 +83,8 @@ const deletePublication = async (props, username, updateFunction) => {
 }
 
 
+
+
  const viewPublication = async (props, navigate) => {
      window.localStorage.setItem("view_publication", JSON.stringify (props))
      const id = props.Publication.id;
@@ -195,6 +197,7 @@ export default function CardMyPublication(props) {
             { <Button variant="contained" onClick={()=>{viewPublication(props, navigate)}} color="success">Consultar</Button> }
             <Button variant="contained" onClick={()=>{update(props)}} color="success">Modificar</Button>
             <Button variant="contained" onClick={()=>{deletePublication(props, username, props.updateLodgings)}} color="success">Eliminar</Button>
+            
             
           </CardActions>
         </React.Fragment>

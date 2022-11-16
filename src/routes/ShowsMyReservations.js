@@ -39,6 +39,31 @@ const ShowsMyReservations = () => {
     )
   }
   
+  const payReservation = (reservation_id) => {
+
+    swal.fire({
+      title: "Confirmar",
+      text: "¿Confirmas que deseas pagar la reserva?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Si, cancelar',
+      cancelButtonText: 'No',
+      dangerMode: true}).then(function(result) {
+        if (result['isConfirmed']) {
+          const params = new URLSearchParams([['email_user', username], ['reservation_id', reservation_id]]);
+          axios.post('payReservation/', {params},{ params })
+          .then(() => {
+            setReservations(null);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        }
+      }
+    )
+  }
+
+  
   if (!reservations) {
     const params = new URLSearchParams([['email_user', username]]);
 
@@ -76,10 +101,14 @@ const ShowsMyReservations = () => {
               </CardContent>
               <CardActions>
                 <Button size="small" onClick={() => {navigate(`/viewPublication/${item.publication_id}?is_reserved=true`)}}>Ver publicación</Button>
-                </CardActions>
-                <CardActions>
+              </CardActions>
+                
+              <CardActions>
+                <Button size="small" onClick={() => payReservation(item.id)} >Pagar reserva</Button>
+              </CardActions>
 
-                <Button size="small" onClick={() => cancelReservation(item.id)}  color="error"> Cancelar reserva </Button>
+              <CardActions>
+                <Button size="small" onClick={() => cancelReservation(item.id)}  color="error">Cancelar reserva</Button>
               </CardActions>
             </Card>
 
