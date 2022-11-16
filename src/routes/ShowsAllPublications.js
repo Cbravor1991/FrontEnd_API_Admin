@@ -25,15 +25,6 @@ const ShowsAllPublications = ({filters}) => {
 
   let username = window.localStorage.getItem("username")
   
-  if (props.getFilters){
-    //setParsed_filters(props.getFilters);
-    parsed_filters=props.getFilters();
-  }
-  else {
-    //setParsed_filters({});
-    parsed_filters={};
-  }
-  
 
   const loadPublications = () => {
     if (!username){
