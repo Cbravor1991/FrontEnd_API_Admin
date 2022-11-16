@@ -7,7 +7,7 @@ function DropDownMenuProvince(props) {
   const selectionChangeHandler = (event) => {
     setSelected(event.target.value);
     props.setProvincia(event.target.value);
-    props.passFilters(event);
+    props.passFilters();
   };
 
   return (

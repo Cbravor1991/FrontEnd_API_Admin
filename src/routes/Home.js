@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {  Typography } from '@mui/material';
-import { Button } from "@mui/material";
+//import { Button } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider, Paper } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import Divider from "@mui/material/Divider";
 import Slider from '@mui/material/Slider';
 import DropDownMenuCountry from '../components/DropDownMenuCountry';
@@ -27,14 +27,9 @@ const theme = createTheme({
 
 const Home = () => {
 
-    useEffect(() => {
-      passFilters();
-    }, []);
-
-
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [filters, setFilters] = useState({})
-    const [email_user, setEmailUser] = useState("");
+    //const [email_user, setEmailUser] = useState("");
     const [precioMin, setPrecioMin] = useState(null);
     const [precioMax, setPrecioMax] = useState(null);
     const [personas, setPersonas] = useState(null);
@@ -43,43 +38,67 @@ const Home = () => {
     const [provincia, setProvincia] = useState("");
     const [localidad, setLocalidad] = useState("");
 
-    let username;
-    
-    if (!window.localStorage.getItem("username")) {
-        window.location.href = "/login";
-        return;
-    } else {
-        username = window.localStorage.getItem("username")
-    }
 
+    let username = window.localStorage.getItem("username");
+    
+    
     //const { setAuth } = useContext(AuthContext);
 
     
-    const logout = async () => {
+   /* const logout = async () => {
         // if used in more components, this should be in context 
         // axios to /logout endpoint 
         //setAuth({});
         window.localStorage.removeItem("username")
 
         navigate('/linkpage');
-    }
+    }*/
     
     window.localStorage.setItem("reservado", false)
     
-    //window.localStorage.setItem("filters", JSON.stringify({}));
+
 
     const handlePrecio = (event, newValue) => {
         setPrecioMin(newValue);
         setPrecioMax(newValue);
-    };
+    }
     const handlePersonasChange = (event, newValue) => {
         setPersonas(newValue);
-    };
+    }
 
     const handleRatingChange = (event, newValue) => {
         setRating(newValue);
-    };
+    }
 
+    
+    
+    const passFilters = () => {
+       //event.preventDefault();
+       if (!username) {
+        window.location.href = "/login";
+        return;
+       }
+
+       //setEmailUser("");
+       const json = JSON.stringify({ "email_user": "",
+                    "price_max": precioMax,
+                    "price_min": precioMin,
+                       "rating": rating,
+                       "people": personas,
+                      "country": pais,
+                     "province": provincia,
+                     "location": localidad
+                   });
+                   
+       //window.localStorage.setItem("filters", json);
+       
+       setFilters(json);
+       console.log(filters);
+       
+    }
+    
+    
+    
     function preciotext(value) {
         return `$ ${value}`;
     }
@@ -92,32 +111,16 @@ const Home = () => {
         return `rating ${value}`;
     }
     
-    const passFilters = (event) => {
-       //event.preventDefault();
-       setEmailUser(username);
-       const json = JSON.stringify({ "email_user": email_user,
-                    "price_max": precioMax,
-                    "price_min": precioMin,
-                       "rating": rating,
-                       "people": personas,
-                      "country": pais,
-                     "province": provincia,
-                     "location": localidad
-                   });
-                   
-       window.localStorage.setItem("filters", json);
-       
-       //filters = window.localStorage.getItem("filters");
-       setFilters(json);
-       console.log(filters);
-       
-    }
-    
     const getFilters = () => {
        return filters;
        }
+       
     
-   
+   useEffect(() => {
+      passFilters();
+    }, []);
+       
+    
 
     return (
 
