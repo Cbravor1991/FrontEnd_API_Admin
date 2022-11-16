@@ -7,7 +7,7 @@ function DropDownMenuLocation(props) {
   const selectionChangeHandler = (event) => {
     setSelected(event.target.value);
     props.setLocalidad(event.target.value);
-    props.passFilters();
+
   };
 
   return (

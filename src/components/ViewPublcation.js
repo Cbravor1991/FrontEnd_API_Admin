@@ -30,7 +30,6 @@ const ViewPublication = (() => {
 
   const [publicationData, setPublicationData] = useState(null);
 
-  //let isReserved = window.localStorage.getItem("reservado");
   console.log(isReserved)
 
   let username = window.localStorage.getItem("username")

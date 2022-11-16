@@ -27,40 +27,38 @@ const theme = createTheme({
 
 const Home = () => {
 
-    //const navigate = useNavigate();
-    const [filters, setFilters] = useState({})
-    //const [email_user, setEmailUser] = useState("");
+    useEffect(() => {
+      setFilters();
+    }, []);
+
+
+    const navigate = useNavigate();
     const [precioMin, setPrecioMin] = useState(null);
     const [precioMax, setPrecioMax] = useState(null);
     const [personas, setPersonas] = useState(null);
     const [rating, setRating] = useState(null);
     const [pais, setPais] = useState("");
-    const [provincia, setProvincia] = useState("");
-    const [localidad, setLocalidad] = useState("");
+    const [provincia, setProvincia] = useState(null);
+    const [localidad, setLocalidad] = useState(null);
+
+    const [filters, setFilters] = useState(null);
 
 
-    let username = window.localStorage.getItem("username");
-    
-    
-    //const { setAuth } = useContext(AuthContext);
+    let username;
+    if (!window.localStorage.getItem("username")) {
+        window.location.href = "/login";
+        return;
+    } else {
+        username = window.localStorage.getItem("username")
+    }
+        
 
-    
-   /* const logout = async () => {
-        // if used in more components, this should be in context 
-        // axios to /logout endpoint 
-        //setAuth({});
-        window.localStorage.removeItem("username")
+    const handlePrecioMin = (event, newValue) => {
+        setPrecioMin(newValue);
+    };
 
-        navigate('/linkpage');
-    }*/
-    
-    window.localStorage.setItem("reservado", false)
-    
-
-
-    const handlePrecio = (event) => {
-        setPrecioMin(event.target.value);
-        setPrecioMax(event.target.value);
+    const handlePrecioMax = (event, newValue) => {
+        setPrecioMax(newValue);
     };
     const handlePersonasChange = (event) => {
         setPersonas(event.target.value);
@@ -72,15 +70,9 @@ const Home = () => {
 
     
     
-    const passFilters = () => {
-       //event.preventDefault();
-       if (!username) {
-        window.location.href = "/login";
-        return;
-       }
-
-       //setEmailUser("");
-       const json = JSON.stringify({ "email_user": "",
+    const onFiltrarClick = (event) => {
+        event.preventDefault();
+       const json = JSON.stringify({
                     "price_max": precioMax,
                     "price_min": precioMin,
                        "rating": rating,
@@ -89,12 +81,11 @@ const Home = () => {
                      "province": provincia,
                      "location": localidad
                    });
-                   
-       //window.localStorage.setItem("filters", json);
-       
        setFilters(json);
        console.log(filters);
        
+       //let filters = window.localStorage.getItem("filters");
+       //console.log(filters);
     }
     
     
@@ -144,18 +135,34 @@ const Home = () => {
                     <DropDownMenuLocation setLocalidad={setLocalidad} passFilters={passFilters}/>
                     
                     <Typography color="black">
-                        Precio por día
+                        Precio noche min
                     </Typography>
                     <Slider
-                        getAriaLabel={() => 'Precio'}
-                        defaultValue={null}
-                        onChange={(event) => {handlePrecio(event)}}
+
+                        getAriaLabel={() => 'PrecioMinimo'}
+                        defaultValue={0}
+                        onChange={handlePrecioMin}
                         valueLabelDisplay="auto"
                         value={precioMax}
                         getAriaValueText={preciotext}
                         step={1000}
                         min={0}
                         max={10000}
+                        disableSwap
+                    />
+
+                    <Typography color="black">
+                        Precio noche máx
+                    </Typography>
+                    <Slider
+                        getAriaLabel={() => 'PrecioMaximo'}
+                        defaultValue={5000}
+                        onChange={handlePrecioMax}
+                        valueLabelDisplay="auto"
+                        getAriaValueText={preciotext}
+                        step={1000}
+                        min={0}
+                        max={50000}
                         disableSwap
                     />
                     <Typography color="black">
@@ -170,7 +177,7 @@ const Home = () => {
                         onChange={(event) => {handlePersonasChange(event)}}
                         step={1}
                         marks
-                        min={1}
+                        min={0}
                         max={10}
                         disableSwap
                     />
@@ -197,14 +204,14 @@ const Home = () => {
                      Resetear filtros
                    </Button>
                         
+                   <Button variant="contained" color="primary" onClick={(e) => {onFiltrarClick(e)}}>Filtrar</Button>
                     
                 </Stack>
                 
                 <Divider orientation="vertical" flexItem />
                 
                 <Stack direction="column" sx={{width: '75vw'}}>
-                    <ShowsAllPublications getFilters={getFilters}/>
-
+                    <ShowsAllPublications filters={filters}/>
                 </Stack>
             </Stack>
         </ThemeProvider>

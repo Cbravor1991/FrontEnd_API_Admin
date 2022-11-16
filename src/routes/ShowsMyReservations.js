@@ -10,10 +10,7 @@ const ShowsMyReservations = () => {
 
   const [reservations, setReservations] = useState(null);
 
-  let username = window.localStorage.getItem("username")
-  
-  window.localStorage.setItem("reservado", true)
-  
+  let username = window.localStorage.getItem("username")  
   
   const cancelReservation = (reservation_id) => {
 
