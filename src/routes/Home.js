@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {  Typography } from '@mui/material';
 import { Button } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider, Paper } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import Divider from "@mui/material/Divider";
 import Slider from '@mui/material/Slider';
 import DropDownMenuCountry from '../components/DropDownMenuCountry';
@@ -60,25 +60,15 @@ const Home = () => {
     const handlePrecioMax = (event, newValue) => {
         setPrecioMax(newValue);
     };
-    const handlePersonasChange = (event, newValue) => {
-        setPersonas(newValue);
+    const handlePersonasChange = (event) => {
+        setPersonas(event.target.value);
     };
 
-    const handleRatingChange = (event, newValue) => {
-        setRating(newValue);
+    const handleRatingChange = (event) => {
+        setRating(event.target.value);
     };
 
-    function preciotext(value) {
-        return `$ ${value}`;
-    }
     
-    function personastext(value) {
-        return `${value} personas`;
-    }
-    
-    function ratingtext(value) {
-        return `rating ${value}`;
-    }
     
     const onFiltrarClick = (event) => {
         event.preventDefault();
@@ -91,7 +81,6 @@ const Home = () => {
                      "province": provincia,
                      "location": localidad
                    });
-                   
        setFilters(json);
        console.log(filters);
        
@@ -99,7 +88,40 @@ const Home = () => {
        //console.log(filters);
     }
     
-   
+    
+    const resetFilters = () => {
+      setPrecioMin(null);
+      setPrecioMax(null);
+      setPersonas(null);
+      setRating(null);
+      setPais("");
+      setProvincia("");
+      setLocalidad("");
+    }
+    
+    
+    function preciotext(value) {
+        return `$ ${value}`;
+    }
+    
+    function personastext(value) {
+        return `${value} personas`;
+    }
+    
+    function ratingtext(value) {
+        return `rating ${value}`;
+    }
+    
+    const getFilters = () => {
+       return filters;
+       }
+       
+    
+   useEffect(() => {
+      passFilters();
+    }, []);
+       
+    
 
     return (
 
@@ -108,18 +130,20 @@ const Home = () => {
             <Stack direction="row" spacing={10} sx={{mt:10}}> 
                 <Stack direction="column" spacing={3} sx={{flex:1 , ml: '3%', heigth: '100%', textAlign: 'left', justifyContent: 'space-between'}}>
                     
-                    <DropDownMenuCountry setPais={setPais}/>
-                    <DropDownMenuProvince setProvincia={setProvincia}/>
-                    <DropDownMenuLocation setLocalidad={setLocalidad}/>
+                    <DropDownMenuCountry setPais={setPais} passFilters={passFilters}/>
+                    <DropDownMenuProvince setProvincia={setProvincia} passFilters={passFilters}/>
+                    <DropDownMenuLocation setLocalidad={setLocalidad} passFilters={passFilters}/>
                     
                     <Typography color="black">
                         Precio noche min
                     </Typography>
                     <Slider
+
                         getAriaLabel={() => 'PrecioMinimo'}
                         defaultValue={0}
                         onChange={handlePrecioMin}
                         valueLabelDisplay="auto"
+                        value={precioMax}
                         getAriaValueText={preciotext}
                         step={1000}
                         min={0}
@@ -146,10 +170,11 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => "Personas"}
-                        defaultValue={6}
+                        defaultValue={null}
                         getAriaValueText={personastext}
                         valueLabelDisplay="auto"
-                        onChange={handlePersonasChange}
+                        value={personas}
+                        onChange={(event) => {handlePersonasChange(event)}}
                         step={1}
                         marks
                         min={0}
@@ -164,7 +189,8 @@ const Home = () => {
                         defaultValue={null}
                         getAriaValueText={ratingtext}
                         valueLabelDisplay="auto"
-                        onChange={handleRatingChange}
+                        value={rating}
+                        onChange={(event) => {handleRatingChange(event)}}
                         step={1}
                         marks
                         min={0}
@@ -173,6 +199,10 @@ const Home = () => {
                     />
                     
                    <br />
+                   
+                   <Button variant="contained" onClick={(event) => {resetFilters()}} >
+                     Resetear filtros
+                   </Button>
                         
                    <Button variant="contained" color="primary" onClick={(e) => {onFiltrarClick(e)}}>Filtrar</Button>
                     

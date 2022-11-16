@@ -13,10 +13,10 @@ import swal from "sweetalert2";
 //const PROPERTYHANDLER_URL = '/updateProperty/';
 
 
-const DateReservation = () => {
+const DatePayment = () => {
 
 
-    let public_id = window.localStorage.getItem("information_reservation")
+    let public_id = window.localStorage.getItem("information_payments")
     
     
     console.log(public_id);
@@ -24,10 +24,6 @@ const DateReservation = () => {
 
     const navigate = useNavigate();
 
-    const [fechaInicio, setFechaInicio] = useState(new Date());
-    const [fechaFin, setFechaFin] = useState(new Date());
-    //const [fechaInicio, setFechaInicio] = useState("");
-    //const [fechaFin, setFechaFin] = useState("");
     
     let username;
     if (!window.localStorage.getItem("username")) {
@@ -39,17 +35,13 @@ const DateReservation = () => {
 
 
     
-    
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack floors
-           const paid = false
             
-           const response = axios.post('/getReservedDaysByDateRange',
+            /*const response = axios.post('/getPaymentsByProperty',
                 JSON.stringify({
-                    "start_date": format(fechaInicio, "yyyy-MM-dd"),"end_date": format(fechaFin, "yyyy-MM-dd"),
-                    "email_user": username, 'publication_id': public_id, "paid": paid
+                    "email_user": username, 'publication_id': public_id
                 }),
                 {
                     headers: { 'Content-Type': 'application/json'
@@ -60,9 +52,9 @@ const DateReservation = () => {
                 console.log(response.data)
                 if(((response.data).length)>0 ){
                     console.log("entro")
-                    swal.fire({title: "SUS FECHAS RESERVADAS ON LAS SIGUIENTE", text:`${response.data}`, icon: "success"})
+                    swal.fire({title: "SUS PAGOS RECIBIDOS SON LOS SIGUIENTES", text:`${response.data}`, icon: "success"})
 
-                }else { swal.fire({title: "ESTA PROPIEDAD NO TIENE RESERVAS", text:``, icon: "error"})}
+                }else { swal.fire({title: "ESTA PROPIEDAD NO TIENE PAGOS", text:``, icon: "error"})}
 
 
 
@@ -71,7 +63,7 @@ const DateReservation = () => {
                 console.log(err);
                 swal.fire({title: "Error", text:`Error realizando reserva: "${(err.response ? err.response.data.detail : err)}"`, icon: "error"})
 
-            });
+            });*/
               
     }
     
@@ -89,44 +81,14 @@ const DateReservation = () => {
 
 <Paper component="form" onSubmit={handleSubmit} sx={{minWidth: 350, maxWidth: 600, padding: "20px", minHeight: 300, backgroundColor: 'white'}}> 
             
-                    <Typography variant="h6"> Consultar fechas de Reservas </Typography>
+                    <Typography variant="h6"> Consultar pagos </Typography>
 
                     <Divider></Divider>
                     <br></br>
-                    
-                        <label htmlFor="fechaInicio"><Typography variant="subtitle2" gutterBottom><DateRange></DateRange> Fecha inicio:  </Typography></label>
-                        <DatePicker
-                        selected={fechaInicio}
-                        onChange={(date) => setFechaInicio(date)}
-                        selectsStart
-                        startDate={fechaInicio}
-                        endDate={fechaFin}
-                        name="fechaInicio"
-                        id="fechaInicio"
-                        
-                        />
-                    
-                    <label htmlFor="fechaFin"><DateRange></DateRange> Fecha fin: </label>
-                    <DatePicker
-                    selected={fechaFin}
-                    onChange={(date) => setFechaFin(date)}
-                    selectsEnd
-                    startDate={fechaInicio}
-                    endDate={fechaFin}
-                    minDate={fechaInicio}
-                    name="fechaFin"
-                        id="fechaFin"
                    
-                    />
-
-                    <br></br>
-                    <br></br>
-
                     <Button variant="outlined" onClick={() => {navigate(-1)
                         }}> Volver </Button>
 
-                    <Button disabled={(fechaInicio > fechaFin)} variant="contained" type="submit"> Consultar</Button>
-                    
                     
                     
                    
@@ -134,5 +96,5 @@ const DateReservation = () => {
     )
 }
 
-export default DateReservation
+export default DatePayment
 

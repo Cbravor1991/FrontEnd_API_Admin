@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Logo from '../components/Logo';
 import { createTheme } from '@mui/material/styles';
 import { Button, ThemeProvider } from '@mui/material';
-import DropDownMenuLocation from "./DropDownMenuLocation";
+import DropDownMenuProvince from "./DropDownMenuProvince";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -240,7 +240,7 @@ const MakePublication = () => {
                                 </Typography>
                                 <Stack direction="row" spacing={3} >
                                     <Stack direction="column" spacing={3} >
-                                        <DropDownMenuLocation selected={provincia} setProvincia={setProvincia}/>
+                                        <DropDownMenuProvince selected={provincia} setProvincia={setProvincia}/>
                                         <TextField
 
                                             id="outlined-basic"
