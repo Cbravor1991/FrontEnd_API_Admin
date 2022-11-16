@@ -46,12 +46,12 @@ const ShowsMyReservations = () => {
       text: "¿Confirmas que deseas pagar la reserva?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Si, cancelar',
+      confirmButtonText: 'Si',
       cancelButtonText: 'No',
       dangerMode: true}).then(function(result) {
         if (result['isConfirmed']) {
-          const params = new URLSearchParams([['email_user', username], ['reservation_id', reservation_id]]);
-          axios.post('payReservation/', {params},{ params })
+          const params = new URLSearchParams([['reservation_id', reservation_id]]);
+          axios.post('payReservation/', {}, {params})
           .then(() => {
             setReservations(null);
           })
