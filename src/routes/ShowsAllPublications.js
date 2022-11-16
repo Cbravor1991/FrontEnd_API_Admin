@@ -80,8 +80,8 @@ const ShowsAllPublications = ({filters}) => {
           )}
         )}   
       </Box>
-      : <Typography style={{color: "black"}} variant="h6" gutterBottom>
-        No tenés publicaciones realizadas
+      : <Typography style={{color: "black", marginTop: "50px"}} variant="h6" gutterBottom>
+        No se encontraron publicaciones
       </Typography>}
      
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>

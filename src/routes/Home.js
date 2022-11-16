@@ -53,8 +53,11 @@ const Home = () => {
     }
         
 
-    const handlePrecio = (event, newValue) => {
+    const handlePrecioMin = (event, newValue) => {
         setPrecioMin(newValue);
+    };
+
+    const handlePrecioMax = (event, newValue) => {
         setPrecioMax(newValue);
     };
     const handlePersonasChange = (event, newValue) => {
@@ -110,17 +113,32 @@ const Home = () => {
                     <DropDownMenuLocation setLocalidad={setLocalidad}/>
                     
                     <Typography color="black">
-                        Precio por día
+                        Precio noche min
                     </Typography>
                     <Slider
-                        getAriaLabel={() => 'Precio'}
-                        defaultValue={5000}
-                        onChange={handlePrecio}
+                        getAriaLabel={() => 'PrecioMinimo'}
+                        defaultValue={0}
+                        onChange={handlePrecioMin}
                         valueLabelDisplay="auto"
                         getAriaValueText={preciotext}
                         step={1000}
                         min={0}
                         max={10000}
+                        disableSwap
+                    />
+
+                    <Typography color="black">
+                        Precio noche máx
+                    </Typography>
+                    <Slider
+                        getAriaLabel={() => 'PrecioMaximo'}
+                        defaultValue={5000}
+                        onChange={handlePrecioMax}
+                        valueLabelDisplay="auto"
+                        getAriaValueText={preciotext}
+                        step={1000}
+                        min={0}
+                        max={50000}
                         disableSwap
                     />
                     <Typography color="black">
