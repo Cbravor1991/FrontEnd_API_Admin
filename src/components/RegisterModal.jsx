@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
 import axios from '../api/axios';
+import swal from 'sweetalert2';
 
 const PWD_ERROR = "At least 8 characters long and contain at least one number, one uppercase letter, and one lowercase letter."
 const USER_ERROR = "Username must be at least 3 characters long and contain only letters and numbers."
@@ -60,9 +61,13 @@ export default function BasicModal(props) {
             {
                 headers: { 'Content-Type': 'application/json' }
             }
-        ).then(response => {
-                props.setOpen(false);
-        })
+        ).then(() => {
+            props.setOpen(false);
+            swal.fire({title: "Exito", text:"Te registraste exitosamente!", icon: "success"})
+            
+        }).catch((err) => {
+            swal.fire({title: "Error", text:`Error registrandose: "${(err.response ? err.response.data.detail : err)}"`, icon: "error"})
+        });
     }
 
 

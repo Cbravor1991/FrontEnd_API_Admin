@@ -4,7 +4,7 @@ import {  Typography } from '@mui/material';
 import { Button } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider, Paper } from '@mui/material';
+import { ThemeProvider, Paper, Box } from '@mui/material';
 import Divider from "@mui/material/Divider";
 import Slider from '@mui/material/Slider';
 import DropDownMenuCountry from '../components/DropDownMenuCountry';
@@ -33,8 +33,10 @@ const Home = () => {
 
 
     const navigate = useNavigate();
-    const [precioMin, setPrecioMin] = useState(null);
-    const [precioMax, setPrecioMax] = useState(null);
+    const [precioMin, setPrecioMin] = useState(0);
+    const [precioMax, setPrecioMax] = useState(10000);
+
+    const [precioMinMax, setPrecioMinMax] = useState([0,10000])
     const [personas, setPersonas] = useState(null);
     const [rating, setRating] = useState(null);
     const [pais, setPais] = useState("");
@@ -60,6 +62,10 @@ const Home = () => {
     const handlePrecioMax = (event, newValue) => {
         setPrecioMax(newValue);
     };
+
+    const handlePrecioMinMax = (event, newValue) => {
+        setPrecioMinMax(newValue);
+    };
     const handlePersonasChange = (event, newValue) => {
         setPersonas(newValue);
     };
@@ -83,8 +89,8 @@ const Home = () => {
     const onFiltrarClick = (event) => {
         event.preventDefault();
        const json = JSON.stringify({
-                    "price_max": precioMax,
-                    "price_min": precioMin,
+                    "price_min": precioMinMax[0],
+                    "price_max": precioMinMax[1],
                        "rating": rating,
                        "people": personas,
                       "country": pais,
@@ -113,34 +119,24 @@ const Home = () => {
                     <DropDownMenuLocation setLocalidad={setLocalidad}/>
                     
                     <Typography color="black">
-                        Precio noche min
+                        Precio noche
                     </Typography>
+
+                    <Box sx={{ width: 300 }}>
                     <Slider
-                        getAriaLabel={() => 'PrecioMinimo'}
-                        defaultValue={0}
-                        onChange={handlePrecioMin}
-                        valueLabelDisplay="auto"
-                        getAriaValueText={preciotext}
-                        step={1000}
+                    getAriaLabel={() => 'Double slider'}
+                    value={precioMinMax}
+                    onChange={handlePrecioMinMax}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={preciotext}
+                    step={100}
                         min={0}
                         max={10000}
-                        disableSwap
+                    disableSwap
                     />
+                    
+                    </Box>
 
-                    <Typography color="black">
-                        Precio noche máx
-                    </Typography>
-                    <Slider
-                        getAriaLabel={() => 'PrecioMaximo'}
-                        defaultValue={5000}
-                        onChange={handlePrecioMax}
-                        valueLabelDisplay="auto"
-                        getAriaValueText={preciotext}
-                        step={1000}
-                        min={0}
-                        max={50000}
-                        disableSwap
-                    />
                     <Typography color="black">
                         Capacidad
                     </Typography>
@@ -157,7 +153,7 @@ const Home = () => {
                         disableSwap
                     />
                     <Typography color="black">
-                        Rating
+                        Rating minimo
                     </Typography>
                     <Slider
                         getAriaLabel={() => "Rating"}

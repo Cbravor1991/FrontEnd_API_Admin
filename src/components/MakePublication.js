@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from '../components/Logo';
 import { createTheme } from '@mui/material/styles';
 import { Button, ThemeProvider } from '@mui/material';
@@ -18,6 +18,7 @@ import { PrecisionManufacturing } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import AddImagesModal from "../components/AddImagesModal";
 import DropDownMenuMakePublication from "./DropDownMakePublication";
+import swal from "sweetalert2";
 
 const PROPERTYHANDLER_URL = '/updateProperty/';
 
@@ -36,6 +37,7 @@ const theme = createTheme({
 }); 
 
 const MakePublication = () => {
+    const navigate = useNavigate();
     const handleOpen = () => setOpen(true);
 
     const [open, setOpen] = useState(false);
@@ -165,9 +167,12 @@ const MakePublication = () => {
                 }).catch((error) => {
                     console.log(error)
                 })
-            }).catch((error) => {
-                console.log(error)
-            })
+            }).then(() => {
+                swal.fire({title: "Exito", text:"Publicacion creada exitosamente!", icon: "success"}).then(() => {navigate("/showsMyPublications")})
+                
+            }).catch((err) => {
+                swal.fire({title: "Error", text:`Error creando publicación: "${(err.response ? err.response.data.detail : err)}"`, icon: "error"})
+            });
             
             
              

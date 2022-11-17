@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { Link, useNavigate  } from "react-router-dom";
 import axios from '../api/axios';
 import CardPublication from "../components/CardPublication";
-import { Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 //import InputLabel from '@mui/material/InputLabel';
 //import MenuItem from '@mui/material/MenuItem';
 //import FormControl from '@mui/material/FormControl';
@@ -32,10 +32,10 @@ const ShowsAllPublications = ({filters}) => {
       return;
     } 
     const params = new URLSearchParams([['offset', 0], ['limit', 100]]);
-    let json = {};
+    let json = {"email_user": username};
     if (filters){
       let parsed_filters = JSON.parse(filters);
-      json = { "email_user": null,
+      json = { "email_user": username,
                 "price_max": (parsed_filters.price_max == 0 ? null : parsed_filters.price_max),
                 "price_min": (parsed_filters.price_min == 0 ? null : parsed_filters.price_min),
                     "rating": (parsed_filters.rating == 0 ? null : parsed_filters.rating),
@@ -73,17 +73,19 @@ const ShowsAllPublications = ({filters}) => {
   return (                             
          <>
          
-    { (publications && publications.length > 0) ? 
-      <Box sx={{display:'flex',flexWrap: 'wrap', mt:10 }}>
-        {publications.map(item => {
-          return (
-              <CardPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
-          )}
-        )}   
-      </Box>
-      : <Typography style={{color: "black", marginTop: "50px"}} variant="h6" gutterBottom>
-        No se encontraron publicaciones
-      </Typography>}
+    { (publications) ?
+        ((publications.length > 0) ? 
+        <Box sx={{display:'flex',flexWrap: 'wrap', mt:10 }}>
+          {publications.map(item => {
+            return (
+                <CardPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
+            )}
+          )}   
+        </Box>
+        : <Typography style={{color: "black", marginTop: "50px"}} variant="h6" gutterBottom>
+          No se encontraron publicaciones
+        </Typography>)
+      : <CircularProgress/>}
      
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
         Podes realizar tu publicacion en <Link style={{marginLeft: "5px"}} to="/ShowsMyPublications"> Mis publicaciones </Link>

@@ -202,7 +202,7 @@ export default function CardMyPublication(props) {
             </Typography>
             
             <Typography variant="body2">
-              {props.Publication.price}
+              ${props.Publication.price} noche
             </Typography>
 
             <Typography variant="body2">
