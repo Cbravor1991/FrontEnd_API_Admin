@@ -100,9 +100,13 @@ const ShowsMyReservations = () => {
                 <Button size="small" onClick={() => {navigate(`/viewPublication/${item.publication_id}?is_reserved=true`)}}>Ver publicación</Button>
               </CardActions>
                 
-              <CardActions>
+              {item.paid ? 
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Ya fue pagada
+              </Typography>:
+                <CardActions>
                 <Button size="small" onClick={() => payReservation(item.id)} >Pagar reserva</Button>
-              </CardActions>
+              </CardActions>}
 
               <CardActions>
                 <Button size="small" onClick={() => cancelReservation(item.id)}  color="error">Cancelar reserva</Button>

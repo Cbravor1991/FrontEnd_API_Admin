@@ -33,11 +33,9 @@ const Home = () => {
 
 
     const navigate = useNavigate();
-    const [precioMin, setPrecioMin] = useState(0);
-    const [precioMax, setPrecioMax] = useState(10000);
 
     const [precioMinMax, setPrecioMinMax] = useState([0,10000])
-    const [personas, setPersonas] = useState(null);
+    const [personas, setPersonas] = useState(0);
     const [rating, setRating] = useState(null);
     const [pais, setPais] = useState("");
     const [provincia, setProvincia] = useState(null);
@@ -53,15 +51,6 @@ const Home = () => {
     } else {
         username = window.localStorage.getItem("username")
     }
-        
-
-    const handlePrecioMin = (event, newValue) => {
-        setPrecioMin(newValue);
-    };
-
-    const handlePrecioMax = (event, newValue) => {
-        setPrecioMax(newValue);
-    };
 
     const handlePrecioMinMax = (event, newValue) => {
         setPrecioMinMax(newValue);
@@ -142,7 +131,7 @@ const Home = () => {
                     </Typography>
                     <Slider
                         getAriaLabel={() => "Personas"}
-                        defaultValue={6}
+                        defaultValue={0}
                         getAriaValueText={personastext}
                         valueLabelDisplay="auto"
                         onChange={handlePersonasChange}
