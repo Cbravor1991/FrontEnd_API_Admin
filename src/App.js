@@ -63,6 +63,7 @@ function App() {
       <Route path="fileLoader" element={<FileLoader />} />
       <Route path="fileLoaderGallery2" element={<FileLoaderGallery2 />} />
       <Route path="profile" element={<ProfilePage />} />
+      <Route path="viewProfile/:user_email" element={<ProfilePage />} />
       <Route path="makePublication"  element={<MakePublication />}/>
       <Route path="showsMyPublications"  element={<ShowsMyPublications />}/>
       <Route path="showsAllPublications"  element={<ShowsAllPublications />}/>

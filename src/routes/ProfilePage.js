@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from '../api/axios';
 import Card from "../components/Card";
 import { Avatar, Box, Button, CircularProgress, Divider, Paper, Rating, Typography } from '@mui/material';
@@ -9,6 +9,8 @@ import { Add, ContactMail, ContactMailOutlined, Description, DescriptionOutlined
 const Profile = () => {
 
   const navigate = useNavigate();
+
+  const routeParams = useParams();
 
   let username = window.localStorage.getItem("username")
 
@@ -22,7 +24,10 @@ const Profile = () => {
   } 
 
   if(!profileData){
-    const params = new URLSearchParams([['user_email', username]]);
+    let params = new URLSearchParams([['user_email', username]]);
+    if (routeParams.user_email){
+      params = new URLSearchParams([['user_email', routeParams.user_email]]);
+    }
 
     axios.get('/getProfile/',{ params: params })
     .then((response) => {
@@ -32,10 +37,6 @@ const Profile = () => {
       console.log(error);
     });
   }
-
-  // useEffect(() => {
-  //   //loadLodgings();
-  //   }, []);
 
 
   return (
@@ -84,10 +85,10 @@ const Profile = () => {
         <b style={{width: '300px'}}>Calificación como casero: </b> <Rating name="read-only" style={{transform: "translate(0px, 7px)"}} value={3.3} precision={0.5} readOnly />
 
       </Typography> */}
-
-      <Button sx={{marginTop: "40px"}} variant="contained" onClick={() => navigate("/profile/edit")} startIcon={<Edit />}>
-        Editar
-      </Button>
+      {routeParams.user_email ? "" : 
+        <Button sx={{marginTop: "40px"}} variant="contained" onClick={() => navigate("/profile/edit")} startIcon={<Edit />}>
+          Editar
+        </Button>}
       </>
      :<CircularProgress></CircularProgress>}
     </Paper>
