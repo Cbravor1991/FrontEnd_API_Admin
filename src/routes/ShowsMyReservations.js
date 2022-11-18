@@ -85,19 +85,19 @@ const ShowsMyReservations = () => {
           return ( //               <CardPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
 
               
-              <Card variant="outlined" key={item.id}>
+              <Card variant="outlined" key={item.Reservation.id}>
               <CardContent>      
                 <Typography variant="body2">
-                  Desde: {item.start_date}
+                  Desde: {item.Reservation.start_date}
                   <br />
-                 Hasta: {item.end_date}
+                 Hasta: {item.Reservation.end_date}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Total: ${item.price}
+                  Total: ${item.Reservation.price}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={() => {navigate(`/viewPublication/${item.publication_id}?is_reserved=true`)}}>Ver publicación</Button>
+                <Button size="small" onClick={() => {navigate(`/viewPublication/${item.Reservation.publication_id}?is_reserved=true`)}}>Ver publicación</Button>
               </CardActions>
                 
               {item.paid ? 
@@ -105,11 +105,11 @@ const ShowsMyReservations = () => {
                 Ya fue pagada
               </Typography>:
                 <CardActions>
-                <Button size="small" onClick={() => payReservation(item.id)} >Pagar reserva</Button>
+                <Button size="small" onClick={() => payReservation(item.Reservation.id)} >Pagar reserva</Button>
               </CardActions>}
 
               <CardActions>
-                <Button size="small" onClick={() => cancelReservation(item.id)}  color="error">Cancelar reserva</Button>
+                <Button size="small" onClick={() => cancelReservation(item.Reservation.id)}  color="error">Cancelar reserva</Button>
               </CardActions>
             </Card>
 
