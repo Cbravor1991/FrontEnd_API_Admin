@@ -87,6 +87,7 @@ const ShowsMyReservations = () => {
               
               <Card variant="outlined" key={item.Reservation.id}>
               <CardContent>      
+                <Typography variant="h6"> {item.title} </Typography>
                 <Typography variant="body2">
                   Desde: {item.Reservation.start_date}
                   <br />

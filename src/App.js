@@ -28,7 +28,7 @@ import ShowsMyReservations from './routes/ShowsMyReservations';
 import Review from './components/Review';
 import DateReservation from './routes/DateReservation'
 import DatePayment from './routes/DatePayment'
-import ViewPublicationReviews from './components/ViewPublicationRatings';
+import ViewPublicationReviews from './components/ViewPublicationReviews';
 
 
 

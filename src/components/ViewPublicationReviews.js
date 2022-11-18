@@ -57,12 +57,12 @@ const ViewPublicationReviews = (() => {
 
                     {publicationReviews.map((x) => 
                     <div>
-                      <Typography variant="subtitle1">
-                      User id: {x.user_id}
+                      <Typography style={{cursor: "pointer", fontWeight: "bold"}} onClick={() => navigate(`/viewProfile/${x.email}`)} variant="subtitle1">
+                      {x.email}
                       </Typography> 
-                      <Rating size="small" value={x.rating} readOnly={true}></Rating>
+                      <Rating size="small" value={x.Review.rating} readOnly={true}></Rating>
                       <Typography variant="subtitle2">
-                      {x.description}
+                      {x.Review.description}
                       </Typography> 
                       <Divider style={{margin: "3px 0 3px 0"}}/> 
                       </div>)}
