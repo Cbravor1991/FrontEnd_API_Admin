@@ -40,7 +40,7 @@
 .contenedor-recomendaciones {
   
   width: 1536px;
-  height: 728.5px;
+  height: 737px;
   z-index: -2;
  
   background-image: url("https://c0.wallpaperflare.com/preview/394/832/981/ushuaia-patagonia-argentina-water.jpg");
@@ -49,8 +49,22 @@
   
   background-position-x: center;
   background-position-y: center ;
-  opacity: 0.7;
+  position: relative;
+  
  
 
   
 }
+
+.slider{
+  z-index: -3;
+  
+  background-color: black;
+  width: 700px;
+  height: 512px;
+
+  position:absolute;
+  top : 25%; left : 30%;
+
+
+} 

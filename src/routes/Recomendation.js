@@ -10,7 +10,7 @@ const Recomendation = () => {
     return (
         
             <div className={['contenedor-recomendaciones']} >
-                <p>Recomendes</p>
+                <div className={['slider']}> </div>
         
              </div>
         )
