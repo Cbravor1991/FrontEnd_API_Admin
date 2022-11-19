@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.contenedor-recomendaciones {
+  
+  width: 1536px;
+  height: 728.5px;
+  z-index: -2;
+ 
+  background-image: url("https://c0.wallpaperflare.com/preview/394/832/981/ushuaia-patagonia-argentina-water.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  background-position-x: center;
+  background-position-y: center ;
+  opacity: 0.7;
+ 
+
+  
+}

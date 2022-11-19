@@ -29,6 +29,7 @@ import Review from './components/Review';
 import DateReservation from './routes/DateReservation'
 import DatePayment from './routes/DatePayment'
 import ViewPublicationReviews from './components/ViewPublicationReviews';
+import Recomendation from './routes/Recomendation';
 
 
 
@@ -76,6 +77,8 @@ function App() {
       <Route path="review" element={<Review />} />
       <Route path="dateReservation" element={<DateReservation/>} />
       <Route path="datePayment" element={<DatePayment/>} />
+      <Route path="datePayment" element={<DatePayment/>} />
+      <Route path="recomendation" element={<Recomendation/>} />
       
       {/*
       <Route element={<RequireAuth allowedRoles={[ROLES.Inquilino]} />}>
