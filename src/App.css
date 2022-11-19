@@ -50,21 +50,14 @@
   background-position-x: center;
   background-position-y: center ;
   position: relative;
-  
- 
-
-  
 }
 
 .slider{
-  z-index: -3;
-  
-  background-color: black;
-  width: 700px;
-  height: 512px;
-
-  position:absolute;
-  top : 25%; left : 30%;
-
-
+z-index: -3;
+background-color: white;
+width: 700px;
+height: 512px;
+position:absolute;
+top : 25%; left : 30%;
 } 
+
