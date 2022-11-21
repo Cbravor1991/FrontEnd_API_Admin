@@ -94,6 +94,7 @@ const deletePublication = async (props, username, updateFunction) => {
    }
   
   
+  
  async function statusPublication(props) {
     window.localStorage.setItem("information_reservation", JSON.stringify (props.Publication.id))
   
@@ -193,35 +194,37 @@ export default function CardMyPublication(props) {
            <div sx={{display:'flex',flexWrap: 'wrap' }}>
                   <img alt="Preview" height="150" src={list[0]} />
            </div>
-             
-            <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+          
+          <div style={{maxWidth: "300px", margin: "0px auto 0px auto"}}>
+           <Typography variant="subtitle2" style={{ fontWeight: "bold"}}  gutterBottom>
               {props.Publication.title}
             </Typography>
-            <Typography variant="h6" component="div">
+            <Typography variant="body2" component="div" style={{textAlign:"left"}}>
               {props.Publication.description}
             </Typography>
             
-            <Typography variant="body2">
-              ${props.Publication.price} noche
+            <Typography variant="body1" style={{fontWeight: "bold"}} color="text.secondary">
+              $ {props.Publication.price} noche
             </Typography>
-
-            <Typography variant="body2">
-              <Button variant="contained" onClick={() => { statusPublication(props) }} color="success">Ver reservas</Button>
-            </Typography>
-            
-            <Typography variant="body2">
-              <Button variant="contained" onClick={() => { statusPayments(props) }} color="success">Ver pagos</Button>
-            </Typography>
+            </div>
 
             {props.Publication.rating ? 
                 <div><Button onClick={()=> {navigate(`/viewPublication/${props.Publication.id}/reviews`)}}><StarRate fontSize="small" style={{color: "#faaf00", transform: "translate(0px, -3px)"}}/> <span style={{color: "black", marginRight: "6px"}}>{props.Publication.rating}</span> Ver calificaciones</Button> </div>
             : "Sin calificaciones"}
 
+            <Typography variant="body2">
+              <Button variant="contained" onClick={() => { navigate(`/property/${props.Publication.property_id}/reservationStatus`)}} >Ver estado de reservas</Button>
+            </Typography>
+            
+            {/* <Typography variant="body2">
+              <Button variant="contained" onClick={() => { statusPayments(props) }}>Ver pagos</Button>
+            </Typography> */}
+
           </CardContent>
           <CardActions sx={{justifyContent:'center'}}>
             { <Button variant="contained" onClick={()=>{viewPublication(props, navigate)}} color="success">Consultar</Button> }
-            <Button variant="contained" onClick={()=>{update(props)}} color="success">Modificar</Button>
-            <Button variant="contained" onClick={()=>{deletePublication(props, username, props.updateLodgings)}} color="success">Eliminar</Button>
+            <Button variant="contained" onClick={()=>{update(props)}}>Modificar</Button>
+            <Button variant="contained" onClick={()=>{deletePublication(props, username, props.updateLodgings)}} color="error">Eliminar</Button>
             
             
           </CardActions>

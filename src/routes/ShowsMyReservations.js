@@ -60,7 +60,6 @@ const ShowsMyReservations = () => {
     )
   }
 
-  
   if (!reservations) {
     const params = new URLSearchParams([['email_user', username]]);
 
@@ -72,6 +71,8 @@ const ShowsMyReservations = () => {
       console.log(error);
     });
   }
+
+  console.log(reservations)
   
 
 
@@ -97,21 +98,22 @@ const ShowsMyReservations = () => {
                   Total: ${item.Reservation.price}
                 </Typography>
               </CardContent>
-              <CardActions>
                 <Button size="small" onClick={() => {navigate(`/viewPublication/${item.Reservation.publication_id}?is_reserved=true`)}}>Ver publicación</Button>
-              </CardActions>
                 
-              {item.paid ? 
+              {item.Reservation.paid ? 
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 Ya fue pagada
               </Typography>:
+                <>
                 <CardActions>
-                <Button size="small" onClick={() => payReservation(item.Reservation.id)} >Pagar reserva</Button>
-              </CardActions>}
+                  <Button size="small" onClick={() => payReservation(item.Reservation.id)} >Pagar reserva</Button>
+                </CardActions>
+                <CardActions>
+                  <Button size="small" onClick={() => cancelReservation(item.Reservation.id)}  color="error">Cancelar reserva</Button>
+                </CardActions>
+                </>}
 
-              <CardActions>
-                <Button size="small" onClick={() => cancelReservation(item.Reservation.id)}  color="error">Cancelar reserva</Button>
-              </CardActions>
+              
             </Card>
 
 
