@@ -9,7 +9,7 @@ const ShowsMyPublications = () => {
 
   const navigate = useNavigate();
 
-  const [publications, setPublications] = useState([]);
+  const [publications, setPublications] = useState(null);
 
   let username = window.localStorage.getItem("username")
       
