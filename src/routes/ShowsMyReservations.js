@@ -105,7 +105,7 @@ const ShowsMyReservations = () => {
                 Ya fue pagada
               </Typography>:
                 <CardActions>
-                <Button size="small" onClick={() => payReservation(item.Reservation.id)} >Pagar reserva</Button>
+                <Button size="small" onClick={() => payReservation(item.Reservation.id)} disabled={item.Reservation.paid ? true : false} >Pagar reserva</Button>
               </CardActions>}
 
               <CardActions>
