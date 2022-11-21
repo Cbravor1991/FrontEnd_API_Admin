@@ -37,11 +37,12 @@
   }
 }
 
+
 .contenedor-recomendaciones {
   
   width: 1536px;
   height: 737px;
-  z-index: -2;
+  z-index: -3;
  
   background-image: url("https://c0.wallpaperflare.com/preview/394/832/981/ushuaia-patagonia-argentina-water.jpg");
   background-size: cover;
@@ -50,14 +51,91 @@
   background-position-x: center;
   background-position-y: center ;
   position: relative;
+
+  
 }
 
+.transparencia{
+  width: 1536px;
+  height: 737px;
+  z-index: -2;
+  background: rgba(169, 192, 169, 0.3)
+  } 
+
+
 .slider{
-z-index: -3;
+z-index: 0;
 background-color: white;
-width: 700px;
-height: 512px;
-position:absolute;
-top : 25%; left : 30%;
+width: 1010px;
+height: 360px;
+position:relative;
+top : 25%; left : 17.5%;
+
 } 
 
+.mar-del-plata{
+  width: 252.2px;
+  height: 360px;
+  position:absolute;
+  left: 0%;
+  background-color: black;
+ 
+ 
+  
+  } 
+
+  .card--image-mar-del{
+    width: 252.2px;
+  height: 360px;
+  position:absolute;
+  left: 0%;
+ 
+  }
+  
+  .bariloche{
+    width: 252.2px;
+    height: 360px;
+    position:absolute;
+    left: 25%;
+    background-color: black;
+   } 
+
+   .card-bariloche{
+  width: 252.2px;
+  height: 360px;
+  position:absolute;
+  left: 0%;
+ 
+  }
+
+  .cordoba{
+    width: 252.2px;
+    height: 360px;
+    position:absolute;
+    left: 50%;
+    background-color: black;
+   } 
+
+   .card-cordoba{
+    width: 252.2px;
+  height: 360px;
+  position:absolute;
+  left: 0%;
+ 
+  }
+
+  .san-martin-de-los-andes{
+    width: 252.2px;
+    height: 360px;
+    position:absolute;
+    left: 75%;
+    background-color: black;
+   } 
+
+   .card-san-martin-los-andes{
+    width: 252.2px;
+  height: 360px;
+  position:absolute;
+  left: 0%;
+ 
+  }
