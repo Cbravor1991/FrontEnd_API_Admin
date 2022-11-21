@@ -60,31 +60,29 @@ export default function CardPublication(props) {
   
     return (
     
-      <Card variant="outlined" sx={{m:1}}>
+      <Card onClick={()=>{viewPublication(props.Publication.id)}} style={{cursor: "pointer"}} variant="outlined" sx={{m:1}}>
         <React.Fragment>
           <CardContent>
             
            <div sx={{display:'flex',flexWrap: 'wrap' }}>
-                  <img alt="Preview" height="150" src={list[0]} />
+                  <img style={{borderRadius: "10px"}} alt="Preview" height="150" src={list[0]} />
            </div>
              
-            <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+            <Typography variant="subtitle2" style={{maxWidth: "300px", textAlign:"left", fontWeight: "bold"}}  gutterBottom>
               {props.Publication.title}
             </Typography>
-            <Typography variant="h6" component="div">
+            <Typography variant="body2" component="div" style={{maxWidth: "300px", textAlign:"left"}}>
               {props.Publication.description}
             </Typography>
             
-            <Typography variant="body2">
+            <Typography variant="body1" style={{fontWeight: "bold"}} color="text.secondary">
               $ {props.Publication.price} noche
             </Typography>
             {props.Publication.rating ? <Typography variant="subtitle2"><StarRate fontSize="small" style={{color: "#faaf00", transform: "translate(0px, 4px)"}}/> {props.Publication.rating} </Typography> : ""}
 
 
           </CardContent>
-          <CardActions sx={{justifyContent:'center'}}>
-            <Button variant="contained" onClick={()=>{viewPublication(props.Publication.id)}} color="success">Consultar</Button>
-          </CardActions>
+
         </React.Fragment>
       </Card>
 
