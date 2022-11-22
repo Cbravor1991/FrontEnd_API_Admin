@@ -1,15 +1,39 @@
 import Logo from '../components/Logo';
 import { useNavigate, Link } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
 import '../Recomendation.module.css';
 import Slider from '../components/Slider';
 import data from "../dataRecomendation";
+import Stack from '@mui/material/Stack';
+import ShowsAllPublications from "./ShowsMyRecomendation";
+
+
+import axios from '../api/axios';
+import CardPublication from "../components/CardPublication";
+import { Box, CircularProgress, Typography } from '@mui/material';
+
+import { Add } from '@mui/icons-material';
 const images = require.context('../images/')
 
 
 
+
+
+
+
+
 const Recomendation = () => {
+    const [filters, setFilters] = useState(null);
+    let username;
+    if (!window.localStorage.getItem("username")) {
+        window.location.href = "/login";
+        return;
+    } else {
+        username = window.localStorage.getItem("username")
+    }
 
-
+   
+       
 
 
     return (
@@ -46,12 +70,21 @@ const Recomendation = () => {
                     <img src={images(`./${data[3].coverImg}`)} className="card-san-martin-los-andes" />
                 </div>
 
-
+        
 
             </div>
             </div>
+
+         
 
             <div className={['ultimas-visitas']}>
+            
+                <h8>Te recomendamos que reserves</h8>
+                <Stack className='stack-recomendations' >
+                    <ShowsAllPublications filters={filters}/>
+                </Stack>
+            
+                
                 
             </div>
 
