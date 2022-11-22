@@ -97,13 +97,14 @@ const deletePublication = async (props, username, updateFunction) => {
  async function statusPublication(props) {
     window.localStorage.setItem("information_reservation", JSON.stringify (props.Publication.id))
   
-    let params = new URLSearchParams([['email_user', props.username], ['publication_id', props.Publication.id]]);
+    let params = new URLSearchParams([['publication_id', props.Publication.id]]);
+    window.localStorage.setItem("id_property", props.Property.id)
   
     const response = axios.post(RESERVATION_STATUS, {}, { params })
       .then((response) => {
         console.log(response.data)
         if((response.data) == true){
-          window.location.href = "/dateReservation"
+          window.location.href = "/showsPropertyReservations"
           
         }else{
           swal.fire({title: "ESTA PROPIEDAD NO TIENE RESERVAS",  icon: "error"})
