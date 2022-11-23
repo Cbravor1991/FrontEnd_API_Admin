@@ -32,7 +32,7 @@ import DatePayment from './routes/DatePayment'
 import ViewPublicationReviews from './components/ViewPublicationReviews';
 import Recomendation from './routes/Recomendation';
 import ShowTopVisit from './routes/ShowTopVisit';
-
+import ShowTopRecomendation from './routes/ShowTopRecomendation';
 
 
 
@@ -84,6 +84,7 @@ function App() {
       <Route path="datePayment" element={<DatePayment/>} />
       <Route path="recomendation" element={<Recomendation/>} />
       <Route path="showTopVisit" element={<ShowTopVisit/>} />
+      <Route path="showTopRecomendation" element={<ShowTopRecomendation/>} />
       
       {/*
       <Route element={<RequireAuth allowedRoles={[ROLES.Inquilino]} />}>

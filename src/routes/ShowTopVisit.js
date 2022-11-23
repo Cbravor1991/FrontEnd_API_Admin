@@ -5,7 +5,7 @@ import '../Recomendation.module.css';
 import Slider from '../components/Slider';
 import data from "../dataRecomendation";
 import Stack from '@mui/material/Stack';
-import ShowsAllPublications from "./ShowsMyRecomendation";
+import ShowsAllPublications from "./ShowTopRecomendation";
 import { Button } from "@mui/material";
 
 
