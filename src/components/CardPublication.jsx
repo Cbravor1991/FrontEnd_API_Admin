@@ -8,6 +8,7 @@ import axios from '../api/axios';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { StarRate } from '@mui/icons-material';
+import { $ } from 'radio';
 
 
 //const DELETE_PUBLICATION_URL = '/deletePublication/';
@@ -54,7 +55,29 @@ export default function CardPublication(props) {
     const viewPublication = async (id) => {
       window.localStorage.setItem("view_publication", JSON.stringify (props))
       //console.log(id)
-      navigate(`/viewPublication/${id}`)
+
+      axios.post('/saveQueryPublication',
+                JSON.stringify({
+                    'user_email': username, 'publication_id': id
+                }),
+                {
+                    headers: { 'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin": "*"
+                         }
+                },
+    
+              ).then((response) => {
+                console.log("cargo preferencias")
+                console.log(id)
+                navigate(`/viewPublication/${id}`)
+                }).catch((error) => {
+                    console.log(error)
+                })
+
+
+
+
+      
     }
     
   
