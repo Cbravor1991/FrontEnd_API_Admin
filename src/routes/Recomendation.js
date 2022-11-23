@@ -6,6 +6,7 @@ import Slider from '../components/Slider';
 import data from "../dataRecomendation";
 import Stack from '@mui/material/Stack';
 import ShowsAllPublications from "./ShowsMyRecomendation";
+import { Button } from "@mui/material";
 
 
 import axios from '../api/axios';
@@ -32,6 +33,15 @@ const Recomendation = () => {
         username = window.localStorage.getItem("username")
     }
 
+    const preferences = (visit) => {
+        console.log('entro')
+        window.localStorage.setItem("top_visit", visit)
+        window.location.href="/showTopVisit"
+
+     
+      }
+   
+
    
        
 
@@ -47,26 +57,24 @@ const Recomendation = () => {
                 
 
                 <div className="mar-del-plata">
-                    <h7>{data[0].Location}</h7>
-                    
-                
-                    <img src={images(`./${data[0].coverImg}`)} className="card--image-mar-del" />
+                <Button variant="contained" style={{backgroundColor: "black"}} onClick={()=>{preferences(data[0].Location)}} >{data[0].Location}</Button>
+                     <img src={images(`./${data[0].coverImg}`)} className="card--image-mar-del" />
                     
                     
                 </div>
 
                 <div className="bariloche">
-                    <h7>{data[1].Location}</h7>
+                    <Button variant="contained"  style={{backgroundColor: "black"}} onClick={()=>{preferences(data[1].Location)}} >{data[1].Location}</Button>
                     <img src={images(`./${data[1].coverImg}`)} className="card-bariloche" />
                 </div>
 
                 <div className="cordoba">
-                    <h7>{data[2].Location}</h7>
+                    <Button variant="contained" style={{backgroundColor: "black"}} onClick={()=>{preferences(data[2].Location)}}>{data[2].Location}</Button>
                     <img src={images(`./${data[2].coverImg}`)} className="card-cordoba" />
                 </div>
 
                 <div className="san-martin-de-los-andes">
-                    <h7>{data[3].Location}</h7>
+                    <Button variant="contained" style={{backgroundColor: "black"}} onClick={()=>{preferences(data[3].Location)}} >{data[3].Location}</Button>
                     <img src={images(`./${data[3].coverImg}`)} className="card-san-martin-los-andes" />
                 </div>
 
