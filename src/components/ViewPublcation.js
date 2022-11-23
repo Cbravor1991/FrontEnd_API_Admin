@@ -15,10 +15,79 @@ import { LocationOn, LocationOnOutlined, PrecisionManufacturing } from "@mui/ico
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { CircularProgress, Divider, Paper, Rating } from "@mui/material";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+
+
 
 
 
 const ViewPublication = (() => {
+
+  //////// Questios hooks
+  const [questions, setQuestions] = useState([]);
+  const [answer, setAnswer] = useState('');
+  const [questionId, setQuestionId] = useState(0);
+
+  const [question, setQuestion] = useState('');
+
+  useEffect(() => {
+    getQuestions();
+    }, []);
+
+  const handleAddQuestion = () => {
+    // check if question not empty
+    if (question.trim() === '') {
+      return;
+    }
+    axios.post('/question/', {
+      publication_id: routeParams.id,
+      question: question,
+      user_id: 1,
+    })
+    .then((response) => {
+      console.log(response);
+      getQuestions()
+    })
+    .catch((error) => {
+      console.log(error);
+
+    });
+  }
+
+  const handleReply = (e) => {
+    axios.post('/answer/',
+      {
+        'question_id': questionId,
+        'answer': answer
+        }
+        )
+    .then((response) => {
+      console.log(response);
+      getQuestions();
+    })
+    .catch((error) => {
+      console.log(error);
+    });    
+  
+  }
+
+  const getQuestions = () => {
+    axios.get(`/question/${routeParams.id}`)
+    .then((response) => {
+      console.log(response);
+      setQuestions(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  ///////////
+
 
   const routeParams = useParams();
 
@@ -95,7 +164,7 @@ const ViewPublication = (() => {
 
 
     return (
-    <Paper component="form" sx={{minWidth: 350, maxWidth: 800, padding: "20px", minHeight: 300, backgroundColor: 'white', textAlign: "left"}}> 
+    <Paper component="form" sx={{minWidth: 350, maxWidth: 800, padding: "20px", minHeight: 300, backgroundColor: 'white', textAlign: "left", mt: 12}}> 
                   {(publicationData && images) ? <>
 
                     <Typography variant="h5">
@@ -142,7 +211,55 @@ const ViewPublication = (() => {
 
                     
                     <Divider></Divider>
-                    
+                  <Stack spacing={2} direction="row" sx={{width: '100%', mt:4}}>
+                    <TextField
+                              sx={{width: '80%', ml: 5}} 
+                              id="outlined-multiline-static"
+                              label="Realiza una pregunta"
+                              multiline
+                              rows={3}
+                              defaultValue="Buenas, tengo una consulta..."
+                              onChange={(e) => setQuestion(e.target.value)}
+                    />
+                    <Button variant="contained" color="success" sx={{height: 'fit-content'}} onClick={handleAddQuestion}>Enviar</Button>
+                  </Stack>
+                  <List sx={{color: 'black'}}>
+                    {questions.map((question) => (
+                      <ListItem key={question.id} sx={{ml: 5}}>
+                        <Stack sx={{width: '80%'}} spacing={2}>
+                          <ListItemText
+                            primary={question.Question.question}
+                            secondary={question.Question.answer ? question.Question.answer : null}
+                          />
+                          {/* Si se pone !isMine, aparece para hacer las preguntas */}
+                          {isMine && (question.Question.answer === null) ?
+                          (<>
+                                <TextField 
+                                  key={question.Question.id}
+                                  multiline 
+                                  label="Respuesta"
+                                  rows={3}
+                                  onChange={(e) => {
+                                    setAnswer(e.target.value)
+                                    setQuestionId(question.Question.id)
+                                  }}
+
+                                />
+                                <Button variant="contained" color="success" sx={{height: 'fit-content', width: 'fit-content'}} onClick={handleReply}>Responder</Button> 
+                                </>
+                            )
+                            : question.Question.answer != null ?  (
+                                null
+                            ) : (
+                            <ListItemText
+                              secondary={'Sin respuesta'}
+                            />)
+                          }
+
+                        </Stack>
+                      </ListItem>
+                    ))}
+                  </List>
                     
                     {
                       (!isMine && !isReserved) ? 
@@ -161,6 +278,7 @@ const ViewPublication = (() => {
                     onClick={() => {navigate(-1);return false;}} fullWidth>Volver</Button>
                   </> :
                   <CircularProgress/>}
+
 
                 </Paper>
     )
