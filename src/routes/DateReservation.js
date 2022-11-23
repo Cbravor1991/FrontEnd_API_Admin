@@ -95,29 +95,27 @@ const DateReservation = () => {
                     <br></br>
                     
                         <label htmlFor="fechaInicio"><Typography variant="subtitle2" gutterBottom><DateRange></DateRange> Fecha inicio:  </Typography></label>
-                        <DatePicker
-                        selected={fechaInicio}
-                        onChange={(date) => setFechaInicio(date)}
-                        selectsStart
-                        startDate={fechaInicio}
-                        endDate={fechaFin}
-                        name="fechaInicio"
-                        id="fechaInicio"
-                        
-                        />
+                          <DatePicker
+                            selected={fechaInicio}
+                            onChange={(date) => setFechaInicio(date)}
+                            selectsStart
+                            startDate={fechaInicio}
+                            endDate={fechaFin}
+                            name="fechaInicio"
+                           id="fechaInicio"
+                         />
                     
-                    <label htmlFor="fechaFin"><DateRange></DateRange> Fecha fin: </label>
-                    <DatePicker
-                    selected={fechaFin}
-                    onChange={(date) => setFechaFin(date)}
-                    selectsEnd
-                    startDate={fechaInicio}
-                    endDate={fechaFin}
-                    minDate={fechaInicio}
-                    name="fechaFin"
-                        id="fechaFin"
-                   
-                    />
+                        <label htmlFor="fechaFin"><DateRange></DateRange> Fecha fin: </label>
+                         <DatePicker
+                           selected={fechaFin}
+                           onChange={(date) => setFechaFin(date)}
+                           selectsEnd
+                           startDate={fechaInicio}
+                           endDate={fechaFin}
+                           minDate={fechaInicio}
+                           name="fechaFin"
+                           id="fechaFin"
+                         />
 
                     <br></br>
                     <br></br>
@@ -126,10 +124,7 @@ const DateReservation = () => {
                         }}> Volver </Button>
 
                     <Button disabled={(fechaInicio > fechaFin)} variant="contained" type="submit"> Consultar</Button>
-                    
-                    
-                    
-                   
+                                       
             </Paper>
     )
 }

@@ -25,12 +25,15 @@ import ViewPublication from './components/ViewPublcation';
 import MakeReservation from './components/MakeReservation';
 import ShowsAllPublications from './routes/ShowsAllPublications';
 import ShowsMyReservations from './routes/ShowsMyReservations';
+import ShowsPropertyReservations from './routes/ShowsPropertyReservations';
 import Review from './components/Review';
 import DateReservation from './routes/DateReservation'
 import DatePayment from './routes/DatePayment'
 import ViewPublicationReviews from './components/ViewPublicationReviews';
 import Recomendation from './routes/Recomendation';
 import PropertyReservations from './routes/PropertyReservations';
+import ShowTopVisit from './routes/ShowTopVisit';
+import ShowTopRecomendation from './routes/ShowTopRecomendation';
 
 
 
@@ -70,6 +73,7 @@ function App() {
       <Route path="showsMyPublications"  element={<ShowsMyPublications />}/>
       <Route path="showsAllPublications"  element={<ShowsAllPublications />}/>
       <Route path="showsMyReservations"  element={<ShowsMyReservations />}/>
+      <Route path="showsPropertyReservations"  element={<ShowsPropertyReservations />}/>
       <Route path="updatePublications/" element={<UpdatePublications/>} />
       <Route path="viewPublication/:id" element={<ViewPublication/>} />
       <Route path="viewPublication/:id/reviews" element={<ViewPublicationReviews/>} />
@@ -81,6 +85,8 @@ function App() {
       <Route path="datePayment" element={<DatePayment/>} />
       <Route path="datePayment" element={<DatePayment/>} />
       <Route path="recomendation" element={<Recomendation/>} />
+      <Route path="showTopVisit" element={<ShowTopVisit/>} />
+      <Route path="showTopRecomendation" element={<ShowTopRecomendation/>} />
       
       {/*
       <Route element={<RequireAuth allowedRoles={[ROLES.Inquilino]} />}>

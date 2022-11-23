@@ -45,21 +45,20 @@ const ShowsMyReservations = () => {
       showCancelButton: true,
       confirmButtonText: 'Si',
       cancelButtonText: 'No',
-      dangerMode: true}).then(function(result) {
+      dangerMode: true})
+    .then(function(result) {
         if (result['isConfirmed']) {
           const params = new URLSearchParams([['reservation_id', reservation_id]]);
           axios.post('payReservation/', {}, {params})
           .then(() => {
             setReservations(null);
           })
+          .then(() => {
+                swal.fire({title: "Exito", text:"Pago realizado exitosamente!", icon: "success"})})
           .catch((error) => {
-            console.log(error);
-          });
-        }
-      }
-    )
+            swal.fire({title: "Error", text:`Error al realizar el pago: "${(error.response ? error.response.data.detail : error)}"`, icon: "error"})});
+      }});
   }
-
   if (!reservations) {
     const params = new URLSearchParams([['email_user', username]]);
 
