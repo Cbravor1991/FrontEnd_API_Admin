@@ -192,7 +192,6 @@ const ViewPublication = (() => {
 
                     <Divider></Divider>
                     <div  >
-                      
                         <div style={{cursor: "pointer", display: "inline-block"}} onClick={() => navigate(`/viewProfile/${publicationData.email}`)} >
                           <UserAvatar  user_email={publicationData.email} prefix="Anfitrión: "/>
                         </div>
@@ -233,6 +232,11 @@ const ViewPublication = (() => {
                     {questions.map((question) => (
                       <ListItem key={question.id} sx={{ml: 5}}>
                         <Stack sx={{width: '80%'}} spacing={2}>
+                          <div>
+                            <div style={{cursor: "pointer", display: "inline-block", marginBottom: "-30px", marginLeft: "-20px"}} onClick={() => navigate(`/viewProfile/${question.email}`)} >
+                              <UserAvatar user_email={question.email}></UserAvatar>
+                              </div>
+                          </div>
                           <ListItemText
                             primary={question.Question.question}
                             secondary={question.Question.answer ? question.Question.answer : null}
