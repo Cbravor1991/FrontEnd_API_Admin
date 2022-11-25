@@ -20,6 +20,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import UserAvatar from "./UserAvatar";
 
 
 
@@ -190,9 +191,14 @@ const ViewPublication = (() => {
                     </Typography>
 
                     <Divider></Divider>
-
+                    <div  >
+                      
+                        <div style={{cursor: "pointer", display: "inline-block"}} onClick={() => navigate(`/viewProfile/${publicationData.email}`)} >
+                          <UserAvatar  user_email={publicationData.email} prefix="Anfitrión: "/>
+                        </div>
+                      </div>
                     <br></br>
-
+                    
                     <Typography variant="body1" component="div" style={{textAlign:"center"}}>
                         {publicationData.Property.description}
                     </Typography>
