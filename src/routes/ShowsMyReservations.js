@@ -77,13 +77,18 @@ const ShowsMyReservations = () => {
 
   return (
     <>
+      <br />
+      <Typography style={{color: "black"}} variant="h6" gutterBottom>
+        MIS RESERVAS
+      </Typography> 
+      <br /> 
     { reservations ? (
       reservations.length > 0 ? 
       <Box sx={{display:'flex',flexWrap: 'wrap' }}>
+       
         {
         reservations.map(item => {
-          return ( //               <CardPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
-
+          return ( 
               
               <Card variant="outlined" key={item.Reservation.id}>
               <CardContent>      

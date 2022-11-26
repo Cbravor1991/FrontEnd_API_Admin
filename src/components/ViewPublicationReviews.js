@@ -15,6 +15,7 @@ import { LocationOn, LocationOnOutlined, PrecisionManufacturing, StarRate } from
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { CircularProgress, Divider, Paper, Rating } from "@mui/material";
+import UserAvatar from "./UserAvatar";
 
 
 
@@ -57,9 +58,11 @@ const ViewPublicationReviews = (() => {
 
                     {publicationReviews.map((x) => 
                     <div>
-                      <Typography style={{cursor: "pointer", fontWeight: "bold"}} onClick={() => navigate(`/viewProfile/${x.email}`)} variant="subtitle1">
-                      {x.email}
-                      </Typography> 
+                      <div  >
+                        <div style={{cursor: "pointer", display: "inline-block"}} onClick={() => navigate(`/viewProfile/${x.email}`)} >
+                          <UserAvatar  user_email={x.email}/>
+                        </div>
+                      </div>
                       <Rating size="small" value={x.Review.rating} readOnly={true}></Rating>
                       <Typography variant="subtitle2">
                       {x.Review.description}

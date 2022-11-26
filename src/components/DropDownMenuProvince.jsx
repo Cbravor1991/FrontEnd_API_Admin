@@ -12,12 +12,12 @@ function DropDownMenuProvince(props) {
 
   return (
     <FormControl sx={{width: '100%'}}>
-      <InputLabel>Province</InputLabel>
+      <InputLabel>Provincia</InputLabel>
       <Select value={selected} onChange={selectionChangeHandler}>
         <MenuItem value={""}></MenuItem>
         <MenuItem value={"Buenos Aires"}>Buenos Aires</MenuItem>
         <MenuItem value={"CABA"}>CABA</MenuItem>
-        <MenuItem value={"Cordoba"}>Cordoba</MenuItem>
+        <MenuItem value={"Córdoba"}>Córdoba</MenuItem>
         <MenuItem value={"Santa Fe"}>Santa Fe</MenuItem>
         <MenuItem value={"Tierra del Fuego"}>Tierra del Fuego</MenuItem>
         <MenuItem value={"Corrientes"}>Corrientes</MenuItem>

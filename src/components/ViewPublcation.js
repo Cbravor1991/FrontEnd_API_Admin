@@ -20,6 +20,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import UserAvatar from "./UserAvatar";
 
 
 
@@ -52,6 +53,7 @@ const ViewPublication = (() => {
       console.log(response);
       getQuestions()
     })
+    .then(setQuestion(""))
     .catch((error) => {
       console.log(error);
 
@@ -69,6 +71,7 @@ const ViewPublication = (() => {
       console.log(response);
       getQuestions();
     })
+    .then(setAnswer(""))
     .catch((error) => {
       console.log(error);
     });    
@@ -190,9 +193,13 @@ const ViewPublication = (() => {
                     </Typography>
 
                     <Divider></Divider>
-
+                    <div  >
+                        <div style={{cursor: "pointer", display: "inline-block"}} onClick={() => navigate(`/viewProfile/${publicationData.email}`)} >
+                          <UserAvatar  user_email={publicationData.email} prefix="Anfitrión: "/>
+                        </div>
+                      </div>
                     <br></br>
-
+                    
                     <Typography variant="body1" component="div" style={{textAlign:"center"}}>
                         {publicationData.Property.description}
                     </Typography>
@@ -219,6 +226,7 @@ const ViewPublication = (() => {
                               multiline
                               rows={3}
                               defaultValue="Buenas, tengo una consulta..."
+                              value={question}
                               onChange={(e) => setQuestion(e.target.value)}
                     />
                     <Button variant="contained" color="success" sx={{height: 'fit-content'}} onClick={handleAddQuestion}>Enviar</Button>
@@ -227,6 +235,11 @@ const ViewPublication = (() => {
                     {questions.map((question) => (
                       <ListItem key={question.id} sx={{ml: 5}}>
                         <Stack sx={{width: '80%'}} spacing={2}>
+                          <div>
+                            <div style={{cursor: "pointer", display: "inline-block", marginBottom: "-30px", marginLeft: "-20px"}} onClick={() => navigate(`/viewProfile/${question.email}`)} >
+                              <UserAvatar user_email={question.email}></UserAvatar>
+                              </div>
+                          </div>
                           <ListItemText
                             primary={question.Question.question}
                             secondary={question.Question.answer ? question.Question.answer : null}
@@ -239,6 +252,7 @@ const ViewPublication = (() => {
                                   multiline 
                                   label="Respuesta"
                                   rows={3}
+                                  value={answer}
                                   onChange={(e) => {
                                     setAnswer(e.target.value)
                                     setQuestionId(question.Question.id)

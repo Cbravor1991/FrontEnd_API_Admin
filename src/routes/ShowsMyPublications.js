@@ -55,6 +55,7 @@ const ShowsMyPublications = () => {
       </Typography>) 
       : <CircularProgress></CircularProgress>}
 
+      <br/> <br/>
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />}>
         Realizar una publicación
       </Button>

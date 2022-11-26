@@ -249,7 +249,7 @@ const MakePublication = () => {
                                         <TextField
 
                                             id="outlined-basic"
-                                            label="Direccion"
+                                            label="Dirección"
                                             variant="outlined"
                                             onChange={(e) => setDireccion(e.target.value)}
                                             value={direccion}

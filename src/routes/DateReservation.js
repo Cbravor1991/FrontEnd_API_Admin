@@ -8,6 +8,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 import swal from "sweetalert2";
+import { subDays } from "date-fns";
+
 
 
 //const PROPERTYHANDLER_URL = '/updateProperty/';
@@ -26,8 +28,28 @@ const DateReservation = () => {
 
     const [fechaInicio, setFechaInicio] = useState(new Date());
     const [fechaFin, setFechaFin] = useState(new Date());
+    const [dates, setDates] = useState(null);
     //const [fechaInicio, setFechaInicio] = useState("");
     //const [fechaFin, setFechaFin] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    /*const [year, setYear] = useState("");
+    const [show, setShow] = useState(false);
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];*/
+    
+    
     
     let username;
     if (!window.localStorage.getItem("username")) {
@@ -38,18 +60,15 @@ const DateReservation = () => {
     }
 
 
-    
-    
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const loadDates = () => {
+        //e.preventDefault();
         // if button enabled with JS hack floors
            const paid = false
             
            const response = axios.post('/getReservedDaysByDateRange',
                 JSON.stringify({
-                    "start_date": format(fechaInicio, "yyyy-MM-dd"),"end_date": format(fechaFin, "yyyy-MM-dd"),
-                    "email_user": username, 'publication_id': public_id, "paid": paid
+                    "start_date": "2022-01-01","end_date": "2022-12-31",
+                    'publication_id': public_id
                 }),
                 {
                     headers: { 'Content-Type': 'application/json'
@@ -59,9 +78,9 @@ const DateReservation = () => {
             ).then((response) => {
                 console.log(response.data)
                 if(((response.data).length)>0 ){
-                    console.log("entro")
-                    swal.fire({title: "SUS FECHAS RESERVADAS ON LAS SIGUIENTE", text:`${response.data}`, icon: "success"})
-
+                    console.log("entro");
+                    //swal.fire({title: "SUS FECHAS RESERVADAS ON LAS SIGUIENTE", text:`${response.data}`, icon: "success"})
+                    setDates(response.data.map((x) => new Date(new Date(x).setDate(new Date(x).getDate() + 1)) ));
                 }else { swal.fire({title: "ESTA PROPIEDAD NO TIENE RESERVAS", text:``, icon: "error"})}
 
 
@@ -75,58 +94,38 @@ const DateReservation = () => {
               
     }
     
-  /*  useEffect((props) => {
-      window.localStorage.setItem("keep_publication", JSON.stringify (props))
-      
-      props = window.localStorage.getItem("keep_publication")
-      parse_publication = (JSON.parse(props)).Publication
-      parse_properties = JSON.parse(props).Property
-    })*/
+   if (!dates) {
+     loadDates(); 
+    }
+   /*function generateArrayOfYears() {
+    var max = new Date().getFullYear();
+    var min = max - 9;
+    var years = [];
+
+    for (var i = max; i >= min; i--) {
+      years.push(i);
+    }
+    return years;
+  }
   
+  const years = generateArrayOfYears();*/
 
-    return ( 
-
-
-<Paper component="form" onSubmit={handleSubmit} sx={{minWidth: 350, maxWidth: 600, padding: "20px", minHeight: 300, backgroundColor: 'white'}}> 
-            
-                    <Typography variant="h6"> Consultar fechas de Reservas </Typography>
-
-                    <Divider></Divider>
-                    <br></br>
-                    
-                        <label htmlFor="fechaInicio"><Typography variant="subtitle2" gutterBottom><DateRange></DateRange> Fecha inicio:  </Typography></label>
-                          <DatePicker
-                            selected={fechaInicio}
-                            onChange={(date) => setFechaInicio(date)}
-                            selectsStart
-                            startDate={fechaInicio}
-                            endDate={fechaFin}
-                            name="fechaInicio"
-                           id="fechaInicio"
-                         />
-                    
-                        <label htmlFor="fechaFin"><DateRange></DateRange> Fecha fin: </label>
-                         <DatePicker
-                           selected={fechaFin}
-                           onChange={(date) => setFechaFin(date)}
-                           selectsEnd
-                           startDate={fechaInicio}
-                           endDate={fechaFin}
-                           minDate={fechaInicio}
-                           name="fechaFin"
-                           id="fechaFin"
-                         />
-
-                    <br></br>
-                    <br></br>
-
-                    <Button variant="outlined" onClick={() => {navigate(-1)
-                        }}> Volver </Button>
-
-                    <Button disabled={(fechaInicio > fechaFin)} variant="contained" type="submit"> Consultar</Button>
-                                       
-            </Paper>
-    )
+  
+  //let highlight = dates.map(date => format((new Date(date)),"yyyy-MM-dd"));
+  //console.log(highlight);
+  
+  return (
+    <div className="white-box p-20">
+      <DatePicker
+                        onChange={(date) => setFechaInicio(date)}
+                        startDate={fechaInicio}
+                        endDate={fechaFin}
+                        name="fechaInicio"
+                        id="fechaInicio"
+                        excludeDates={dates}
+                        />
+    </div>
+  );
 }
 
 export default DateReservation

@@ -10,6 +10,7 @@ import { Box, CircularProgress, Typography, TableRow, Table, TableHead, TableCel
 //import Select from '@mui/material/Select';
 import { Button } from "@mui/material";
 import { Add, Check, Clear } from '@mui/icons-material';
+import DateReservation from '../routes/DateReservation';
 
 
 
@@ -54,13 +55,13 @@ const PropertyReservations = ({filters}) => {
     console.log(reservations)
    
   return (                             
-         <Paper style={{padding: "20px"}}>
+         <Paper style={{padding: "20px", maxHeight: "auto", height: "auto"}}>
          
     { (reservations) ?
         ((reservations.length > 0) ? 
 
-        <TableContainer component={Paper} style={{maxWidth: "950px"}}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableContainer component={Paper} width="auto" maxHeight="auto">
+          <Table sx={{ minWidth: 650, maxHeight: "auto" }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell> Reservado por </TableCell>
@@ -85,12 +86,17 @@ const PropertyReservations = ({filters}) => {
               ))}
             </TableBody>
           </Table>
+        
         </TableContainer>
         : <Typography style={{color: "black", marginTop: "50px"}} variant="h6" gutterBottom>
           No hay ninguna reserva en esta propiedad.
         </Typography>)
       : <CircularProgress/>}
      
+      <br/>
+      <label htmlFor="fechaFin">Ver fechas reservadas: </label>
+      <DateReservation/>
+      <br/>  
       <Button variant="contained" style={{marginTop: "10px", marginBottom: "10px"}} onClick={() => navigate(-1)}>
        Volver
       </Button>
