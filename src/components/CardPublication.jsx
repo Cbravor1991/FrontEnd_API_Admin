@@ -94,14 +94,14 @@ export default function CardPublication(props) {
             <Typography variant="subtitle2" style={{maxWidth: "300px", textAlign:"left", fontWeight: "bold"}}  gutterBottom>
               {props.Publication.title}
             </Typography>
-            <Typography variant="body2" component="div" style={{maxWidth: "300px", textAlign:"left"}}>
+            <Typography variant="body2" component="div" style={{maxWidth: "300px", minHeight: "150px", textAlign:"left"}}>
               {props.Publication.description}
             </Typography>
             
             <Typography variant="body1" style={{fontWeight: "bold"}} color="text.secondary">
               $ {props.Publication.price} noche
             </Typography>
-            {props.Publication.rating ? <Typography variant="subtitle2"><StarRate fontSize="small" style={{color: "#faaf00", transform: "translate(0px, 4px)"}}/> {props.Publication.rating} </Typography> : ""}
+            {props.Publication.rating ? <Typography variant="subtitle2"><StarRate fontSize="small" style={{color: "#faaf00", transform: "translate(0px, 4px)"}}/> {props.Publication.rating} </Typography> : "Sin calificar"}
 
 
           </CardContent>
