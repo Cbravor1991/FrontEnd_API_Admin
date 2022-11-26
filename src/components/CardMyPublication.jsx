@@ -200,7 +200,7 @@ export default function CardMyPublication(props) {
            <Typography variant="subtitle2" style={{ fontWeight: "bold"}}  gutterBottom>
               {props.Publication.title}
             </Typography>
-            <Typography variant="body2" component="div" style={{textAlign:"left"}}>
+            <Typography variant="body2" component="div" style={{textAlign:"center"}}>
               {props.Publication.description}
             </Typography>
             

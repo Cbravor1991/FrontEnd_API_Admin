@@ -53,6 +53,7 @@ const ViewPublication = (() => {
       console.log(response);
       getQuestions()
     })
+    .then(setQuestion(""))
     .catch((error) => {
       console.log(error);
 
@@ -70,6 +71,7 @@ const ViewPublication = (() => {
       console.log(response);
       getQuestions();
     })
+    .then(setAnswer(""))
     .catch((error) => {
       console.log(error);
     });    
@@ -224,6 +226,7 @@ const ViewPublication = (() => {
                               multiline
                               rows={3}
                               defaultValue="Buenas, tengo una consulta..."
+                              value={question}
                               onChange={(e) => setQuestion(e.target.value)}
                     />
                     <Button variant="contained" color="success" sx={{height: 'fit-content'}} onClick={handleAddQuestion}>Enviar</Button>
@@ -249,6 +252,7 @@ const ViewPublication = (() => {
                                   multiline 
                                   label="Respuesta"
                                   rows={3}
+                                  value={answer}
                                   onChange={(e) => {
                                     setAnswer(e.target.value)
                                     setQuestionId(question.Question.id)
