@@ -28,6 +28,8 @@ import UserAvatar from "./UserAvatar";
 
 const ViewPublication = (() => {
 
+  let username = window.localStorage.getItem("username")
+
   //////// Questios hooks
   const [questions, setQuestions] = useState([]);
   const [answer, setAnswer] = useState('');
@@ -47,7 +49,7 @@ const ViewPublication = (() => {
     axios.post('/question/', {
       publication_id: routeParams.id,
       question: question,
-      user_id: 1,
+      user_email: username,
     })
     .then((response) => {
       console.log(response);
@@ -102,10 +104,7 @@ const ViewPublication = (() => {
 
   const [publicationData, setPublicationData] = useState(null);
 
-  console.log(isReserved)
-
-  let username = window.localStorage.getItem("username")
-    
+  console.log(isReserved)    
   
   const loadPublicationData = () => {
     if (!username){
