@@ -188,7 +188,7 @@ export default function CardMyPublication(props) {
   
     return (
     
-      <Card variant="outlined" sx={{m:1}}>
+      <Card variant="outlined" sx={{m:1}} style={{cursor: "pointer", backgroundColor: "black", color: "white" }}>
         <React.Fragment>
           <CardContent>
             

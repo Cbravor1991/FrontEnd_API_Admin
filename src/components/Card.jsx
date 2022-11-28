@@ -64,7 +64,7 @@ export default function Cards(props) {
 
     return (
 
-      <Card variant="outlined" sx={{m:1}}>
+      <Card variant="outlined" sx={{m:1}} style={{cursor: "pointer", backgroundColor: "black", color: "white" }}>
         <React.Fragment>
           <CardContent>
             <img alt="Preview" height="100" src={props.link} />

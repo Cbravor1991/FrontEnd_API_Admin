@@ -38,10 +38,31 @@
 }
 
 
+.contenedor-login{
+  
+  width: 100%;
+  height: 652.5px;
+  top: 10%;
+
+  
+ 
+  background-image: url("https://c0.wallpaperflare.com/preview/394/832/981/ushuaia-patagonia-argentina-water.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  
+  background-position-x: center;
+  background-position-y: center ;
+  position: absolute;
+
+  
+}
+
+
 .contenedor-recomendaciones {
   
   width: 100%;
-  height: 1200px;
+  height: 1305px;
   top: 10%;
   
  
@@ -56,6 +77,8 @@
 
   
 }
+
+
 
 .transparencia{
   width: 100%;
@@ -114,10 +137,10 @@ font-style: oblique;
 
   .card--image-mar-del{
     width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
  }
 
@@ -135,10 +158,10 @@ font-style: oblique;
 
    .card-bariloche{
   width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
   }
 
@@ -154,10 +177,10 @@ font-style: oblique;
 
    .card-cordoba{
     width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
   }
 
@@ -173,10 +196,10 @@ font-style: oblique;
 
    .card-san-martin-los-andes{
     width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
  
   }
