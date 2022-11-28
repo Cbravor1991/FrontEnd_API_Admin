@@ -6,7 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from '../components/Logo';
 import { createTheme } from '@mui/material/styles';
 import { Button, ThemeProvider } from '@mui/material';
+import DropDownMenuCountry from "./DropDownMenuCountry";
 import DropDownMenuProvince from "./DropDownMenuProvince";
+import DropDownMenuLocation from "./DropDownMenuLocation";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -245,7 +247,10 @@ const MakePublication = () => {
                                 </Typography>
                                 <Stack direction="row" spacing={3} >
                                     <Stack direction="column" spacing={3} >
+                                    
+                                        <DropDownMenuCountry selected={pais} setPais={setPais}/>
                                         <DropDownMenuProvince selected={provincia} setProvincia={setProvincia}/>
+                                        <DropDownMenuLocation selected={localidad} setLocalidad={setLocalidad}/>
                                         <TextField
 
                                             id="outlined-basic"
@@ -256,24 +261,7 @@ const MakePublication = () => {
                                             required
                                             
                                         />
-                                        <TextField
-                                            id="outlined-basic"
-                                            label="Localidad"
-                                            variant="outlined"
-                                            onChange={(e) => setLocalidad(e.target.value)}
-                                            value={localidad}
-                                            required
-
-                                        />
-                                        <TextField
-                                            id="outlined-basic"
-                                            label="Pais"
-                                            variant="outlined"
-                                            onChange={(e) => setPais(e.target.value)}
-                                            value={pais}
-                                            required
-
-                                        />
+                                        
                                     </Stack>
                                     <Stack direction="column" spacing={3} >
                                         <DropDownMenuMakePublication values={[0,1,2,3,4,5,6,7]} name={'Baños'} setFunction={setBanios}/>

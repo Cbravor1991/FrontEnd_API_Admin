@@ -38,10 +38,31 @@
 }
 
 
+.contenedor-login{
+  
+  width: 100%;
+  height: 652.5px;
+  top: 10%;
+
+  
+ 
+  background-image: url("https://c0.wallpaperflare.com/preview/394/832/981/ushuaia-patagonia-argentina-water.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  
+  background-position-x: center;
+  background-position-y: center ;
+  position: absolute;
+
+  
+}
+
+
 .contenedor-recomendaciones {
   
   width: 100%;
-  height: 1200px;
+  height: 1305px;
   top: 10%;
   
  
@@ -56,6 +77,8 @@
 
   
 }
+
+
 
 .transparencia{
   width: 100%;
@@ -85,9 +108,9 @@ margin-right: auto;
   height: 360px;
   position:absolute;
   left: 0%;
-  background-color: black;
+  background-color: #e67e22;
   border-radius: .5em;
-  border: 10px solid black;
+  border: 10px solid #e67e22;
   
  } 
 h7{
@@ -114,10 +137,10 @@ font-style: oblique;
 
   .card--image-mar-del{
     width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
  }
 
@@ -128,17 +151,17 @@ font-style: oblique;
     height: 360px;
     position:absolute;
     left: 25%;
-    background-color: black;
+    background-color: #e67e22;
     border-radius: .5em;
-    border: 10px solid black;
+    border: 10px solid #e67e22;
    } 
 
    .card-bariloche{
   width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
   }
 
@@ -147,17 +170,17 @@ font-style: oblique;
     height: 360px;
     position:absolute;
     left: 50%;
-    background-color: black;
+    background-color: #e67e22;
     border-radius: .5em;
-    border: 10px solid black;
+    border: 10px solid #e67e22;
    } 
 
    .card-cordoba{
     width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
   }
 
@@ -166,17 +189,17 @@ font-style: oblique;
     height: 360px;
     position:absolute;
     left: 75%;
-    background-color: black;
+    background-color: #e67e22;
     border-radius: .5em;
-    border: 10px solid black;
+    border: 10px solid #e67e22;
    } 
 
    .card-san-martin-los-andes{
     width: 252.2px;
-  height: 300px;
+  height: 285px;
   position:absolute;
   left: 0%;
-  top: 17%;
+  top: 22%;
  
  
   }
@@ -200,7 +223,7 @@ font-style: oblique;
   }
 
   .cards-recomendations{
-    background-color: black;
+    background-color: #e67e22;
   }
 
   .ultimas-visitas{
