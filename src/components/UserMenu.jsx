@@ -116,6 +116,7 @@ export default function UserMenu({username}) {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem onClick={(e) => {navigate("profile"); handleClose(e)}}> Mi perfil</MenuItem>
+                    {/* <MenuItem onClick={(e) => {navigate("showLodgings"); handleClose(e)}}> Mis propiedades</MenuItem> */}
                     <MenuItem onClick={(e) => {navigate("showsMyPublications"); handleClose(e)}}> Mis Publicaciones</MenuItem>
                     <MenuItem onClick={(e) => {navigate("showsMyReservations"); handleClose(e)}}> Mis Reservas</MenuItem>
 
