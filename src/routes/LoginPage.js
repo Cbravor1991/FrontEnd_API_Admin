@@ -36,7 +36,7 @@ const LoginPage = () => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/recomendation";
+    const from = location.state?.from?.pathname || "/";
 
     const userRef = useRef();
     const errRef = useRef();
