@@ -87,8 +87,9 @@ const ShowsAllPublications = ({filters}) => {
         </Typography>)
       : <CircularProgress/>}
      
-      <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />} sx={{width: 'fit-content', ml: '-2%'}}>
-        Podes realizar tu publicacion en <Link style={{marginLeft: "5px"}} to="/ShowsMyPublications"> Mis publicaciones </Link>
+      <br/>
+      <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />} sx={{width: 'fit-content', position: 'center'}}>
+        Podes realizar tu publicacion en : <Link sx={{mr: '7%' }} to="/ShowsMyPublications">  Mis publicaciones </Link>
       </Button>
     
     </>)
