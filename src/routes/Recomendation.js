@@ -57,24 +57,24 @@ const Recomendation = () => {
                 
 
                 <div className="mar-del-plata">
-                <Button variant="contained" style={{backgroundColor: "black"}} onClick={()=>{preferences(data[0].Location)}} >{data[0].Location}</Button>
+                <Button variant="contained" style={{backgroundColor: "#e67e22"}} onClick={()=>{preferences(data[0].Location)}} >{data[0].Location}</Button>
                      <img src={images(`./${data[0].coverImg}`)} className="card--image-mar-del" />
                     
                     
                 </div>
 
                 <div className="bariloche">
-                    <Button variant="contained"  style={{backgroundColor: "black"}} onClick={()=>{preferences(data[1].Location)}} >{data[1].Location}</Button>
+                    <Button variant="contained"  style={{backgroundColor: "#e67e22"}} onClick={()=>{preferences(data[1].Location)}} >{data[1].Location}</Button>
                     <img src={images(`./${data[1].coverImg}`)} className="card-bariloche" />
                 </div>
 
                 <div className="cordoba">
-                    <Button variant="contained" style={{backgroundColor: "black"}} onClick={()=>{preferences(data[2].Location)}}>{data[2].Location}</Button>
+                    <Button variant="contained" style={{backgroundColor: "#e67e22"}} onClick={()=>{preferences(data[2].Location)}}>{data[2].Location}</Button>
                     <img src={images(`./${data[2].coverImg}`)} className="card-cordoba" />
                 </div>
 
                 <div className="san-martin-de-los-andes">
-                    <Button variant="contained" style={{backgroundColor: "black"}} onClick={()=>{preferences(data[3].Location)}} >{data[3].Location}</Button>
+                    <Button variant="contained" style={{backgroundColor: "#e67e22"}} onClick={()=>{preferences(data[3].Location)}} >{data[3].Location}</Button>
                     <img src={images(`./${data[3].coverImg}`)} className="card-san-martin-los-andes" />
                 </div>
 

@@ -108,9 +108,9 @@ margin-right: auto;
   height: 360px;
   position:absolute;
   left: 0%;
-  background-color: black;
+  background-color: #e67e22;
   border-radius: .5em;
-  border: 10px solid black;
+  border: 10px solid #e67e22;
   
  } 
 h7{
@@ -151,9 +151,9 @@ font-style: oblique;
     height: 360px;
     position:absolute;
     left: 25%;
-    background-color: black;
+    background-color: #e67e22;
     border-radius: .5em;
-    border: 10px solid black;
+    border: 10px solid #e67e22;
    } 
 
    .card-bariloche{
@@ -170,9 +170,9 @@ font-style: oblique;
     height: 360px;
     position:absolute;
     left: 50%;
-    background-color: black;
+    background-color: #e67e22;
     border-radius: .5em;
-    border: 10px solid black;
+    border: 10px solid #e67e22;
    } 
 
    .card-cordoba{
@@ -189,9 +189,9 @@ font-style: oblique;
     height: 360px;
     position:absolute;
     left: 75%;
-    background-color: black;
+    background-color: #e67e22;
     border-radius: .5em;
-    border: 10px solid black;
+    border: 10px solid #e67e22;
    } 
 
    .card-san-martin-los-andes{
@@ -223,7 +223,7 @@ font-style: oblique;
   }
 
   .cards-recomendations{
-    background-color: black;
+    background-color: #e67e22;
   }
 
   .ultimas-visitas{

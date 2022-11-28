@@ -83,7 +83,7 @@ export default function CardPublication(props) {
   
     return (
     
-      <Card onClick={()=>{viewPublication(props.Publication.id)}} style={{cursor: "pointer", backgroundColor: "black", color: "white"}} variant="outlined" sx={{m:1}}>
+      <Card onClick={()=>{viewPublication(props.Publication.id)}} style={{cursor: "pointer", backgroundColor: "#e67e22", color: "white"}} variant="outlined" sx={{m:1}}>
         <React.Fragment>
           <CardContent>
             
