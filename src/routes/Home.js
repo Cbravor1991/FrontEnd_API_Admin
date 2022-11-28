@@ -101,7 +101,7 @@ const Home = () => {
 
         <ThemeProvider theme={theme}>
             <Stack direction="row" spacing={10} sx={{mt:10}}> 
-                <Stack direction="column" spacing={3} sx={{flex:1 , ml: '5%', mt:'2%', heigth: '100%', textAlign: 'left', justifyContent: 'space-between'}}>
+                <Stack direction="column" spacing={3} sx={{flex:1 , ml: '5%', mt:'2%', height: '600px', textAlign: 'left', justifyContent: 'space-between'}}>
                     
                     <DropDownMenuCountry setPais={setPais}/>
                     <DropDownMenuProvince setProvincia={setProvincia}/>

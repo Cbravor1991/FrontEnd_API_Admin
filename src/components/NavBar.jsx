@@ -21,11 +21,7 @@ export default function ButtonAppBar() {
             HospedateAhora
           </Typography>
         {(username) ? (<>
-        <Button>
-            <Link style={{ color:"white", textDecoration: 'none' }} to="/showsAllPublications">
-                    Publicaciones
-            </Link>
-        </Button>
+
         <UserMenu username={username}></UserMenu></>)
       : <></>}
 
