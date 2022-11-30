@@ -11,7 +11,7 @@ export default DataProperties[
         "description": "bungalows",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1667703284/alppjrlkn4o748vhwkw2.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -29,7 +29,10 @@ export default DataProperties[
         "description": "Departamento cerca del centro de Mar Del Plata",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669772637/uod8hiwoby8s1jvslq3g.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669772636/vadkvorwdosoqoxcbwjb.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -47,7 +50,16 @@ export default DataProperties[
         "description": "Casa en tigre",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669248494/wqdfvonvdfza2lul6ufa.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669248495/ipfdrhyka6kbbcjpsps9.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669248492/ou0lavxblrcqa2wd37xm.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669248496/wrwxvlyxy6cooylryz50.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -65,7 +77,10 @@ export default DataProperties[
         "description": "Hotel en Mar Del Plata",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669675324/dwjhf2ajqaj96htdzusv.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669675325/ltp9vay819rnqwunl6nv.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -83,7 +98,13 @@ export default DataProperties[
         "description": "Castillo en córdoba",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669674829/jyaxqvj0l2m7khw5ryh2.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669674625/ukhnmkwn8oyhum6buonx.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669674624/lpmlgbkb995wjqz1kakh.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -101,7 +122,10 @@ export default DataProperties[
         "description": "Departamento en Palermo",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669819740/departamento_kqnabd.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669819741/departamento2_yxur6j.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -119,7 +143,10 @@ export default DataProperties[
         "description": "Cabañas",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669819505/Caba%C3%B1aExt_ik4ln5.webp"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669819485/Caba%C3%B1aInt_bvueqh.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"
@@ -137,7 +164,10 @@ export default DataProperties[
         "description": "Hotel en Mar Del Plata",
         "images": [
           {
-           "link": "string"
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669674487/o8uyugwxmrl8kqceoedj.jpg"
+          },
+          {
+           "link": "https://res.cloudinary.com/dwx9rqfjh/image/upload/v1669674488/djy9trjyijnisb4pbzpr.jpg"
           }
                 ],
         "email_user": "jecastillo@fi.uba.ar"

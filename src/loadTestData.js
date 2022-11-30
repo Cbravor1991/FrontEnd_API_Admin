@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import DataProperties from ".data/dataProperties";
 import DataPublications from ".data/dataPublications";
 
