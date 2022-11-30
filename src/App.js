@@ -33,6 +33,7 @@ import Recomendation from './routes/Recomendation';
 import PropertyReservations from './routes/PropertyReservations';
 import ShowTopVisit from './routes/ShowTopVisit';
 import ShowTopRecomendation from './routes/ShowTopRecomendation';
+import FAQ from './components/FAQ';
 
 
 
@@ -85,6 +86,7 @@ function App() {
       <Route path="recomendation" element={<Recomendation/>} />
       <Route path="showTopVisit" element={<ShowTopVisit/>} />
       <Route path="showTopRecomendation" element={<ShowTopRecomendation/>} />
+      <Route path="faq" element={<FAQ />} />
       
       {/*
       <Route element={<RequireAuth allowedRoles={[ROLES.Inquilino]} />}>

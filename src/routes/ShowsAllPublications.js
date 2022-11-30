@@ -75,7 +75,7 @@ const ShowsAllPublications = ({filters}) => {
          
     { (publications) ?
         ((publications.length > 0) ? 
-        <Box sx={{display:'flex',flexWrap: 'wrap', mt:'2%', ml: '-3%' }}>
+        <Box sx={{display:'flex',flexWrap: 'wrap', mt:'7%', ml: '2%' }}>
           {publications.map(item => {
             return (
                 <CardPublication key={item.Publication.id} {...item} username={username} updatePublications={loadPublications} />
@@ -91,6 +91,7 @@ const ShowsAllPublications = ({filters}) => {
       <Button variant="contained" onClick={() => navigate("/makePublication")} endIcon={<Add />} sx={{width: 'fit-content', position: 'center'}}>
         Podes realizar tu publicacion en : <Link sx={{mr: '7%' }} to="/ShowsMyPublications">  Mis publicaciones </Link>
       </Button>
+      <br/>
     
     </>)
   

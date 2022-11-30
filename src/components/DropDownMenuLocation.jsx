@@ -21,6 +21,7 @@ function DropDownMenuLocation(props) {
         <MenuItem value={"Mar Del Plata"}>Mar Del Plata</MenuItem>
         <MenuItem value={"Ushuaia"}>Ushuaia</MenuItem>
         <MenuItem value={"Tigre"}>Tigre</MenuItem>
+        <MenuItem value={"Villa María"}>Villa María</MenuItem>
       </Select>
     </FormControl>
   );

@@ -286,7 +286,8 @@ const ViewPublication = (() => {
                       : ""
                     }
                     
-                      
+                    <Button variant="contained" color="success" sx={{height: 'fit-content'}} onClick={() => navigate(`/faq`)}>Preguntas frecuentes</Button>
+                    <br/><br/>
                     <Button variant="contained" color="primary" 
                     onClick={() => {navigate(-1);return false;}} fullWidth>Volver</Button>
                   </> :
