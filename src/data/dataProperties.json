@@ -1,10 +1,11 @@
-export default DataProperties[
+
+[
     {
         "id": 1,
         "direction": "Av. Exequiel Bustillo 6276",
-        "province": 'Río Negro',
-        "location": 'Bariloche',
-        "country": 'Argentina',
+        "province": "Río Negro",
+        "location": "Bariloche",
+        "country": "Argentina",
         "toilets": 136,
         "rooms": 15,
         "people": 15,
@@ -20,9 +21,9 @@ export default DataProperties[
     {
         "id": 2,
         "direction": "Belgrano 1234",
-        "province": 'Buenos Aires',
-        "location": 'Mar Del Plata',
-        "country": 'Argentina',
+        "province": "Buenos Aires",
+        "location": "Mar Del Plata",
+        "country": "Argentina",
         "toilets": 1,
         "rooms": 2,
         "people": 4,
@@ -41,9 +42,9 @@ export default DataProperties[
     {
         "id": 3,
         "direction": "Av. Del Libertador 5678",
-        "province": 'Buenos Aires',
-        "location": 'Tigre',
-        "country": 'Argentina',
+        "province": "Buenos Aires",
+        "location": "Tigre",
+        "country": "Argentina",
         "toilets": 2,
         "rooms": 3,
         "people": 5,
@@ -68,9 +69,9 @@ export default DataProperties[
     {
         "id": 4,
         "direction": "Av. Luro 3346",
-        "province": 'Buenos Aires',
-        "location": 'Mar Del Plata',
-        "country": 'Argentina',
+        "province": "Buenos Aires",
+        "location": "Mar Del Plata",
+        "country": "Argentina",
         "toilets": 15,
         "rooms": 15,
         "people": 30,
@@ -89,9 +90,9 @@ export default DataProperties[
     {
         "id": 5,
         "direction": "Ruta 20 km 200",
-        "province": 'Córdoba',
-        "location": 'Villa María',
-        "country": 'Argentina',
+        "province": "Córdoba",
+        "location": "Villa María",
+        "country": "Argentina",
         "toilets": 8,
         "rooms": 12,
         "people": 20,
@@ -113,9 +114,9 @@ export default DataProperties[
     {
         "id": 6,
         "direction": "Av. Santa Fe 2745",
-        "province": 'CABA',
-        "location": 'Palermo',
-        "country": 'Argentina',
+        "province": "CABA",
+        "location": "Palermo",
+        "country": "Argentina",
         "toilets": 2,
         "rooms": 3,
         "people": 4,
@@ -134,9 +135,9 @@ export default DataProperties[
     {
         "id": 7,
         "direction": "Libertador 6538",
-        "province": 'Río Negro',
-        "location": 'Bariloche',
-        "country": 'Argentina',
+        "province": "Río Negro",
+        "location": "Bariloche",
+        "country": "Argentina",
         "toilets": 5,
         "rooms": 7,
         "people": 15,
@@ -155,9 +156,9 @@ export default DataProperties[
     {
         "id": 8,
         "direction": "Libertad 5938",
-        "province": 'Buenos Aires',
-        "location": 'Mar Del Plata',
-        "country": 'Argentina',
+        "province": "Buenos Aires",
+        "location": "Mar Del Plata",
+        "country": "Argentina",
         "toilets": 1,
         "rooms": 1,
         "people": 3,
@@ -173,3 +174,4 @@ export default DataProperties[
         "email_user": "jecastillo@fi.uba.ar"
     }
 ]
+

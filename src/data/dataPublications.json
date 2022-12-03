@@ -1,5 +1,4 @@
-
-export default DataPublications[
+[
     {   
         "title": "Bungallows",
         "description": "Bungallows para alquiler por día en Bariloche",
